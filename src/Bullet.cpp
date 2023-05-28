@@ -29,7 +29,7 @@ void Bullet::bulletMovement()
 
 void Bullet::setup()
 {
-    m_bullet.setRadius(25.f);
+    m_bullet.setRadius(10.f);
     m_bullet.setPosition(300.f, 100.f);
     m_bullet.setOrigin(sf::Vector2f(25.f, 25.f));
     m_bullet.setFillColor(sf::Color::Green);

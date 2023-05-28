@@ -3,7 +3,7 @@ project(Space_Shooter)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp Collision.cpp Collision.h Ship.cpp Ship.h Util.cpp Util.h Bullet.cpp Bullet.h TextureManager.h TextureManager.cpp BulletManager.cpp BulletManager.h)
+set(SOURCE_FILES src/main.cpp src/Collision.cpp src/Collision.h src/Ship.cpp src/Ship.h src/Util.cpp src/Util.h src/Bullet.cpp src/Bullet.h src/TextureManager.h src/TextureManager.cpp src/BulletManager.cpp src/BulletManager.h)
 add_executable(Space_Shooter ${SOURCE_FILES})
 include_directories(/usr/local/include)
 

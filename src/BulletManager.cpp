@@ -28,7 +28,5 @@ void BulletManager::updateBulletCount()
 void BulletManager::bulletMovement()
 {
     for (auto bullet : m_bullets)
-    {
         bullet.bulletMovement();
-    }
 }

@@ -49,47 +49,47 @@ cmake_ninja_workdir = /home/prime/Desktop/dev/gameDev/Space-Shooter/cmake-build-
 
 build cmake_object_order_depends_target_Space_Shooter: phony || CMakeFiles/Space_Shooter.dir
 
-build CMakeFiles/Space_Shooter.dir/main.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/main.cpp || cmake_object_order_depends_target_Space_Shooter
-  DEP_FILE = CMakeFiles/Space_Shooter.dir/main.cpp.o.d
+build CMakeFiles/Space_Shooter.dir/src/main.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/src/main.cpp || cmake_object_order_depends_target_Space_Shooter
+  DEP_FILE = CMakeFiles/Space_Shooter.dir/src/main.cpp.o.d
   FLAGS = -std=c++11 -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir
-  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir
+  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir/src
 
-build CMakeFiles/Space_Shooter.dir/Collision.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/Collision.cpp || cmake_object_order_depends_target_Space_Shooter
-  DEP_FILE = CMakeFiles/Space_Shooter.dir/Collision.cpp.o.d
+build CMakeFiles/Space_Shooter.dir/src/Collision.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/src/Collision.cpp || cmake_object_order_depends_target_Space_Shooter
+  DEP_FILE = CMakeFiles/Space_Shooter.dir/src/Collision.cpp.o.d
   FLAGS = -std=c++11 -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir
-  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir
+  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir/src
 
-build CMakeFiles/Space_Shooter.dir/Ship.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/Ship.cpp || cmake_object_order_depends_target_Space_Shooter
-  DEP_FILE = CMakeFiles/Space_Shooter.dir/Ship.cpp.o.d
+build CMakeFiles/Space_Shooter.dir/src/Ship.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/src/Ship.cpp || cmake_object_order_depends_target_Space_Shooter
+  DEP_FILE = CMakeFiles/Space_Shooter.dir/src/Ship.cpp.o.d
   FLAGS = -std=c++11 -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir
-  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir
+  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir/src
 
-build CMakeFiles/Space_Shooter.dir/Util.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/Util.cpp || cmake_object_order_depends_target_Space_Shooter
-  DEP_FILE = CMakeFiles/Space_Shooter.dir/Util.cpp.o.d
+build CMakeFiles/Space_Shooter.dir/src/Util.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/src/Util.cpp || cmake_object_order_depends_target_Space_Shooter
+  DEP_FILE = CMakeFiles/Space_Shooter.dir/src/Util.cpp.o.d
   FLAGS = -std=c++11 -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir
-  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir
+  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir/src
 
-build CMakeFiles/Space_Shooter.dir/Bullet.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/Bullet.cpp || cmake_object_order_depends_target_Space_Shooter
-  DEP_FILE = CMakeFiles/Space_Shooter.dir/Bullet.cpp.o.d
+build CMakeFiles/Space_Shooter.dir/src/Bullet.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/src/Bullet.cpp || cmake_object_order_depends_target_Space_Shooter
+  DEP_FILE = CMakeFiles/Space_Shooter.dir/src/Bullet.cpp.o.d
   FLAGS = -std=c++11 -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir
-  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir
+  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir/src
 
-build CMakeFiles/Space_Shooter.dir/TextureManager.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/TextureManager.cpp || cmake_object_order_depends_target_Space_Shooter
-  DEP_FILE = CMakeFiles/Space_Shooter.dir/TextureManager.cpp.o.d
+build CMakeFiles/Space_Shooter.dir/src/TextureManager.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/src/TextureManager.cpp || cmake_object_order_depends_target_Space_Shooter
+  DEP_FILE = CMakeFiles/Space_Shooter.dir/src/TextureManager.cpp.o.d
   FLAGS = -std=c++11 -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir
-  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir
+  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir/src
 
-build CMakeFiles/Space_Shooter.dir/BulletManager.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/BulletManager.cpp || cmake_object_order_depends_target_Space_Shooter
-  DEP_FILE = CMakeFiles/Space_Shooter.dir/BulletManager.cpp.o.d
+build CMakeFiles/Space_Shooter.dir/src/BulletManager.cpp.o: CXX_COMPILER__Space_Shooter_Debug /home/prime/Desktop/dev/gameDev/Space-Shooter/src/BulletManager.cpp || cmake_object_order_depends_target_Space_Shooter
+  DEP_FILE = CMakeFiles/Space_Shooter.dir/src/BulletManager.cpp.o.d
   FLAGS = -std=c++11 -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir
-  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir
+  OBJECT_FILE_DIR = CMakeFiles/Space_Shooter.dir/src
 
 
 # =============================================================================
@@ -99,7 +99,7 @@ build CMakeFiles/Space_Shooter.dir/BulletManager.cpp.o: CXX_COMPILER__Space_Shoo
 #############################################
 # Link the executable Space_Shooter
 
-build Space_Shooter: CXX_EXECUTABLE_LINKER__Space_Shooter_Debug CMakeFiles/Space_Shooter.dir/main.cpp.o CMakeFiles/Space_Shooter.dir/Collision.cpp.o CMakeFiles/Space_Shooter.dir/Ship.cpp.o CMakeFiles/Space_Shooter.dir/Util.cpp.o CMakeFiles/Space_Shooter.dir/Bullet.cpp.o CMakeFiles/Space_Shooter.dir/TextureManager.cpp.o CMakeFiles/Space_Shooter.dir/BulletManager.cpp.o | /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
+build Space_Shooter: CXX_EXECUTABLE_LINKER__Space_Shooter_Debug CMakeFiles/Space_Shooter.dir/src/main.cpp.o CMakeFiles/Space_Shooter.dir/src/Collision.cpp.o CMakeFiles/Space_Shooter.dir/src/Ship.cpp.o CMakeFiles/Space_Shooter.dir/src/Util.cpp.o CMakeFiles/Space_Shooter.dir/src/Bullet.cpp.o CMakeFiles/Space_Shooter.dir/src/TextureManager.cpp.o CMakeFiles/Space_Shooter.dir/src/BulletManager.cpp.o | /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
   FLAGS = -std=c++11 -g
   LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1  /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1  /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
   OBJECT_DIR = CMakeFiles/Space_Shooter.dir

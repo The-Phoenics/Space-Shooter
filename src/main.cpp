@@ -13,7 +13,7 @@ const static float height = 600;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(width, height), "Space-Shooter", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(width, height), " ", sf::Style::Close);
     window.setFramerateLimit(60);
 
     Ship ship(50, 50);

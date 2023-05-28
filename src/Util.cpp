@@ -1,7 +1,7 @@
 #include "Util.h"
-#include <math.h>
+#include <cmath>
 
-sf::Vector2f& operator+(sf::Vector2f v1, sf::Vector2f v2)
+sf::Vector2f operator+(sf::Vector2f& v1, sf::Vector2f& v2)
 {
     sf::Vector2f resultPlus;
     resultPlus.x = v1.x + v2.x;
@@ -9,7 +9,7 @@ sf::Vector2f& operator+(sf::Vector2f v1, sf::Vector2f v2)
     return resultPlus;
 }
 
-sf::Vector2f& operator-(sf::Vector2f v1, sf::Vector2f v2)
+sf::Vector2f operator-(sf::Vector2f& v1, sf::Vector2f& v2)
 {
     sf::Vector2f resultMinus;
     resultMinus.x = v1.x - v2.x;
@@ -17,13 +17,21 @@ sf::Vector2f& operator-(sf::Vector2f v1, sf::Vector2f v2)
     return resultMinus;
 }
 
-sf::Vector2f& operator*(sf::Vector2f& v, int n)
+sf::Vector2f operator*(sf::Vector2f& v1, sf::Vector2f& v2)
+{
+    sf::Vector2f resultMult;
+    resultMult.x = v1.x - v2.x;
+    resultMult.y = v1.y - v2.y;
+    return resultMult;
+}
+
+void operator*(sf::Vector2f& v, int n)
 {
     v.x *= n;
     v.y *= n;
 }
 
-sf::Vector2f& operator/(sf::Vector2f& v, int n)
+sf::Vector2f operator/(sf::Vector2f& v, int n)
 {
     sf::Vector2f resultDiv;
     resultDiv.x = v.x / n;
@@ -31,7 +39,7 @@ sf::Vector2f& operator/(sf::Vector2f& v, int n)
     return resultDiv;
 }
 
-sf::Vector2f calcRotation(sf::Vector2f v, float theta)
+sf::Vector2f calcRotation(sf::Vector2f& v, double theta)
 {
     sf::Vector2f newPos;
     newPos.x = v.x * cos(theta) - v.y * sin(theta);
