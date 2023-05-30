@@ -1,7 +1,3 @@
-//
-// Created by prime on 21/5/23.
-//
-
 #ifndef SPACE_SHOOTER_SHIP_H
 #define SPACE_SHOOTER_SHIP_H
 
@@ -27,6 +23,7 @@ public:
 private:
     sf::RectangleShape m_ship;
     sf::Vector2f m_vel;
+    sf::Vector2f m_facingDir;
     float m_rotationAngle;
 };
 

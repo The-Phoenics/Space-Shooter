@@ -1,9 +1,5 @@
-//
-// Created by prime on 21/5/23.
-//
-
-#include "Ship.h"
-#include "Util.h"
+#include "include/Ship.h"
+#include "include/Util.h"
 
 Ship::Ship()
 {

@@ -2,18 +2,17 @@
 #include <vector>
 #include <iostream>
 
-#include "Collision.h"
-#include "Ship.h"
-#include "Util.h"
-#include "BulletManager.h"
-const static int N = 10;
+#include "include/Collision.h"
+#include "include/Ship.h"
+#include "include/Util.h"
+#include "include/BulletManager.h"
 
 const static float width  = 800;
 const static float height = 600;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(width, height), " ", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(width, height), "Space-Shooter", sf::Style::Close);
     window.setFramerateLimit(60);
 
     Ship ship(50, 50);
@@ -26,7 +25,7 @@ int main()
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();;
+                window.close();
         }
 
 
@@ -36,8 +35,8 @@ int main()
         ship.shipMovement();
         ship.rotationMovement();
 
-        bm.updateBulletCount();
-        bm.bulletMovement();
+        bm.updateBulletCount(ship);
+        bm.bulletsMovement();
 
 
         // ----------------- RENDER --------------- //

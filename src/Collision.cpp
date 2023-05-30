@@ -1,7 +1,4 @@
-//
-// Created by prime on 21/5/23.
-//
-#include "Collision.h"
+#include "include/Collision.h"
 
 int isColliding(const sf::RectangleShape& object, const sf::RenderWindow& window)
 {

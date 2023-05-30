@@ -1,4 +1,4 @@
-#include "Util.h"
+#include "include/Util.h"
 #include <cmath>
 
 sf::Vector2f operator+(sf::Vector2f& v1, sf::Vector2f& v2)
@@ -39,13 +39,27 @@ sf::Vector2f operator/(sf::Vector2f& v, int n)
     return resultDiv;
 }
 
-sf::Vector2f calcRotation(sf::Vector2f& v, double theta)
+sf::Vector2f getDir(sf::Vector2f& start, sf::Vector2f& dest)
 {
+    // Difference of start from destination
+    // Then, normalize it
+}
+
+sf::Vector2f calcRotation(sf::Vector2f& currentPos, double theta)
+{
+    // this function calculates the position of a point after it is being rotated
+    // with respect to the a point currentPos
     sf::Vector2f newPos;
-    newPos.x = v.x * cos(theta) - v.y * sin(theta);
-    newPos.x = v.x * sin(theta) + v.y * cos(theta);
+    newPos.x = currentPos.x * cos(theta) - currentPos.y * sin(theta);
+    newPos.x = currentPos.x * sin(theta) + currentPos.y * cos(theta);
 
     return newPos;
+}
+
+void normalize(sf::Vector2f& v)
+{
+    v.x = v.x / std::abs(v.x);
+    v.y = v.y / std::abs(v.y); 
 }
 
 int random_integer(int min, int max)

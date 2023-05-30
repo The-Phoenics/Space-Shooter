@@ -1,15 +1,22 @@
-//
-// Created by prime on 25/5/23.
-//
+#include "include/Bullet.h"
+#include "include/Util.h"
+#include "include/Ship.h"
 
-#include "Bullet.h"
-#include "Util.h"
-
-Bullet::Bullet()
-    : m_vel(sf::Vector2f(0.5f, 0.5f))
+Bullet::Bullet(Ship& t_ship)
+    : m_vel(sf::Vector2f(0.5f, 0.5f)),
+      m_ship(t_ship)
 {
     m_bullet = sf::CircleShape();
     setup();
+}
+
+Bullet::Bullet(Ship& t_ship, float radii)
+    : m_vel(sf::Vector2f(0.5f, 0.5f)),
+      m_ship(t_ship)
+{
+    m_bullet = sf::CircleShape();
+    setup();
+    setRadii(radii);
 }
 
 void Bullet::render(sf::RenderWindow& window)
@@ -22,15 +29,20 @@ sf::CircleShape& Bullet::getBullet()
     return m_bullet;
 }
 
-void Bullet::bulletMovement()
+void Bullet::setbulletRenderPosition()
 {
     m_bullet.setPosition(m_bullet.getPosition() + m_vel);
+}
+
+void Bullet::bulletMovement()
+{
+    m_bullet.setPosition(m_dir + m_vel);
 }
 
 void Bullet::setup()
 {
     m_bullet.setRadius(10.f);
-    m_bullet.setPosition(300.f, 100.f);
+    m_bullet.setPosition(m_ship.getShip().getPosition());
     m_bullet.setOrigin(sf::Vector2f(25.f, 25.f));
     m_bullet.setFillColor(sf::Color::Green);
 }

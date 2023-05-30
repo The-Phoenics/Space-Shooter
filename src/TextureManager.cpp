@@ -1,8 +1,4 @@
-//
-// Created by prime on 25/5/23.
-//
-
-#include "TextureManager.h"
+#include "include/TextureManager.h"
 
 TextureManager::TextureManager()
 {

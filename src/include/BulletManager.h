@@ -1,7 +1,3 @@
-//
-// Created by prime on 27/5/23.
-//
-
 #ifndef SPACE_SHOOTER_BULLETMANAGER_H
 #define SPACE_SHOOTER_BULLETMANAGER_H
 
@@ -15,8 +11,8 @@ public:
     ~BulletManager() {}
 
     void renderBullet(sf::RenderWindow& window);
-    void updateBulletCount();
-    void bulletMovement();
+    void updateBulletCount(Ship& ship);
+    void bulletsMovement();
 
 private:
     std::vector<Bullet> m_bullets;

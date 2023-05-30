@@ -1,7 +1,3 @@
-//
-// Created by prime on 25/5/23.
-//
-
 #ifndef SPACE_SHOOTER_TEXTUREMANAGER_H
 #define SPACE_SHOOTER_TEXTUREMANAGER_H
 
