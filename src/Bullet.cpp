@@ -2,52 +2,32 @@
 #include "include/Util.h"
 #include "include/Ship.h"
 
-Bullet::Bullet(Ship& t_ship)
-    : m_vel(sf::Vector2f(0.5f, 0.5f)),
-      m_ship(t_ship)
+Bullet::Bullet(Ship& ship, float radii)
+    : m_vel(100.0f)
 {
-    m_bullet = sf::CircleShape();
-    setup();
+    this->calcDir(ship.getShip());
+    m_bullet.setRadius(10.f);
+    m_bullet.setPosition(ship.getShip().getPosition());
+    m_bullet.setFillColor(sf::Color::Red);
+    m_bullet.setOrigin(m_bullet.getRadius(), m_bullet.getRadius());
 }
 
-Bullet::Bullet(Ship& t_ship, float radii)
-    : m_vel(sf::Vector2f(0.5f, 0.5f)),
-      m_ship(t_ship)
-{
-    m_bullet = sf::CircleShape();
-    setup();
-    setRadii(radii);
-}
-
-void Bullet::render(sf::RenderWindow& window)
-{
+void Bullet::render(sf::RenderWindow& window) {
     window.draw(m_bullet);
 }
 
-sf::CircleShape& Bullet::getBullet()
-{
-    return m_bullet;
-}
-
-void Bullet::setbulletRenderPosition()
-{
-    m_bullet.setPosition(m_bullet.getPosition() + m_vel);
-}
-
-void Bullet::bulletMovement()
-{
-    m_bullet.setPosition(m_dir + m_vel);
-}
-
-void Bullet::setup()
-{
-    m_bullet.setRadius(10.f);
-    m_bullet.setPosition(m_ship.getShip().getPosition());
-    m_bullet.setOrigin(sf::Vector2f(25.f, 25.f));
-    m_bullet.setFillColor(sf::Color::Green);
+void Bullet::move() {
+    m_bullet.setPosition(m_bullet.getPosition() + (m_dir * m_vel));
 }
 
 void Bullet::onCollisionWithWall(int Collision_Side)
 {
     // TODO: delete the bullet
+}
+
+void Bullet::calcDir(sf::RectangleShape& player)
+{
+    // ----- BULLET DIRECTION ----- //
+    sf::Vector2f tlc = player.getPosition() - (player.getSize() / 2.f);
+    m_dir = normalize(tlc - player.getPosition());
 }

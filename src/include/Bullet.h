@@ -2,34 +2,34 @@
 #define SPACE_SHOOTER_BULLET_H
 
 #include <SFML/Graphics.hpp>
+#include "include/Ship.h"
 
-class Bullet {
+class Bullet 
+{
 public:
-    Bullet(Ship& t_ship);
-    Bullet(Ship& t_ship, float radii = 10.f);
+
+    Bullet(Ship& ship, float radii = 10.f);
     ~Bullet() {}
 
     void render(sf::RenderWindow& window);
-    sf::CircleShape& getBullet();
-    void setup();
-
-    inline void  setRadii(float radii){ m_bullet.setRadius(radii); }
-    inline float getRadii() const     { return m_bullet.getRadius(); }
 
     void onCollisionWithWall(int Collision_Side);
-    void setbulletRenderPosition();
-    void bulletMovement();
-    void calcDir();
+    void calcDir(sf::RectangleShape& player);
+    void move();
 
+    // getter .. setters
+    inline float getVel()         { return m_vel; }
+    inline void setVel(float vel) { m_vel = vel;  }
 
-    inline sf::Vector2f& getVel()        { return m_vel; }
-    inline void setVel(sf::Vector2f vel) { m_vel = vel;  }
+    sf::CircleShape& getBullet() { return m_bullet; }
+
+    inline void  setRadii(float radii) { m_bullet.setRadius(radii); }
+    inline float getRadii() const { return m_bullet.getRadius(); }
 
 private:
     sf::CircleShape m_bullet;
-    Ship& m_ship;
-    sf::Vector2f m_vel;
     sf::Vector2f m_dir;
+    float m_vel;
 };
 
 #endif //SPACE_SHOOTER_BULLET_H

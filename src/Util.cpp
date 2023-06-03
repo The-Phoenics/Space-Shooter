@@ -20,18 +20,19 @@ sf::Vector2f operator-(sf::Vector2f& v1, sf::Vector2f& v2)
 sf::Vector2f operator*(sf::Vector2f& v1, sf::Vector2f& v2)
 {
     sf::Vector2f resultMult;
-    resultMult.x = v1.x - v2.x;
-    resultMult.y = v1.y - v2.y;
+    resultMult.x = v1.x * v2.x;
+    resultMult.y = v1.y * v2.y;
     return resultMult;
 }
 
-void operator*(sf::Vector2f& v, int n)
+sf::Vector2f operator*(sf::Vector2f& v, float n)
 {
-    v.x *= n;
-    v.y *= n;
+    sf::Vector2f result;
+    result += v;
+    return result;
 }
 
-sf::Vector2f operator/(sf::Vector2f& v, int n)
+sf::Vector2f operator/(sf::Vector2f& v, float n)
 {
     sf::Vector2f resultDiv;
     resultDiv.x = v.x / n;
@@ -39,16 +40,11 @@ sf::Vector2f operator/(sf::Vector2f& v, int n)
     return resultDiv;
 }
 
-sf::Vector2f getDir(sf::Vector2f& start, sf::Vector2f& dest)
-{
-    // Difference of start from destination
-    // Then, normalize it
-}
-
-sf::Vector2f calcRotation(sf::Vector2f& currentPos, double theta)
+sf::Vector2f calcPointAfterRotation(sf::Vector2f& currentPos, double theta)
 {
     // this function calculates the position of a point after it is being rotated
     // with respect to the a point currentPos
+
     sf::Vector2f newPos;
     newPos.x = currentPos.x * cos(theta) - currentPos.y * sin(theta);
     newPos.x = currentPos.x * sin(theta) + currentPos.y * cos(theta);
@@ -56,10 +52,12 @@ sf::Vector2f calcRotation(sf::Vector2f& currentPos, double theta)
     return newPos;
 }
 
-void normalize(sf::Vector2f& v)
+sf::Vector2f normalize(const sf::Vector2f& v)
 {
-    v.x = v.x / std::abs(v.x);
-    v.y = v.y / std::abs(v.y); 
+    float mag = std::sqrt((v.x)*(v.x) + (v.y) * (v.y));
+    sf::Vector2f dir(v.x / mag, v.y / mag);
+
+    return dir;
 }
 
 int random_integer(int min, int max)

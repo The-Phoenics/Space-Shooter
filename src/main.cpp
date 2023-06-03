@@ -34,9 +34,10 @@ int main()
         ship.onCollisionWithWall(isColliding(ship.getShip(), window));
         ship.shipMovement();
         ship.rotationMovement();
+        ship.calcFacingDir();
 
         bm.updateBulletCount(ship);
-        bm.bulletsMovement();
+        bm.bulletsMovement();              //////////////////
 
 
         // ----------------- RENDER --------------- //
