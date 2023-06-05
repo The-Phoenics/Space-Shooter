@@ -1,15 +1,18 @@
 #include "include/Bullet.h"
 #include "include/Util.h"
 #include "include/Ship.h"
+#include "include/Ship.h"
+#include "include/TextureManager.h"
 
 Bullet::Bullet(Ship& ship, float radii)
     : m_vel(100.0f)
 {
-    this->calcDir(ship.getShip());
+    m_dir = ship.getFacingDir();
+
     m_bullet.setRadius(10.f);
     m_bullet.setPosition(ship.getShip().getPosition());
-    m_bullet.setFillColor(sf::Color::Red);
     m_bullet.setOrigin(m_bullet.getRadius(), m_bullet.getRadius());
+    m_bullet.setTexture(&TextureManager::get_bullet_texture());
 }
 
 void Bullet::render(sf::RenderWindow& window) {
@@ -23,11 +26,4 @@ void Bullet::move() {
 void Bullet::onCollisionWithWall(int Collision_Side)
 {
     // TODO: delete the bullet
-}
-
-void Bullet::calcDir(sf::RectangleShape& player)
-{
-    // ----- BULLET DIRECTION ----- //
-    sf::Vector2f tlc = player.getPosition() - (player.getSize() / 2.f);
-    m_dir = normalize(tlc - player.getPosition());
 }

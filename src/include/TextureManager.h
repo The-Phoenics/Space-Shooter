@@ -1,18 +1,21 @@
 #ifndef SPACE_SHOOTER_TEXTUREMANAGER_H
 #define SPACE_SHOOTER_TEXTUREMANAGER_H
 
-#include <SFML/Graphics.hpp>
-#include <string>
+#define TEXT_PATH_SHIP   "res/ship.png"
+#define TEXT_PATH_BULLET "res/bullet2.png"
 
-struct TextureManager
+#include <SFML/Graphics.hpp>
+#include <iostream>
+
+class TextureManager
 {
-    TextureManager();
-    ~TextureManager();
-    
+public:
+    static const sf::Texture& get_ship_texture();
+    static const sf::Texture& get_bullet_texture();
 
 private:
-    sf::Texture player;
+    static sf::Texture shipText;
+    static sf::Texture bulletText;
 };
 
-
-#endif //SPACE_SHOOTER_TEXTUREMANAGER_H
+#endif // SPACE_SHOOTER_TEXTUREMANAGER_H

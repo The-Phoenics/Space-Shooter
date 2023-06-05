@@ -1,7 +1,7 @@
 #include "include/BulletManager.h"
 
 BulletManager::BulletManager()
-    //: m_bullets(std::vector<Bullet>())
+    : m_bullets(std::vector<Bullet>())
 {
 }
 

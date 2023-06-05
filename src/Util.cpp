@@ -40,16 +40,27 @@ sf::Vector2f operator/(sf::Vector2f& v, float n)
     return resultDiv;
 }
 
-sf::Vector2f calcPointAfterRotation(sf::Vector2f& currentPos, double theta)
+sf::Vector2f calcPointAfterRotation(Ship& ship, float rotationAngle)
 {
-    // this function calculates the position of a point after it is being rotated
-    // with respect to the a point currentPos
+    sf::Vector2f center(ship.getShip().getPosition());
+    float sideLength = ship.getShip().getSize().x;
 
-    sf::Vector2f newPos;
-    newPos.x = currentPos.x * cos(theta) - currentPos.y * sin(theta);
-    newPos.x = currentPos.x * sin(theta) + currentPos.y * cos(theta);
+    // Convert the rotation angle from degrees to radians
+    float rotationRadians = DegToRadian(rotationAngle);
 
-    return newPos;
+    // Calculate the coordinates of the center of the square relative to the top left corner
+    float topLeftX = center.x - (sideLength / 2.0f);
+    float topLeftY = center.y - (sideLength / 2.0f);
+
+    // Apply rotation transformation
+    float rotatedX = topLeftX * std::cos(rotationRadians) - topLeftY * std::sin(rotationRadians);
+    float rotatedY = topLeftX * std::sin(rotationRadians) + topLeftY * std::cos(rotationRadians);
+
+    // Adjust the coordinates of the top left corner relative to the center
+    rotatedX += (sideLength / 2.0f);
+    rotatedY += (sideLength / 2.0f);
+
+    return sf::Vector2f(rotatedX, rotatedY);
 }
 
 sf::Vector2f normalize(const sf::Vector2f& v)
@@ -60,9 +71,14 @@ sf::Vector2f normalize(const sf::Vector2f& v)
     return dir;
 }
 
+float DegToRadian(float degree)
+{
+    return degree * PI / 180.0f;
+}
+
 int random_integer(int min, int max)
 {
-    std::uniform_int_distribution<int> dist(min, max);
+    static std::uniform_int_distribution<int> dist(min, max);
     std::random_device engine;
 
     return dist(engine);

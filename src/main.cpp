@@ -14,6 +14,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(width, height), "Space-Shooter", sf::Style::Close);
     window.setFramerateLimit(60);
+    int tick = 0;
 
     Ship ship(50, 50);
     BulletManager bm;
@@ -28,16 +29,18 @@ int main()
                 window.close();
         }
 
+        if (tick > 20)
+            tick = 0;
+        tick++;
 
         // ----------------- UPDATE ---------------- //
 
         ship.onCollisionWithWall(isColliding(ship.getShip(), window));
         ship.shipMovement();
-        ship.rotationMovement();
-        ship.calcFacingDir();
 
-        bm.updateBulletCount(ship);
-        bm.bulletsMovement();              //////////////////
+        if (tick > 20)
+            bm.updateBulletCount(ship);
+        bm.bulletsMovement();
 
 
         // ----------------- RENDER --------------- //
@@ -45,7 +48,6 @@ int main()
         window.clear();
         bm.renderBullet(window);
         ship.render(window);
-
         window.display();
     }
 }

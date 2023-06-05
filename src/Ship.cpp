@@ -1,35 +1,46 @@
 #include "include/Ship.h"
 #include "include/Util.h"
+#include "include/TextureManager.h"
 
 Ship::Ship()
-    : m_currentAngle(0.f),
-      m_vel(sf::Vector2f(1.f, 1.f)),
-      m_rotationAngle(1.5f)
+    : m_vel(sf::Vector2f(1.f, 1.f)),
+      m_rotationAngle(1.5f),
+      m_headTip(m_ship.getPosition() - sf::Vector2f(m_ship.getSize().x / 2, m_ship.getSize().y / 2))
 {
     m_ship = sf::RectangleShape(sf::Vector2f(100.f, 100.f));
     m_ship.setPosition(400, 400);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
+    m_ship.setTexture(&TextureManager::get_ship_texture());
 }
 
 Ship::Ship(float width, float height)
-    : m_currentAngle(0.f),
-      m_vel(sf::Vector2f(1.f, 1.f)),
+    : m_vel(sf::Vector2f(1.f, 1.f)),
       m_rotationAngle(1.5f),
-      m_ship(sf::RectangleShape(sf::Vector2f(width, height)))
+      m_headTip(m_ship.getPosition() - sf::Vector2f(m_ship.getSize().x / 2, m_ship.getSize().y / 2))
 {
+    m_ship = sf::RectangleShape(sf::Vector2f(width, height));
     m_ship.setPosition(400, 400);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
+    m_ship.setTexture(&TextureManager::get_ship_texture());
 }
-
 
 void Ship::calcFacingDir()
 {
-    sf::Vector2f dest(m_ship.getPosition() - sf::Vector2f(m_ship.getSize().x / 2, m_ship.getSize().y / 2));
-    sf::Vector2f start(m_ship.getPosition());
 
-    sf::Vector2f dir = dest - start;
+
+    // FIX : FIX THIS THE FACING DIRECTION IS NOT CALCULATED PROPERLY
+
+
+
+    float currentAngle = m_ship.getRotation() - 90.f;
+    std::cout << currentAngle << std::endl;
+    if (currentAngle != 0)
+        this->m_headTip = calcPointAfterRotation(*this, currentAngle);
+    sf::Vector2f centre(m_ship.getPosition());
+
+    sf::Vector2f dir = this->m_headTip - centre;
     m_facingDir = normalize(dir);
 }
 
@@ -55,24 +66,25 @@ void Ship::onCollisionWithWall(int Collision_Side) {
             break;
         default:
             break;
-
     }
 }
 
 void Ship::shipMovement()
 {
-    sf::Vector2f v(m_ship.getPosition().x + m_vel.x, m_ship.getPosition().y + m_vel.y);
-    m_ship.setPosition(v);
+    //sf::Vector2f v(m_ship.getPosition().x + m_vel.x, m_ship.getPosition().y + m_vel.y);
+    //m_ship.setPosition(v);
+
+    rotationMovement();
 }
 
 void Ship::rotationMovement()
 {
-    clamp<float>(m_currentAngle, 0, 360);
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        m_ship.rotate(this->m_currentAngle);
-    this->setcurrentAngle(getcurrentAngle() + m_rotationAngle);
+        m_ship.rotate(m_rotationAngle);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        m_ship.rotate(-1 * this->m_currentAngle);
+        m_ship.rotate(-1 * m_rotationAngle);
+
+    // After rotation calculate the ship's facing dir
+    this->calcFacingDir();
 }

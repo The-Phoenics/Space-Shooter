@@ -14,7 +14,6 @@ public:
     void render(sf::RenderWindow& window);
 
     void onCollisionWithWall(int Collision_Side);
-    void calcDir(sf::RectangleShape& player);
     void move();
 
     // getter .. setters
