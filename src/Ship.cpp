@@ -26,21 +26,20 @@ Ship::Ship(float width, float height)
     m_ship.setTexture(&TextureManager::get_ship_texture());
 }
 
-void Ship::calcFacingDir()
+void Ship::calcFacingDir(sf::RenderWindow& window)
 {
+    // FIX : FIIRECTION IX THIS THE FACING DS NOT CALCULATED PROPERLY
 
-
-    // FIX : FIX THIS THE FACING DIRECTION IS NOT CALCULATED PROPERLY
-
-
-
-    float currentAngle = m_ship.getRotation() - 90.f;
+    float currentAngle = m_ship.getRotation();
     std::cout << currentAngle << std::endl;
     if (currentAngle != 0)
         this->m_headTip = calcPointAfterRotation(*this, currentAngle);
-    sf::Vector2f centre(m_ship.getPosition());
 
-    sf::Vector2f dir = this->m_headTip - centre;
+    sf::Vector2f centre = sf::Vector2f(m_ship.getPosition());
+    sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
+
+    //sf::Vector2f dir = this->m_headTip - centre;
+    sf::Vector2f dir = mousePos - centre;
     m_facingDir = normalize(dir);
 }
 
@@ -69,15 +68,15 @@ void Ship::onCollisionWithWall(int Collision_Side) {
     }
 }
 
-void Ship::shipMovement()
+void Ship::shipMovement(sf::RenderWindow& window)
 {
     //sf::Vector2f v(m_ship.getPosition().x + m_vel.x, m_ship.getPosition().y + m_vel.y);
     //m_ship.setPosition(v);
 
-    rotationMovement();
+    rotationMovement(window);
 }
 
-void Ship::rotationMovement()
+void Ship::rotationMovement(sf::RenderWindow& window)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         m_ship.rotate(m_rotationAngle);
@@ -86,5 +85,5 @@ void Ship::rotationMovement()
         m_ship.rotate(-1 * m_rotationAngle);
 
     // After rotation calculate the ship's facing dir
-    this->calcFacingDir();
+    this->calcFacingDir(window);
 }

@@ -67,7 +67,6 @@ sf::Vector2f normalize(const sf::Vector2f& v)
 {
     float mag = std::sqrt((v.x)*(v.x) + (v.y) * (v.y));
     sf::Vector2f dir(v.x / mag, v.y / mag);
-
     return dir;
 }
 

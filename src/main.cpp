@@ -36,7 +36,7 @@ int main()
         // ----------------- UPDATE ---------------- //
 
         ship.onCollisionWithWall(isColliding(ship.getShip(), window));
-        ship.shipMovement();
+        ship.shipMovement(window);
 
         if (tick > 20)
             bm.updateBulletCount(ship);

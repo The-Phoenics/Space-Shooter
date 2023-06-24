@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Space_Shooter"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Space_Shooter">
+				<Option output="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Space_Shooter" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include"/>
+					<Add directory="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 Space_Shooter"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Space_Shooter/fast">
+				<Option output="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Space_Shooter" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include"/>
+					<Add directory="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 Space_Shooter/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/Bullet.cpp">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/BulletManager.cpp">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/Collision.cpp">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/Ship.cpp">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/TextureManager.cpp">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/Util.cpp">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include/Bullet.h">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include/BulletManager.h">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include/Collision.h">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include/Ship.h">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include/TextureManager.h">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/include/Util.h">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/src/main.cpp">
+			<Option target="Space_Shooter"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets-none.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/prime/Desktop/dev/Space-Shooter-Git-Latest/../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

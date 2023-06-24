@@ -1,6 +1,9 @@
 #ifndef SPACE_SHOOTER_TEXTUREMANAGER_H
 #define SPACE_SHOOTER_TEXTUREMANAGER_H
 
+#define TEXT_RELATIVE_PATH_SHIP   "../res/ship.png"
+#define TEXT_RELATIVE_PATH_BULLET "../res/bullet2.png"
+
 #define TEXT_PATH_SHIP   "res/ship.png"
 #define TEXT_PATH_BULLET "res/bullet2.png"
 
@@ -16,6 +19,7 @@ public:
 private:
     static sf::Texture shipText;
     static sf::Texture bulletText;
+
 };
 
 #endif // SPACE_SHOOTER_TEXTUREMANAGER_H

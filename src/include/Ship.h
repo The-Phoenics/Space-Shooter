@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class Ship
+class Ship : public sf::Transformable
 {
 public:
     Ship();
@@ -17,11 +17,11 @@ public:
     inline sf::Vector2f getFacingDir()   { return m_facingDir; }
 
     void onCollisionWithWall(int Collision_Side);
-    void shipMovement();
-    void rotationMovement();
 
-    void calcFacingDir();
-
+    void shipMovement(sf::RenderWindow& window);
+    void rotationMovement(sf::RenderWindow& window);
+    void calcFacingDir(sf::RenderWindow& window);
+    
     void render(sf::RenderWindow& window);
 
 private:
