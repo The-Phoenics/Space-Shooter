@@ -23,6 +23,8 @@ float DegToRadian(float degree);
 
 int random_integer(int min, int max);
 
+float angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos);
+
 template<typename T>
 void clamp(T& value, T minValue, T maxValue)
 {

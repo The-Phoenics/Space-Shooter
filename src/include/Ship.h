@@ -6,8 +6,8 @@
 class Ship : public sf::Transformable
 {
 public:
-    Ship();
-    Ship(float width, float height);
+    Ship(sf::RenderWindow& win);
+    Ship(float width, float height, sf::RenderWindow& win);
     ~Ship() {}
 
     inline sf::Vector2f& getVel() { return m_vel; }
@@ -16,20 +16,19 @@ public:
     inline sf::RectangleShape& getShip() { return m_ship; }
     inline sf::Vector2f getFacingDir()   { return m_facingDir; }
 
-    void onCollisionWithWall(int Collision_Side);
+    void  onCollisionWithWall(int Collision_Side);
 
-    void shipMovement(sf::RenderWindow& window);
-    void rotationMovement(sf::RenderWindow& window);
-    void calcFacingDir(sf::RenderWindow& window);
+    void  shipMovement();
+    void  calcFacingDir();
+    float angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos);
     
-    void render(sf::RenderWindow& window);
+    void render();
 
 private:
     sf::RectangleShape m_ship;
     sf::Vector2f m_vel;
-    sf::Vector2f m_headTip;
     sf::Vector2f m_facingDir;
-    float m_rotationAngle;
+    sf::RenderWindow& window;
 };
 
 #endif //SPACE_SHOOTER_SHIP_H

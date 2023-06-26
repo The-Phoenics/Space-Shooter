@@ -13,7 +13,7 @@ void BulletManager::renderBullet(sf::RenderWindow& window)
 
 void BulletManager::updateBulletCount(Ship& ship)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         m_bullets.push_back(Bullet(ship));
     }
 }

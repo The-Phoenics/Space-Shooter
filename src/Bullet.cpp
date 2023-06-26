@@ -5,14 +5,14 @@
 #include "include/TextureManager.h"
 
 Bullet::Bullet(Ship& ship, float radii)
-    : m_vel(100.0f)
+    : m_vel(1000.0f)
 {
     m_dir = ship.getFacingDir();
-
     m_bullet.setRadius(10.f);
     m_bullet.setPosition(ship.getShip().getPosition());
     m_bullet.setOrigin(m_bullet.getRadius(), m_bullet.getRadius());
     m_bullet.setTexture(&TextureManager::get_bullet_texture());
+    m_bullet.rotate(ship.getShip().getRotation());
 }
 
 void Bullet::render(sf::RenderWindow& window) {
@@ -25,5 +25,5 @@ void Bullet::move() {
 
 void Bullet::onCollisionWithWall(int Collision_Side)
 {
-    // TODO: delete the bullet
+    // TODO: delete the bullets
 }

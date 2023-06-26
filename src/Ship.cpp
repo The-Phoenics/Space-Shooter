@@ -2,10 +2,9 @@
 #include "include/Util.h"
 #include "include/TextureManager.h"
 
-Ship::Ship()
+Ship::Ship(sf::RenderWindow& win)
     : m_vel(sf::Vector2f(1.f, 1.f)),
-      m_rotationAngle(1.5f),
-      m_headTip(m_ship.getPosition() - sf::Vector2f(m_ship.getSize().x / 2, m_ship.getSize().y / 2))
+      window(win)
 {
     m_ship = sf::RectangleShape(sf::Vector2f(100.f, 100.f));
     m_ship.setPosition(400, 400);
@@ -14,10 +13,9 @@ Ship::Ship()
     m_ship.setTexture(&TextureManager::get_ship_texture());
 }
 
-Ship::Ship(float width, float height)
+Ship::Ship(float width, float height, sf::RenderWindow& win)
     : m_vel(sf::Vector2f(1.f, 1.f)),
-      m_rotationAngle(1.5f),
-      m_headTip(m_ship.getPosition() - sf::Vector2f(m_ship.getSize().x / 2, m_ship.getSize().y / 2))
+      window(win)
 {
     m_ship = sf::RectangleShape(sf::Vector2f(width, height));
     m_ship.setPosition(400, 400);
@@ -26,24 +24,16 @@ Ship::Ship(float width, float height)
     m_ship.setTexture(&TextureManager::get_ship_texture());
 }
 
-void Ship::calcFacingDir(sf::RenderWindow& window)
+void Ship::calcFacingDir()
 {
-    // FIX : FIIRECTION IX THIS THE FACING DS NOT CALCULATED PROPERLY
-
-    float currentAngle = m_ship.getRotation();
-    std::cout << currentAngle << std::endl;
-    if (currentAngle != 0)
-        this->m_headTip = calcPointAfterRotation(*this, currentAngle);
-
     sf::Vector2f centre = sf::Vector2f(m_ship.getPosition());
     sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
 
-    //sf::Vector2f dir = this->m_headTip - centre;
     sf::Vector2f dir = mousePos - centre;
     m_facingDir = normalize(dir);
 }
 
-void Ship::render(sf::RenderWindow& window)
+void Ship::render()
 {
     window.draw(m_ship);
 }
@@ -68,22 +58,30 @@ void Ship::onCollisionWithWall(int Collision_Side) {
     }
 }
 
-void Ship::shipMovement(sf::RenderWindow& window)
+void Ship::shipMovement()
 {
+    // ----------- RANDOM MOVEMENT ------------ //
     //sf::Vector2f v(m_ship.getPosition().x + m_vel.x, m_ship.getPosition().y + m_vel.y);
     //m_ship.setPosition(v);
 
-    rotationMovement(window);
+    // Rotational movement
+    static sf::Vector2f mousePos;
+    static float angle;
+
+    mousePos = sf::Vector2f((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
+    angle = angleToAlignSpriteWithMouse(mousePos, m_ship.getPosition()) - 90.f;
+
+    m_ship.setRotation(angle);
 }
 
-void Ship::rotationMovement(sf::RenderWindow& window)
+float Ship::angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        m_ship.rotate(m_rotationAngle);
+    float angle = 0.0f;
+    sf::Vector2f hypot = mousePos - spritePos;
+    sf::Vector2f base  = sf::Vector2f(mousePos.x, spritePos.y) - spritePos;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        m_ship.rotate(-1 * m_rotationAngle);
+    angle = std::atan2(hypot.y, base.x) * 180.0f / M_PI;
 
-    // After rotation calculate the ship's facing dir
-    this->calcFacingDir(window);
+    angle > 180.f ? angle = 180.f - angle : angle = 180.f + angle;
+    return angle;
 }

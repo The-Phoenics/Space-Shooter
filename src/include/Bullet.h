@@ -23,7 +23,7 @@ public:
     sf::CircleShape& getBullet() { return m_bullet; }
 
     inline void  setRadii(float radii) { m_bullet.setRadius(radii); }
-    inline float getRadii() const { return m_bullet.getRadius(); }
+    inline float getRadii() const      { return m_bullet.getRadius(); }
 
 private:
     sf::CircleShape m_bullet;
