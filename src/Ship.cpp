@@ -60,10 +60,6 @@ void Ship::onCollisionWithWall(int Collision_Side) {
 
 void Ship::shipMovement()
 {
-    // ----------- RANDOM MOVEMENT ------------ //
-    //sf::Vector2f v(m_ship.getPosition().x + m_vel.x, m_ship.getPosition().y + m_vel.y);
-    //m_ship.setPosition(v);
-
     // Rotational movement
     static sf::Vector2f mousePos;
     static float angle;
@@ -84,4 +80,11 @@ float Ship::angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::
 
     angle > 180.f ? angle = 180.f - angle : angle = 180.f + angle;
     return angle;
+}
+
+void Ship::update()
+{
+    this->onCollisionWithWall(isColliding(m_ship, window));
+    this->shipMovement();
+    this->calcFacingDir();
 }

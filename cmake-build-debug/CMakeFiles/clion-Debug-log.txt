@@ -1,5 +1,0 @@
-/snap/clion/241/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/prime/Desktop/dev/Space-Shooter-Git-Latest -B /home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug
--- Found SFML 2.5.1 in /usr/lib/x86_64-linux-gnu/cmake/SFML
--- Configuring done
--- Generating done
--- Build files have been written to: /home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug

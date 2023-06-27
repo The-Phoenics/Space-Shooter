@@ -15,11 +15,13 @@ Bullet::Bullet(Ship& ship, float radii)
     m_bullet.rotate(ship.getShip().getRotation());
 }
 
-void Bullet::render(sf::RenderWindow& window) {
+void Bullet::render(sf::RenderWindow& window) 
+{
     window.draw(m_bullet);
 }
 
-void Bullet::move() {
+void Bullet::move() 
+{
     m_bullet.setPosition(m_bullet.getPosition() + (m_dir * m_vel));
 }
 

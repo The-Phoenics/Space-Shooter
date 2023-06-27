@@ -1,3 +1,0 @@
-/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/CMakeFiles/Space_Shooter.dir
-/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/prime/Desktop/dev/Space-Shooter-Git-Latest/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Space_Shooter)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
 
-set(SOURCE_FILES src/main.cpp src/Collision.cpp src/include/Collision.h src/Ship.cpp src/include/Ship.h src/Util.cpp src/include/Util.h src/Bullet.cpp src/include/Bullet.h src/include/TextureManager.h src/TextureManager.cpp src/BulletManager.cpp src/include/BulletManager.h)
+#set(SOURCE_FILES src/main.cpp src/Collision.cpp src/include/Collision.h src/Ship.cpp src/include/Ship.h src/Util.cpp src/include/Util.h src/Bullet.cpp src/include/Bullet.h src/include/TextureManager.h src/TextureManager.cpp src/BulletManager.cpp src/include/BulletManager.h)
+file(GLOB SOURCE_FILES src/*.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 

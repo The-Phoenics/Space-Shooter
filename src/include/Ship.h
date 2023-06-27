@@ -1,7 +1,6 @@
-#ifndef SPACE_SHOOTER_SHIP_H
-#define SPACE_SHOOTER_SHIP_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
+#include "Collision.h"
 
 class Ship : public sf::Transformable
 {
@@ -22,6 +21,7 @@ public:
     void  calcFacingDir();
     float angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos);
     
+    void update();
     void render();
 
 private:
@@ -30,5 +30,3 @@ private:
     sf::Vector2f m_facingDir;
     sf::RenderWindow& window;
 };
-
-#endif //SPACE_SHOOTER_SHIP_H
