@@ -1,6 +1,4 @@
-#ifndef SPACE_SHOOTER_BULLET_H
-#define SPACE_SHOOTER_BULLET_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "include/Ship.h"
 
@@ -30,5 +28,3 @@ private:
     sf::Vector2f m_dir;
     float m_vel;
 };
-
-#endif //SPACE_SHOOTER_BULLET_H

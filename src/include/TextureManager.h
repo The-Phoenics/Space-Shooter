@@ -1,10 +1,7 @@
 #pragma once
 
 #define TEXT_RELATIVE_PATH_SHIP   "../res/ship.png"
-#define TEXT_RELATIVE_PATH_BULLET "../res/bullet2.png"
-
-// #define TEXT_PATH_SHIP   "res/ship.png"
-// #define TEXT_PATH_BULLET "res/bullet2.png"
+#define TEXT_RELATIVE_PATH_BULLET "../res/bullet.png"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>

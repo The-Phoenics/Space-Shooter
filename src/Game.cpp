@@ -2,19 +2,68 @@
 
 Game::Game()
     : m_GameWindow(sf::VideoMode(800, 600), "Space Shooter", sf::Style::Close),
-      m_ship(Ship(50, 50, m_GameWindow)),
-      m_bulletManager(BulletManager(m_ship, m_GameWindow))
+      m_ship(50, 50, m_GameWindow),
+      m_bulletManager(m_ship, m_GameWindow),
+      mainMenuState(m_GameWindow),
+      pauseState(m_GameWindow),
+      gameOverState(m_GameWindow)
 {
     m_GameWindow.setFramerateLimit(60);
 }
 
 void Game::run()
 {
+    gamePlayState = Playing;
+
     while (m_GameWindow.isOpen())
     {
+        // sfml event polling
         this->processEvents();
-        this->update();
-        this->render();
+
+        if (isInMainMenuState)
+        {
+            if (mainMenuState.isPlayButtonClicked()) {
+                this->isInMainMenuState = false;
+                continue;
+            }
+            mainMenuState.update();
+            mainMenuState.render();
+        }
+
+        else // If not in MainMenuState
+        {
+            if (gamePlayState == Playing)
+            {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    gamePlayState = Paused;
+                    continue;
+                }
+                this->update();
+                this->render();
+                continue;
+            }
+            else if (gamePlayState == Paused)
+            {
+                if (pauseState.resumeButtonClicked()) {
+                    gamePlayState = Playing;
+                    continue;
+                }
+                if (pauseState.quitButtonClicked()) {
+                    this->isInMainMenuState = true;
+                    gamePlayState = Playing;
+                    continue;
+                }
+                pauseState.update();
+                pauseState.render();
+                continue;
+            }
+            else if (gamePlayState == GameOver)
+            {
+                gameOverState.update();
+                gameOverState.render();
+                continue;
+            }
+        }
     }
 }
 
