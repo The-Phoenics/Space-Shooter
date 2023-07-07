@@ -32,9 +32,7 @@ void PauseState::setup()
     quitButton.getButton().setOrigin(resumeButton.getButton().getSize() / 2.f);
     quitButton.setButtonPos(sf::Vector2f(resumeButton.getButton().getPosition().x, resumeButton.getButton().getPosition().y + 100));
 
-    resumeButText.loadFromFile("/home/prime/Desktop/Space-Shooter/res/resumeButton.png");
-    quitButText.loadFromFile  ("/home/prime/Desktop/Space-Shooter/res/quitButton.png");
-
-    resumeButton.setButtonText(resumeButText);
-    quitButton.setButtonText(quitButText);
+    // Load textures
+    resumeButton.setButtonText(TextureManager::get_resumeButton_texture());
+    quitButton.setButtonText  (TextureManager::get_quitButton_texture());
 }

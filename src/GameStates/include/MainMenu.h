@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Button.h"
+#include "TextureManager.h"
 
 class MainMenu
 {

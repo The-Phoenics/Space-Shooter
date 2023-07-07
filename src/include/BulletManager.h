@@ -3,6 +3,7 @@
 #include <vector>
 #include "Bullet.h"
 #include "Ship.h"
+#include "Collision.h"
 
 class BulletManager {
 public:
@@ -12,12 +13,15 @@ public:
     void renderBullet();
     void updateBulletCount(Ship& ship);
     void bulletsMovement();
+    void removeBullets(sf::CircleShape& asteroid);
 
     void update();
     void render();
 
-private:
+public:
     std::vector<Bullet> m_bullets;
+
+private:
     Ship& shootingShip;
     sf::RenderWindow& window;
     

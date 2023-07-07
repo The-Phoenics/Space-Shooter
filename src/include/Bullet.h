@@ -2,10 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "include/Ship.h"
 
-class Bullet 
+class Bullet
 {
 public:
-
     Bullet(Ship& ship, float radii = 10.f);
     ~Bullet() {}
 
@@ -16,7 +15,7 @@ public:
 
     // getter .. setters
     inline float getVel()         { return m_vel; }
-    inline void setVel(float vel) { m_vel = vel;  }
+    inline void  setVel(float vel) { m_vel = vel;  }
 
     sf::CircleShape& getBullet() { return m_bullet; }
 
@@ -26,5 +25,5 @@ public:
 private:
     sf::CircleShape m_bullet;
     sf::Vector2f m_dir;
-    float m_vel;
+    float m_vel = 3.f;
 };

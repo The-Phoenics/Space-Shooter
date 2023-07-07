@@ -2,12 +2,15 @@
 #include "include/Util.h"
 #include "include/TextureManager.h"
 
+#define M_PI 3.14
+
 Ship::Ship(sf::RenderWindow& win)
     : m_vel(sf::Vector2f(1.f, 1.f)),
+      m_ship(),
       window(win)
 {
-    m_ship = sf::RectangleShape(sf::Vector2f(100.f, 100.f));
-    m_ship.setPosition(400, 400);
+    m_ship.setSize(sf::Vector2f(100.f, 100.f));
+    m_ship.setPosition(sf::Vector2f(400.f, 300.f));
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
     m_ship.setTexture(&TextureManager::get_ship_texture());
@@ -41,16 +44,16 @@ void Ship::render()
 void Ship::onCollisionWithWall(int Collision_Side) {
     switch (Collision_Side)
     {
-        case 1:
+        case LEFT:
             m_vel.x *= -1;
             break;
-        case 2:
+        case RIGHT:
             m_vel.x *= -1;
             break;
-        case 3:
+        case TOP:
             m_vel.y *= -1;
             break;
-        case 4:
+        case BOTTOM:
             m_vel.y *= -1;
             break;
         default:
@@ -58,8 +61,25 @@ void Ship::onCollisionWithWall(int Collision_Side) {
     }
 }
 
-void Ship::shipMovement()
+void Ship::movementControls()
 {
+    sf::Vector2f currentPos = m_ship.getPosition();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        m_ship.setPosition(sf::Vector2f(currentPos.x, currentPos.y - m_speed));
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        m_ship.setPosition(sf::Vector2f(currentPos.x - m_speed, currentPos.y));
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        m_ship.setPosition(sf::Vector2f(currentPos.x, currentPos.y + m_speed));
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        m_ship.setPosition(sf::Vector2f(currentPos.x + m_speed, currentPos.y));
+}
+
+void Ship::move()
+{
+    // movement
+    this->movementControls();
+
     // Rotational movement
     static sf::Vector2f mousePos;
     static float angle;
@@ -85,6 +105,6 @@ float Ship::angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::
 void Ship::update()
 {
     this->onCollisionWithWall(isColliding(m_ship, window));
-    this->shipMovement();
+    this->move();
     this->calcFacingDir();
 }

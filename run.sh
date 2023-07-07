@@ -1,4 +1,4 @@
-cd ./build
+cd build
 cmake ..
 make
 ./Space_Shooter

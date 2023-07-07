@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "include/Ship.h"
-
+#include <iostream>
 #include <random>
 
 #define PI 3.14159
@@ -23,14 +23,18 @@ float DegToRadian(float degree);
 
 int random_integer(int min, int max);
 
-float angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos);
+sf::Vector2f randomVector2f(int min, int max);
 
-template<typename T>
-void clamp(T& value, T minValue, T maxValue)
-{
-	if (value < minValue)
-		value = minValue;
-	
-	if (value > maxValue)
-		value = maxValue;
-}
+void operator<<(std::ostream& os, sf::Vector2f v);
+
+//float angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos);
+
+//template<typename T>
+//void clamp(T& value, T minValue, T maxValue)
+//{
+//	if (value < minValue)
+//		value = minValue;
+//	
+//	if (value > maxValue)
+//		value = maxValue;
+//}

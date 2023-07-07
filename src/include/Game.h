@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "menu.h"
 #include "Ship.h"
+#include "Enemy.h"
 #include "BulletManager.h"
+#include "EnemyManager.h"
 
 #include "GameStates/include/MainMenu.h"
 #include "GameStates/include/GameOverState.h"
@@ -30,6 +31,7 @@ private:
 	void processEvents();
 	void update();
 	void render();
+	void eraseSprites();
 
 public:
     bool isplaying = false;
@@ -37,7 +39,8 @@ public:
 private:
 	sf::RenderWindow m_GameWindow;
     
-    Ship m_ship;
+    Ship  m_ship;
+	EnemyManager m_enemyManager;
 	BulletManager m_bulletManager;
 
 	bool isInMainMenuState = true;

@@ -2,18 +2,36 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Space_Shooter)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#set(SOURCE_FILES src/main.cpp src/Collision.cpp src/include/Collision.h src/Ship.cpp src/include/Ship.h src/Util.cpp src/include/Util.h src/Bullet.cpp src/include/Bullet.h src/include/TextureManager.h src/TextureManager.cpp src/BulletManager.cpp src/include/BulletManager.h)
+# Set the path to SFML
+if(WIN32)
+    set(SFML_DIR "<path to sfml>\\lib\\cmake\\SFML")
+endif()
+
+# Add the source files to your project
 file(GLOB SOURCE_FILES 
     src/*.cpp
     src/GameStates/*.cpp
 )
 
+# Add the executable target
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-#add_executable(Space_Shooter src/main.cpp src/Collision.cpp src/include/Collision.h src/Ship.cpp src/include/Ship.h src/Util.cpp src/include/Util.h src/Bullet.cpp src/include/Bullet.h src/include/TextureManager.h src/TextureManager.cpp src/BulletManager.cpp src/include/BulletManager.h)
-target_include_directories(${PROJECT_NAME} PUBLIC ${SFML_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/src/include ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src/GameStates/include)
+# Set the include directories
+target_include_directories(${PROJECT_NAME} PUBLIC 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/include 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/GameStates/include
+)
 
+# Find SFML package
 find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
-target_link_libraries(${PROJECT_NAME} sfml-system sfml-window sfml-graphics)
+
+# Link SFML libraries
+target_link_libraries(${PROJECT_NAME} 
+    sfml-system 
+    sfml-window 
+    sfml-graphics
+)

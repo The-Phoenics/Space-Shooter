@@ -15,7 +15,7 @@ void BulletManager::renderBullet()
 
 void BulletManager::updateBulletCount(Ship& ship)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+    if (sf::Mouse().isButtonPressed(sf::Mouse::Left)) {
         m_bullets.push_back(Bullet(ship));
     }
 }
@@ -24,6 +24,16 @@ void BulletManager::bulletsMovement()
 {
     for (Bullet& bullet : m_bullets)
         bullet.move();
+}
+
+void BulletManager::removeBullets(sf::CircleShape& asteroid)
+{
+    m_bullets.erase(
+        std::remove_if(m_bullets.begin(), m_bullets.end(), [&](Bullet& bullet) {
+            return isColliding(bullet.getBullet(), asteroid) || isCollidingWithWall(bullet.getBullet());
+            }),
+        m_bullets.end()
+    );
 }
 
 void BulletManager::update()

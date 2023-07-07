@@ -28,7 +28,8 @@ sf::Vector2f operator*(sf::Vector2f& v1, sf::Vector2f& v2)
 sf::Vector2f operator*(sf::Vector2f& v, float n)
 {
     sf::Vector2f result;
-    result += v;
+    result.x = v.x * n;
+    result.y = v.y * n;
     return result;
 }
 
@@ -77,8 +78,22 @@ float DegToRadian(float degree)
 
 int random_integer(int min, int max)
 {
-    static std::uniform_int_distribution<int> dist(min, max);
-    std::random_device engine;
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
 
-    return dist(engine);
+    std::uniform_int_distribution<int> dist(min, max);
+    return dist(gen);
+}
+
+sf::Vector2f randomVector2f(int min, int max)
+{
+    sf::Vector2f dir;
+    dir.x = random_integer(min, max);
+    dir.y = random_integer(min, max);
+    return dir;
+}
+
+void operator<<(std::ostream& os, sf::Vector2f v)
+{
+    os << v.x << ", " << v.y << std::endl;
 }

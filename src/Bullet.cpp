@@ -5,7 +5,6 @@
 #include "include/TextureManager.h"
 
 Bullet::Bullet(Ship& ship, float radii)
-    : m_vel(1000.0f)
 {
     m_dir = ship.getFacingDir();
     m_bullet.setRadius(10.f);
@@ -22,7 +21,10 @@ void Bullet::render(sf::RenderWindow& window)
 
 void Bullet::move() 
 {
-    m_bullet.setPosition(m_bullet.getPosition() + (m_dir * m_vel));
+    sf::Vector2f currentPos = m_bullet.getPosition();
+    sf::Vector2f speed = (m_dir * m_vel);
+    sf::Vector2f newPos = currentPos + speed;
+    m_bullet.setPosition(newPos);
 }
 
 void Bullet::onCollisionWithWall(int Collision_Side)
