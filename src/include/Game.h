@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "DEFINES.h"
 #include "Ship.h"
 #include "Enemy.h"
 #include "BulletManager.h"

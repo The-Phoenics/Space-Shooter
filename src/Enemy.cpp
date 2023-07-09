@@ -18,7 +18,7 @@ void Enemy::update()
 {
 	this->move();
     this->rotate();
-    this->onCollisionWithWall(isColliding(m_enemy, window));
+    this->onCollisionWithWall();
 }
 
 void Enemy::render()
@@ -51,16 +51,16 @@ void Enemy::rotate()
     this->m_enemy.rotate(this->m_rotate);
 }
 
-void Enemy::onCollisionWithWall(int Collision_Side)
+void Enemy::onCollisionWithWall()
 {
     sf::Vector2f pos = m_enemy.getPosition();
 
-    if (pos.y > 650)
+    if (pos.y > WINDOW_HEIGHT + 50)
         m_enemy.setPosition(pos.x, 0 - 50);
     if (pos.y < 0 - 50)
-        m_enemy.setPosition(pos.x, 600 + 50);
-    if (pos.x > 800 + 50)
+        m_enemy.setPosition(pos.x, WINDOW_HEIGHT + 50);
+    if (pos.x > WINDOW_WIDTH + 50)
         m_enemy.setPosition(0 - 50, pos.y);
     if (pos.x < 0 - 50)
-        m_enemy.setPosition(800 + 50, pos.x);
+        m_enemy.setPosition(WINDOW_WIDTH + 50, pos.x);
 }

@@ -1,16 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
-#define TEXT_RELATIVE_PATH_SHIP      "/home/prime/Desktop/SpaceShooter/res/ship.png"
-#define TEXT_RELATIVE_PATH_BULLET    "/home/prime/Desktop/SpaceShooter/res/bullet.png"
-#define TEXT_RELATIVE_PATH_PLAY      "/home/prime/Desktop/SpaceShooter/res/playButton.png"
-#define TEXT_RELATIVE_PATH_EXIT      "/home/prime/Desktop/SpaceShooter/res/exitButton.png"
-#define TEXT_RELATIVE_PATH_RESUME    "/home/prime/Desktop/SpaceShooter/res/resumeButton.png"
-#define TEXT_RELATIVE_PATH_QUIT      "/home/prime/Desktop/SpaceShooter/res/quitButton.png"
-#define TEXT_RELATIVE_PATH_BACKG     "/home/prime/Desktop/SpaceShooter/res/background.png"
-#define TEXT_RELATIVE_PATH_ASTEROID  "/home/prime/Desktop/SpaceShooter/res/asteroid.png"
-#define TEXT_RELATIVE_PATH_EXPLOSION "/home/prime/Desktop/SpaceShooter/res/explosion.png"
+#include "DEFINES.h"
 
 class TextureManager
 {
@@ -34,4 +25,5 @@ private:
     static sf::Texture quitButtonText;
     static sf::Texture backgText;
     static sf::Texture asteroidText;
+    static sf::Texture explosionText;
 };

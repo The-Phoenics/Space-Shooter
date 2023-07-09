@@ -2,42 +2,42 @@
 
 Animator::Animator(sf::RenderWindow& win, sf::Texture spriteSheet, int columns, int rows)
     : window (win),
-      texture(texture),
-      columns(columns),
-      rows   (rows),
+      m_texture(spriteSheet),
+      m_columns(columns),
+      m_rows   (rows),
       currentFrame(0)
 {
-    sprite.setTexture(*texture);
-    sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x / columns, texture.getSize().y / rows));
+    m_sprite.setTexture(m_texture);
+    m_sprite.setTextureRect(sf::IntRect(0, 0, m_texture.getSize().x / m_columns, m_texture.getSize().y / m_rows));
 }
 
 void Animator::update()
 {
     currentFrame++;
 
-    if (currentFrame >= columns * rows)
+    if (currentFrame >= m_columns * m_rows)
         currentFrame = 0;
 
-    int frameX = currentFrame % columns;
-    int frameY = currentFrame / columns;
+    int frameX = currentFrame % m_columns;
+    int frameY = currentFrame / m_columns;
 
-    sprite.setTextureRect(sf::IntRect(frameX * sprite.getTextureRect().width,
-                                      frameY * sprite.getTextureRect().height,
-                                      sprite.getTextureRect().width,
-                                      sprite.getTextureRect().height));
+    m_sprite.setTextureRect(sf::IntRect(frameX * m_sprite.getTextureRect().width,
+                                      frameY * m_sprite.getTextureRect().height,
+                                      m_sprite.getTextureRect().width,
+                                      m_sprite.getTextureRect().height));
 }
 
 void Animator::setPosition(sf::Vector2f& pos)
 {
-    sprite.setPosition(pos);
+    m_sprite.setPosition(pos);
 }
 
 void Animator::setScale(float scaleX, float scaleY)
 {
-    sprite.setScale(scaleX, scaleY);
+    m_sprite.setScale(scaleX, scaleY);
 }
 
 void Animator::render()
 {
-    window.draw(sprite);
+    window.draw(m_sprite);
 }

@@ -2,13 +2,13 @@
 #include "Util.h"
 
 Game::Game()
-    : m_GameWindow(sf::VideoMode(800, 600), "Space Shooter", sf::Style::Close),
-      m_ship(50, 50, m_GameWindow),
-      m_enemyManager(m_GameWindow),
+    : m_GameWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Space Shooter", sf::Style::Close),
+      m_ship         (50, 50, m_GameWindow),
+      m_enemyManager (m_GameWindow),
       m_bulletManager(m_ship, m_GameWindow),
-      mainMenuState(m_GameWindow),
-      pauseState(m_GameWindow),
-      gameOverState(m_GameWindow)
+      mainMenuState  (m_GameWindow),
+      pauseState     (m_GameWindow),
+      gameOverState  (m_GameWindow)
 {
     m_GameWindow.setFramerateLimit(60);
 }
@@ -100,15 +100,11 @@ void Game::render()
     m_GameWindow.display();
 }
 
-bool colliding(sf::CircleShape& first, sf::CircleShape& second) {
-    return first.getGlobalBounds().intersects(second.getGlobalBounds());
-}
-
 void Game::eraseSprites()
 {
     for (auto& bullet : m_bulletManager.m_bullets) {
         for (auto& enemy : m_enemyManager.m_enemies) {
-            if (colliding(bullet.getBullet(), enemy.getEnemy())) {
+            if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
                 m_bulletManager.removeBullets(enemy.getEnemy());
                 enemy.reduceHealth(); // reduce enemy health at bullet hit
             }

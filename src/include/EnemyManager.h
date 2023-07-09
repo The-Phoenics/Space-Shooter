@@ -27,5 +27,5 @@ private:
 	sf::RenderWindow& window;
 
 	sf::Texture m_explosionText;
-	Animator m_explosion;
+	//Animator m_explosion;
 };

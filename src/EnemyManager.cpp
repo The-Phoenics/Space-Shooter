@@ -28,7 +28,7 @@ void EnemyManager::removeEnemy()
 {
 	m_enemies.erase(
 		std::remove_if(m_enemies.begin(), m_enemies.end(), [&](Enemy& enemy) {
-			return enemy.isAlive = false;
+			return enemy.isAlive == false;
 			}),
 		m_enemies.end()
 	);
