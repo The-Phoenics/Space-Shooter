@@ -8,6 +8,7 @@ sf::Texture TextureManager::resumeButtonText;
 sf::Texture TextureManager::quitButtonText;
 sf::Texture TextureManager::backgText;
 sf::Texture TextureManager::asteroidText;
+sf::Texture TextureManager::explosionText;
 
 const sf::Texture& TextureManager::get_ship_texture() 
 {
@@ -56,3 +57,10 @@ const sf::Texture& TextureManager::get_asteroid_texture()
     asteroidText.loadFromFile(TEXT_RELATIVE_PATH_ASTEROID);
     return asteroidText;
 }
+
+const sf::Texture& TextureManager::get_explosion_texture()
+{
+    asteroidText.loadFromFile(TEXT_RELATIVE_PATH_EXPLOSION);
+    return explosionText;
+}
+

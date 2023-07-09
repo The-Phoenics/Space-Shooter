@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Animator.h"
 #include "TextureManager.h"
 #include "Util.h"
 
@@ -15,6 +16,9 @@ public:
 	inline void reduceHealth() { 
 		if (m_health > 0)
 			--m_health;
+
+		if (m_health <= 0)
+			isAlive = true;
 	}
 
 	void update();
@@ -33,6 +37,7 @@ private:
 	sf::Vector2f m_dir;
 	sf::Vector2f m_vel;
 
+	bool  isAlive = true;
 	int   m_health = 3;
 	float m_rotate;
 	float m_size;   // radius between 30 to 60

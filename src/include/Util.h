@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "include/Ship.h"
+#include "Ship.h"
 #include <iostream>
 #include <random>
 

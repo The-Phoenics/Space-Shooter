@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "Animator.h"
 #include "Collision.h"
 #include <functional>
 
@@ -25,4 +26,6 @@ public:
 private:
 	sf::RenderWindow& window;
 
+	sf::Texture m_explosionText;
+	Animator m_explosion;
 };
