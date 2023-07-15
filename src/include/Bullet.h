@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "include/Ship.h"
+#include "Ship.h"
 
 class Bullet
 {
