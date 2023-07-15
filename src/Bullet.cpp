@@ -1,8 +1,8 @@
-#include "include/Bullet.h"
-#include "include/Util.h"
-#include "include/Ship.h"
-#include "include/Ship.h"
-#include "include/TextureManager.h"
+#include "Bullet.h"
+#include "Util.h"
+#include "Ship.h"
+#include "Ship.h"
+#include "TextureManager.h"
 
 Bullet::Bullet(Ship& ship, float radii)
 {

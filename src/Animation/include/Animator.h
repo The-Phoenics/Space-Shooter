@@ -1,23 +1,29 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Animator
 {
 public:
-    Animator(sf::RenderWindow& win, sf::Texture spriteSheet, int columns, int rows);
-    ~Animator() { }
+    Animator(sf::Texture spriteSheet, sf::Vector2f& pos, int columns, int rows, int counts = 1);
+    ~Animator() {  }
 
-    void setPosition(sf::Vector2f& pos);
-    void setScale(float scaleX, float scaleY);
-    
+    void setAnimationPosition(sf::Vector2f& pos);
+    void setAnimationScale(float scaleX, float scaleY);
+
     void update();
-    void render();
+    void render(sf::RenderWindow& window);
+
+public:
+    bool isAnimating;
+    float m_animatingSpeed = 500;
 
 private:
-    sf::RenderWindow& window;
-    sf::Texture texture;
-    sf::Sprite  sprite;
-    int columns; // columns in sprite sheet
-    int rows;    // rows in sprite sheet
+    sf::Texture m_texture;
+    sf::Sprite  m_sprite;
+    int m_columns; // columns in sprite sheet
+    int m_rows;    // rows in sprite sheet
     int currentFrame;
+
+    int m_animationCounts;
 };

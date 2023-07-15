@@ -1,43 +1,62 @@
 #include "Animator.h"
+#include "DEFINES.h"
 
-Animator::Animator(sf::RenderWindow& win, sf::Texture spriteSheet, int columns, int rows)
-    : window (win),
-      texture(texture),
-      columns(columns),
-      rows   (rows),
-      currentFrame(0)
+Animator::Animator(sf::Texture spriteSheet, sf::Vector2f& pos, int columns, int rows, int counts)
+    : m_texture(spriteSheet),
+    m_columns(columns),
+    m_rows(rows),
+    currentFrame(0),
+    m_animationCounts(counts)
 {
-    sprite.setTexture(*texture);
-    sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x / columns, texture.getSize().y / rows));
+    std::cout << "Constructor: Creating animation\n"; // DBG
+
+    isAnimating = true;
+    setAnimationPosition(pos);
+    m_sprite.setTexture(m_texture);
+    m_sprite.setTextureRect(sf::IntRect(0, 0, m_texture.getSize().x / m_columns, m_texture.getSize().y / m_rows));
 }
 
 void Animator::update()
 {
-    currentFrame++;
+    if (m_animationCounts == 0) {
+        isAnimating = false;
+    }
 
-    if (currentFrame >= columns * rows)
-        currentFrame = 0;
+    if (isAnimating)
+    {
+        if (m_animatingSpeed == 0) {
+            currentFrame++;
+            m_animatingSpeed = 500;
+        }
 
-    int frameX = currentFrame % columns;
-    int frameY = currentFrame / columns;
+        if (currentFrame >= m_columns * m_rows) {
+            m_animationCounts--;
+            currentFrame = 0;
+        }
 
-    sprite.setTextureRect(sf::IntRect(frameX * sprite.getTextureRect().width,
-                                      frameY * sprite.getTextureRect().height,
-                                      sprite.getTextureRect().width,
-                                      sprite.getTextureRect().height));
+        int frameX = currentFrame % m_columns;
+        int frameY = currentFrame / m_columns;
+
+        m_sprite.setTextureRect(sf::IntRect(frameX * m_sprite.getTextureRect().width,
+            frameY * m_sprite.getTextureRect().height,
+            m_sprite.getTextureRect().width,
+            m_sprite.getTextureRect().height));
+
+        m_animatingSpeed--;
+    }
 }
 
-void Animator::setPosition(sf::Vector2f& pos)
+void Animator::setAnimationPosition(sf::Vector2f& pos)
 {
-    sprite.setPosition(pos);
+    m_sprite.setPosition(pos);
 }
 
-void Animator::setScale(float scaleX, float scaleY)
+void Animator::setAnimationScale(float scaleX, float scaleY)
 {
-    sprite.setScale(scaleX, scaleY);
+    m_sprite.setScale(scaleX, scaleY);
 }
 
-void Animator::render()
+void Animator::render(sf::RenderWindow& window)
 {
-    window.draw(sprite);
+    window.draw(m_sprite);
 }

@@ -12,10 +12,14 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::update()
 {
+
+	// update enemies
 	for (auto& enemy : m_enemies)
 		enemy.update();
 
+	// respawn enemies
 	spawnEnemies();
+
 }
 
 void EnemyManager::render()
@@ -24,11 +28,22 @@ void EnemyManager::render()
 		enemy.render();
 }
 
+void EnemyManager::updateStackOfDeadEnemyPositions(std::stack<sf::Vector2f>& enemyDeathPositions)
+{
+	// update stack
+	for (auto& enemy : m_enemies)
+	{
+		if (enemy.getHealth() <= 0 || !enemy.isAlive) {
+			enemyDeathPositions.push(enemy.getEnemy().getPosition());
+		}
+	}
+}
+
 void EnemyManager::removeEnemy()
 {
 	m_enemies.erase(
 		std::remove_if(m_enemies.begin(), m_enemies.end(), [&](Enemy& enemy) {
-			return enemy.isAlive = false;
+			return !enemy.isAlive;
 			}),
 		m_enemies.end()
 	);

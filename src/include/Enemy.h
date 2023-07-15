@@ -18,17 +18,20 @@ public:
 			--m_health;
 
 		if (m_health <= 0)
-			isAlive = true;
+			isAlive = false;
 	}
 
 	void update();
 	void render();
 
+public:
+	bool  isAlive = true;
+
 private:
 	void init();
 	void move();
 	void rotate();
-	void onCollisionWithWall(int Collision_Side);
+	void onCollisionWithWall();
 
 private:
 	std::reference_wrapper<sf::RenderWindow> window;
@@ -37,9 +40,8 @@ private:
 	sf::Vector2f m_dir;
 	sf::Vector2f m_vel;
 
-	bool  isAlive = true;
 	int   m_health = 3;
 	float m_rotate;
 	float m_size;   // radius between 30 to 60
-	
+
 };

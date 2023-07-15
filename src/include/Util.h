@@ -26,15 +26,3 @@ int random_integer(int min, int max);
 sf::Vector2f randomVector2f(int min, int max);
 
 void operator<<(std::ostream& os, sf::Vector2f v);
-
-//float angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos);
-
-//template<typename T>
-//void clamp(T& value, T minValue, T maxValue)
-//{
-//	if (value < minValue)
-//		value = minValue;
-//	
-//	if (value > maxValue)
-//		value = maxValue;
-//}
