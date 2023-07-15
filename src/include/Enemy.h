@@ -43,4 +43,5 @@ private:
 	int   m_health = 3;
 	float m_rotate;
 	float m_size;   // radius between 30 to 60
+
 };

@@ -12,7 +12,7 @@ public:
     bool mouseIsOverButton();
 
     sf::RectangleShape& getButton() { return this->button; }
-
+    
     inline void setButtonPos (const sf::Vector2f& pos)    { button.setPosition(pos); }
     inline void setButtonText(const sf::Texture& texture) { button.setTexture(&texture); }
     inline void setButtonSize(const sf::Vector2f& size)   { button.setSize(size); }

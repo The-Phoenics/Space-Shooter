@@ -1,8 +1,7 @@
 #pragma once
 #include "Enemy.h"
+#include "Animator.h"
 #include "Collision.h"
-
-#include <stack>
 #include <functional>
 
 class EnemyManager
@@ -13,8 +12,6 @@ public:
 
 	void update();
 	void render();
-
-	void updateStackOfDeadEnemyPositions(std::stack<sf::Vector2f>& enemyDeathPositions);
 
 	void removeEnemy();
 	void spawnEnemies();
@@ -28,4 +25,7 @@ public:
 
 private:
 	sf::RenderWindow& window;
+
+	sf::Texture m_explosionText;
+	//Animator m_explosion;
 };

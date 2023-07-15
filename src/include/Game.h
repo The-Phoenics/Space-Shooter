@@ -1,13 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <stack>
 
 #include "DEFINES.h"
 #include "Ship.h"
+#include "Enemy.h"
 #include "BulletManager.h"
 #include "EnemyManager.h"
-#include "AnimationManager.h"
-
 #include "MainMenu.h"
 #include "GameOverState.h"
 #include "PauseState.h"
@@ -16,7 +14,7 @@ class Game
 {
 public:
 	Game();
-	~Game() { }
+	~Game() {}
 
 	enum PlayState
 	{
@@ -25,26 +23,26 @@ public:
 		GameOver
 	};
 
+	unsigned int getWindowWidth()  const { return m_GameWindow.getSize().x; }
+	unsigned int getWindowHeight() const { return m_GameWindow.getSize().y; }
+
 	void run();
 
 private:
 	void processEvents();
 	void update();
 	void render();
-	void remove();
+	void eraseSprites();
 
 public:
     bool isplaying = false;
 
 private:
 	sf::RenderWindow m_GameWindow;
-
+    
     Ship  m_ship;
-	EnemyManager     m_enemyManager;
-	BulletManager    m_bulletManager;
-	AnimationManager m_animationManager;
-
-	std::stack<sf::Vector2f> m_enemyDeathPositions;
+	EnemyManager m_enemyManager;
+	BulletManager m_bulletManager;
 
 	bool isInMainMenuState = true;
 	PlayState  gamePlayState;

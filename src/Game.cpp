@@ -8,8 +8,7 @@ Game::Game()
       m_bulletManager(m_ship, m_GameWindow),
       mainMenuState  (m_GameWindow),
       pauseState     (m_GameWindow),
-      gameOverState  (m_GameWindow),
-      m_enemyDeathPositions()
+      gameOverState  (m_GameWindow)
 {
     m_GameWindow.setFramerateLimit(60);
 }
@@ -36,14 +35,12 @@ void Game::run()
         else // If not in MainMenuState
         {
             if (gamePlayState == Playing)
-            { 
-                // Gameplay 
+            {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                     gamePlayState = Paused;
                     continue;
                 }
                 this->update();
-                this->remove();
                 this->render();
                 continue;
             }
@@ -88,23 +85,7 @@ void Game::update()
     m_ship.update();
     m_enemyManager.update();
     m_bulletManager.update();
-    m_animationManager.update(); // NR
-
-
-    for (auto& bullet : m_bulletManager.m_bullets)
-    {
-        for (auto& enemy : m_enemyManager.m_enemies)
-        {
-            if (isColliding(bullet.getBullet(), enemy.getEnemy()))
-            {
-                enemy.reduceHealth(); // reduce enemy health at bullet hit
-            }
-        }
-    }
-
-    // update the enemy dead position stack, right after they die, before removing them from vector
-    m_enemyManager.updateStackOfDeadEnemyPositions(m_enemyDeathPositions);
-    m_animationManager.updateStack(m_enemyDeathPositions);
+    eraseSprites();
 }
 
 // Render Game
@@ -114,20 +95,22 @@ void Game::render()
 
     m_bulletManager.render();
     m_enemyManager.render();
-    m_animationManager.render(m_GameWindow);
     m_ship.render();
 
     m_GameWindow.display();
 }
 
-void Game::remove()
+void Game::eraseSprites()
 {
-    // remove enemies
-    for (auto& enemy : m_enemyManager.m_enemies) {
-        m_bulletManager.removeBullets(enemy.getEnemy());
+    for (auto& bullet : m_bulletManager.m_bullets) {
+        for (auto& enemy : m_enemyManager.m_enemies) {
+            if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
+                m_bulletManager.removeBullets(enemy.getEnemy());
+                enemy.reduceHealth(); // reduce enemy health at bullet hit
+            }
+        }
     }
 
     // if enemy health < 0 remove it
     m_enemyManager.removeEnemy();
-    m_animationManager.removeAnimator();
 }
