@@ -60,7 +60,7 @@ const sf::Texture& TextureManager::get_asteroid_texture()
 
 const sf::Texture& TextureManager::get_explosion_texture()
 {
-    asteroidText.loadFromFile(TEXT_RELATIVE_PATH_EXPLOSION);
+    explosionText.loadFromFile(TEXT_RELATIVE_PATH_EXPLOSION);
     return explosionText;
 }
 

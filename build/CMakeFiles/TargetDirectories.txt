@@ -1,3 +1,0 @@
-/home/prime/Desktop/game/build/CMakeFiles/Space_Shooter.dir
-/home/prime/Desktop/game/build/CMakeFiles/edit_cache.dir
-/home/prime/Desktop/game/build/CMakeFiles/rebuild_cache.dir

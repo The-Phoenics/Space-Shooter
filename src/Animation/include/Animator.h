@@ -1,27 +1,31 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Animator
 {
 public:
-    Animator(sf::RenderWindow& win, sf::Texture spriteSheet, int columns, int rows);
+    Animator(const sf::Texture& spriteSheet, int c, int r, const sf::Vector2f& pos, float ft);
     ~Animator() { }
 
-    void setPosition(sf::Vector2f& pos);      
+    void setPosition(sf::Vector2f& pos);
     void setScale(float scaleX, float scaleY);
 
-    inline bool isAnimating()  const { return m_animating; }
-    inline void setAnimating(bool isAnimating) { m_animating = isAnimating; }
-    
     void update();
-    void render();
+    void render(sf::RenderWindow& window);
 
+public:
+    bool isAlive = true;
 private:
-    sf::RenderWindow & window;
-    sf::Texture m_texture;
-    sf::Sprite  m_sprite;
-    int m_columns; // columns in sprite sheet
-    int m_rows;    // rows in sprite sheet
+    int columns;
+    int rows;
     int currentFrame;
-    bool m_animating;
+    float frameTime;
+
+    // more the time slower the animation
+    float time = 0;
+
+    sf::Texture  texture;
+    sf::Vector2f position;
+    sf::Sprite   sprite;
 };

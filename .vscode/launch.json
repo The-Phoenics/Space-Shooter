@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/Space_Shooter",
-            "args": ["src/*cpp src/GameStates/*.cpp"],
+            "args": ["src/*cpp src/GameStates/*.cpp src/Animation/*cpp"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

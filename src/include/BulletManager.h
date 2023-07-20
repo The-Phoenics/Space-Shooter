@@ -13,7 +13,7 @@ public:
     void renderBullet();
     void updateBulletCount(Ship& ship);
     void bulletsMovement();
-    void removeBullets(sf::CircleShape& asteroid);
+    void removeBullets(sf::CircleShape& enemy);
 
     void update();
     void render();

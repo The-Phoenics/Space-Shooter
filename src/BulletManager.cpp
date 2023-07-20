@@ -1,7 +1,7 @@
 #include "include/BulletManager.h"
 
 BulletManager::BulletManager(Ship& shootingObj, sf::RenderWindow& win)
-    : m_bullets(std::vector<Bullet>()),
+    : m_bullets(),
       shootingShip(shootingObj),
       window(win)
 {
@@ -26,11 +26,11 @@ void BulletManager::bulletsMovement()
         bullet.move();
 }
 
-void BulletManager::removeBullets(sf::CircleShape& asteroid)
+void BulletManager::removeBullets(sf::CircleShape& enemy)
 {
     m_bullets.erase(
         std::remove_if(m_bullets.begin(), m_bullets.end(), [&](Bullet& bullet) {
-            return isColliding(bullet.getBullet(), asteroid) || isCollidingWithWall(bullet.getBullet());
+            return isColliding(bullet.getBullet(), enemy) || isCollidingWithWall(bullet.getBullet());
             }),
         m_bullets.end()
     );

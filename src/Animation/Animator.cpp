@@ -1,43 +1,56 @@
 #include "Animator.h"
 
-Animator::Animator(sf::RenderWindow& win, sf::Texture spriteSheet, int columns, int rows)
-    : window (win),
-      m_texture(spriteSheet),
-      m_columns(columns),
-      m_rows   (rows),
-      currentFrame(0)
+Animator::Animator(const sf::Texture& spriteSheet, int c, int r, const sf::Vector2f& pos, float ft)
+    : texture(spriteSheet),
+      position(pos),
+      columns(c),
+      rows   (r),
+      currentFrame(0),
+      frameTime(ft),
+      sprite()
 {
-    m_sprite.setTexture(m_texture);
-    m_sprite.setTextureRect(sf::IntRect(0, 0, m_texture.getSize().x / m_columns, m_texture.getSize().y / m_rows));
+    sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x / columns, texture.getSize().y / rows));
+    setPosition(position);
 }
 
 void Animator::update()
 {
-    currentFrame++;
+    time += 0.5;
 
-    if (currentFrame >= m_columns * m_rows)
-        currentFrame = 0;
+    if (time > frameTime) {
+        currentFrame++;
 
-    int frameX = currentFrame % m_columns;
-    int frameY = currentFrame / m_columns;
+        if (currentFrame >= columns * rows) {
+            currentFrame = 0;
+            isAlive = false;
+            std::cout << "Removing explosion\n"; // DBG
+        }
 
-    m_sprite.setTextureRect(sf::IntRect(frameX * m_sprite.getTextureRect().width,
-                                      frameY * m_sprite.getTextureRect().height,
-                                      m_sprite.getTextureRect().width,
-                                      m_sprite.getTextureRect().height));
+        int frameX = currentFrame % columns;
+        int frameY = currentFrame / columns;
+
+        sprite.setTextureRect(sf::IntRect(
+            frameX * sprite.getTextureRect().width, frameY * sprite.getTextureRect().height,
+            sprite.getTextureRect().width, sprite.getTextureRect().height)
+        );
+
+        time = 0.f;
+    }
 }
 
 void Animator::setPosition(sf::Vector2f& pos)
 {
-    m_sprite.setPosition(pos);
+    sprite.setPosition(pos);
 }
 
 void Animator::setScale(float scaleX, float scaleY)
 {
-    m_sprite.setScale(scaleX, scaleY);
+    sprite.setScale(scaleX, scaleY);
 }
 
-void Animator::render()
+void Animator::render(sf::RenderWindow& window)
 {
-    window.draw(m_sprite);
+    window.draw(sprite);
+    std::cout << "Drawing explosion\n"; // DBG
 }
