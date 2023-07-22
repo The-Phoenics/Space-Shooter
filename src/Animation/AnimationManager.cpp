@@ -1,25 +1,23 @@
 #include "AnimationManager.h"
 
 AnimationManager::AnimationManager()
-	: m_explosionAnimators(),
-	posi(100.f, 100.f),
-	anim(TextureManager::get_explosion_texture(), 13, 1, posi, 10.f) // DBG
+	: m_explosionAnimators()
 {
 }
 
 void AnimationManager::update()
 {
-	anim.update(); // DBG
 	for (auto& a : m_explosionAnimators) {
-		a.update();
+		if (a.isAlive)
+			a.update();
 	}
 }
 
 void AnimationManager::render(sf::RenderWindow& window)
-{	
-	anim.render(window); // DBG
+{
 	for (auto& a : m_explosionAnimators) {
-		a.render(window);
+		if (a.isAlive)
+			a.render(window);
 	}
 }
 
@@ -30,8 +28,7 @@ void AnimationManager::createNewExplosionAnimators(std::stack<sf::Vector2f>& ene
 	while (!enemyDeathPositions.empty())
 	{
 		position = enemyDeathPositions.top();
-		Animator a(TextureManager::get_explosion_texture(), 13, 1, position, 10.f);
-		m_explosionAnimators.emplace_back(a);
+		m_explosionAnimators.emplace_back(TextureManager::get_explosion_texture(), 13, 1, position, 2.5f);
 		enemyDeathPositions.pop();
 	}
 }
@@ -39,8 +36,8 @@ void AnimationManager::createNewExplosionAnimators(std::stack<sf::Vector2f>& ene
 void AnimationManager::removeAnimator()
 {
 	m_explosionAnimators.erase(
-		std::remove_if(m_explosionAnimators.begin(), m_explosionAnimators.end(), [&](Animator& animator) {
-			return !animator.isAlive;
+		std::remove_if(m_explosionAnimators.begin(), m_explosionAnimators.end(), [&](Animator& a) {
+			return !a.isAlive;
 		}),
 		m_explosionAnimators.end()
 	);

@@ -8,8 +8,10 @@ public:
     Button(sf::RenderWindow& win, const sf::Texture& texture);
     ~Button();
 
+    void init();
+    void reset();
     bool isClicked();
-    bool mouseIsOverButton();
+    bool isFocused();
 
     sf::RectangleShape& getButton() { return this->button; }
 
@@ -19,8 +21,8 @@ public:
 
     inline void render() { window.draw(this->button); }
 
-private:
-    void init();
+    void onFocus();
+    void fadeOut();
 
 private:
     sf::RenderWindow& window;

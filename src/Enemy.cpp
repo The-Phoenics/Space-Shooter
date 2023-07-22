@@ -32,8 +32,8 @@ void Enemy::init()
     float ri = random_integer(111, 185) / 100.f; 
     m_vel    = sf::Vector2f(ri, ri);
     m_size   = random_integer(40, 60);
-
-	sf::Vector2f pos = randomVector2f(150, 550);
+	sf::Vector2f pos = randomVector2f(100, 800);
+    
 	m_enemy.setRadius(m_size);
 	m_enemy.setPosition(pos);
 	m_enemy.setOrigin(sf::Vector2f(m_enemy.getRadius(), m_enemy.getRadius()));

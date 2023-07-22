@@ -25,5 +25,5 @@ public:
 private:
     sf::CircleShape m_bullet;
     sf::Vector2f m_dir;
-    float m_vel = 3.f;
+    float m_vel;
 };

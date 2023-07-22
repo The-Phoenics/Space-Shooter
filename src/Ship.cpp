@@ -5,12 +5,12 @@
 #define M_PI 3.14
 
 Ship::Ship(sf::RenderWindow& win)
-    : m_vel(sf::Vector2f(1.f, 1.f)),
+    : m_vel(sf::Vector2f(1.5f, 1.5f)),
       m_ship(),
       window(win)
 {
     m_ship.setSize(sf::Vector2f(100.f, 100.f));
-    m_ship.setPosition(sf::Vector2f(400.f, 300.f));
+    m_ship.setPosition(MIDDLE_OF_SCREEN);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
     m_ship.setTexture(&TextureManager::get_ship_texture());
@@ -21,7 +21,7 @@ Ship::Ship(float width, float height, sf::RenderWindow& win)
       window(win)
 {
     m_ship = sf::RectangleShape(sf::Vector2f(width, height));
-    m_ship.setPosition(400, 400);
+    m_ship.setPosition(MIDDLE_OF_SCREEN);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
     m_ship.setTexture(&TextureManager::get_ship_texture());
@@ -80,7 +80,7 @@ void Ship::move()
     // movement
     this->movementControls();
 
-    // Rotational movement
+    // rotational movement
     static sf::Vector2f mousePos;
     static float angle;
 

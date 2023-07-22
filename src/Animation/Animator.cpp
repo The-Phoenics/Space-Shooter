@@ -11,6 +11,9 @@ Animator::Animator(const sf::Texture& spriteSheet, int c, int r, const sf::Vecto
 {
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x / columns, texture.getSize().y / rows));
+
+    sf::Vector2f centre(sprite.getTextureRect().width / 2.f, sprite.getTextureRect().height / 2.f);
+    sprite.setOrigin(centre);
     setPosition(position);
 }
 
@@ -21,10 +24,9 @@ void Animator::update()
     if (time > frameTime) {
         currentFrame++;
 
-        if (currentFrame >= columns * rows) {
+        if (currentFrame >= columns * rows - 3) {
             currentFrame = 0;
             isAlive = false;
-            std::cout << "Removing explosion\n"; // DBG
         }
 
         int frameX = currentFrame % columns;
@@ -52,5 +54,4 @@ void Animator::setScale(float scaleX, float scaleY)
 void Animator::render(sf::RenderWindow& window)
 {
     window.draw(sprite);
-    std::cout << "Drawing explosion\n"; // DBG
 }

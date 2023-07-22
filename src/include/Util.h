@@ -11,6 +11,10 @@ sf::Vector2f operator-(sf::Vector2f& v1, sf::Vector2f& v2);
 
 sf::Vector2f operator*(sf::Vector2f& v1, sf::Vector2f& v2);
 
+sf::Vector2f operator+(sf::Vector2f& v, float n);
+
+sf::Vector2f operator-(sf::Vector2f& v, float n);
+
 sf::Vector2f operator/(sf::Vector2f& v, float n);
 
 sf::Vector2f operator*(sf::Vector2f& v, float n);

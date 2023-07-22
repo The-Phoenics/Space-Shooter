@@ -1,7 +1,11 @@
 #include "Game.h"
+#include "DEFINES.h"
+
+// window
+extern sf::RenderWindow window;
 
 int main()
-{
-    Game game;
+{    
+    Game game(window);
     game.run();
 }

@@ -21,6 +21,7 @@ MainMenu::~MainMenu()
 void MainMenu::init()
 {
     m_background.setSize(sf::Vector2f(window.getSize()));
+    playButton.getButton().setPosition(MIDDLE_OF_SCREEN);
     sf::Vector2f exitButPos(playButton.getButton().getPosition().x, playButton.getButton().getPosition().y + 100.f);
     exitButton.setButtonPos(exitButPos);
     exitButton.getButton().setFillColor(sf::Color::Cyan);
@@ -28,6 +29,18 @@ void MainMenu::init()
 
 void MainMenu::update()
 {
+    if (playButton.isFocused()) {
+        playButton.onFocus();
+    } else {
+        playButton.reset();
+    }
+
+    if (exitButton.isFocused()) {
+        exitButton.onFocus();
+    } else {
+        exitButton.reset();
+    }
+    
     if (playButton.isClicked()) {
         std::cout << "Play clicked!\n";
     }
@@ -41,7 +54,7 @@ void MainMenu::update()
 void MainMenu::render()
 {
     window.clear();
-    //window.draw(m_background);
+    window.draw(m_background);
     playButton.render();
     exitButton.render();
     window.display();

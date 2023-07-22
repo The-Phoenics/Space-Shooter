@@ -25,6 +25,22 @@ sf::Vector2f operator*(sf::Vector2f& v1, sf::Vector2f& v2)
     return resultMult;
 }
 
+sf::Vector2f operator+(sf::Vector2f& v, float n)
+{
+    sf::Vector2f resultDiv;
+    resultDiv.x = v.x + n;
+    resultDiv.y = v.y + n;
+    return resultDiv;
+}
+
+sf::Vector2f operator-(sf::Vector2f& v, float n)
+{
+    sf::Vector2f resultDiv;
+    resultDiv.x = v.x - n;
+    resultDiv.y = v.y - n;
+    return resultDiv;
+}
+
 sf::Vector2f operator*(sf::Vector2f& v, float n)
 {
     sf::Vector2f result;

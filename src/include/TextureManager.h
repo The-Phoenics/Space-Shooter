@@ -9,7 +9,7 @@ constexpr const char* TEXT_RELATIVE_PATH_PLAY      = "/home/prime/Desktop/SpaceS
 constexpr const char* TEXT_RELATIVE_PATH_EXIT      = "/home/prime/Desktop/SpaceShooter/res/exitButton.png";
 constexpr const char* TEXT_RELATIVE_PATH_RESUME    = "/home/prime/Desktop/SpaceShooter/res/resumeButton.png";
 constexpr const char* TEXT_RELATIVE_PATH_QUIT      = "/home/prime/Desktop/SpaceShooter/res/quitButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_BACKG     = "/home/prime/Desktop/SpaceShooter/res/background.png";
+constexpr const char* TEXT_RELATIVE_PATH_BACKG     = "/home/prime/Desktop/SpaceShooter/res/space_background.png";
 constexpr const char* TEXT_RELATIVE_PATH_ASTEROID  = "/home/prime/Desktop/SpaceShooter/res/asteroid.png";
 constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION = "/home/prime/Desktop/SpaceShooter/res/explosion.png";
 

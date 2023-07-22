@@ -1,17 +1,15 @@
 #include "Game.h"
 #include "Util.h"
 
-Game::Game()
-    : m_GameWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Space Shooter", sf::Style::Close),
+Game::Game(sf::RenderWindow& win)
+    : m_GameWindow(win),
       m_ship         (50, 50, m_GameWindow),
       m_enemyManager (m_GameWindow),
       m_bulletManager(m_ship, m_GameWindow),
       mainMenuState  (m_GameWindow),
       pauseState     (m_GameWindow),
       gameOverState  (m_GameWindow),
-      m_enemyDeathPositions(),
-      pos(100.f, 100.f),
-      animator(TextureManager::get_explosion_texture(), 13, 1, pos, 1.5f)
+      m_enemyDeathPositions()
 {
     m_GameWindow.setFramerateLimit(60);
 }
@@ -22,54 +20,58 @@ void Game::run()
 
     while (m_GameWindow.isOpen())
     {
-        // sfml event polling
-        this->processEvents();
-
-        if (isInMainMenuState)
+        // only run the game is window has focus
+        if (m_GameWindow.hasFocus()) 
         {
-            if (mainMenuState.isPlayButtonClicked()) {
-                this->isInMainMenuState = false;
-                continue;
-            }
-            mainMenuState.update();
-            mainMenuState.render();
-        }
+            // sfml event polling
+            this->processEvents();
 
-        else // If not in MainMenuState
-        {
-            if (gamePlayState == Playing)
-            { 
-                // Gameplay 
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                    gamePlayState = Paused;
+            if (isInMainMenuState)
+            {
+                if (mainMenuState.isPlayButtonClicked()) {
+                    this->isInMainMenuState = false;
                     continue;
                 }
+                mainMenuState.update();
+                mainMenuState.render();
+            }
 
-                this->update();
-                this->remove();
-                this->render();
-                continue;
-            }
-            else if (gamePlayState == Paused)
+            else // If not in MainMenuState
             {
-                if (pauseState.resumeButtonClicked()) {
-                    gamePlayState = Playing;
+                if (gamePlayState == Playing)
+                { 
+                    // Gameplay 
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                        gamePlayState = Paused;
+                        continue;
+                    }
+
+                    this->update();
+                    this->remove();
+                    this->render();
                     continue;
                 }
-                if (pauseState.quitButtonClicked()) {
-                    this->isInMainMenuState = true;
-                    gamePlayState = Playing;
+                else if (gamePlayState == Paused)
+                {
+                    if (pauseState.resumeButtonClicked()) {
+                        gamePlayState = Playing;
+                        continue;
+                    }
+                    if (pauseState.quitButtonClicked()) {
+                        this->isInMainMenuState = true;
+                        gamePlayState = Playing;
+                        continue;
+                    }
+                    pauseState.update();
+                    pauseState.render();
                     continue;
                 }
-                pauseState.update();
-                pauseState.render();
-                continue;
-            }
-            else if (gamePlayState == GameOver)
-            {
-                gameOverState.update();
-                gameOverState.render();
-                continue;
+                else if (gamePlayState == GameOver)
+                {
+                    gameOverState.update();
+                    gameOverState.render();
+                    continue;
+                }
             }
         }
     }
@@ -91,14 +93,10 @@ void Game::update()
     m_ship.update();
     m_enemyManager.update();
     m_bulletManager.update();
-    m_animationManager.update();
 
-    for (auto& bullet : m_bulletManager.m_bullets)
-    {
-        for (auto& enemy : m_enemyManager.m_enemies)
-        {
-            if (isColliding(bullet.getBullet(), enemy.getEnemy()))
-            {
+    for (auto& bullet : m_bulletManager.m_bullets) {
+        for (auto& enemy : m_enemyManager.m_enemies) {
+            if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
                 enemy.reduceHealth(); // reduce enemy health at bullet hit
             }
         }
@@ -107,6 +105,8 @@ void Game::update()
     // update the enemy dead position stack, right after they die, before removing them from vector
     m_enemyManager.updateStackOfDeadEnemyPositions(m_enemyDeathPositions);
     m_animationManager.createNewExplosionAnimators(m_enemyDeathPositions);
+
+    m_animationManager.update();
 }
 
 // Render Game
@@ -115,8 +115,8 @@ void Game::render()
     m_GameWindow.clear();
 
     m_bulletManager.render();
-    m_enemyManager.render();
     m_animationManager.render(m_GameWindow);
+    m_enemyManager.render();
     m_ship.render();
 
     m_GameWindow.display();

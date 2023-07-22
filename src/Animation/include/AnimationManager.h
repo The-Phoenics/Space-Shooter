@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iostream>
 
+#include "Util.h"
 #include "Animator.h"
 #include "TextureManager.h"
 
@@ -22,8 +23,6 @@ public:
 	void createNewExplosionAnimators(std::stack<sf::Vector2f>& enemyDeathPositions);
 
 private:
-	sf::Vector2f posi; // DBG
-	Animator anim;
-	
 	std::vector<Animator> m_explosionAnimators;
+	
 };

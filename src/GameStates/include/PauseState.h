@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "Button.h"
 #include "TextureManager.h"
+#include "DEFINES.h"
+#include "Util.h"
 
 class PauseState
 {

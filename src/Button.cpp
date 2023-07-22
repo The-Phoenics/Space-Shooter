@@ -18,16 +18,24 @@ Button::~Button()
 {
 }
 
+void Button::onFocus()
+{
+    sf::Vector2f pos = button.getPosition();
+    this->button.setScale(1.2f, 1.2f);
+    this->button.setPosition(pos);
+    this->button.setFillColor(sf::Color::Cyan);
+}
+
 bool Button::isClicked()
 {
-    if (mouseIsOverButton())
+    if (isFocused())
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             return true;
 
     return false;
 }
 
-bool Button::mouseIsOverButton()
+bool Button::isFocused()
 {
     return (button.getGlobalBounds().contains(
         sf::Mouse::getPosition(window).x,
@@ -43,4 +51,10 @@ void Button::init()
     
     sf::Vector2f centre = sf::Vector2f(button.getSize().x / 2.f, button.getSize().x / 2.f);
     button.setOrigin(centre);
+}
+
+void Button::reset()
+{
+    button.setScale(1.f, 1.f);
+    button.setFillColor(sf::Color::White);
 }

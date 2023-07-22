@@ -17,7 +17,7 @@
 class Game
 {
 public:
-	Game();
+	Game(sf::RenderWindow& win);
 	~Game() { }
 
 	enum PlayState
@@ -39,15 +39,12 @@ public:
     bool isplaying = false;
 
 private:
-	sf::RenderWindow m_GameWindow;
+	sf::RenderWindow& m_GameWindow;
 
     Ship  m_ship;
 	EnemyManager     m_enemyManager;
 	BulletManager    m_bulletManager;
 	AnimationManager m_animationManager;
-
-	Animator animator;
-	sf::Vector2f pos;
 
 	std::stack<sf::Vector2f> m_enemyDeathPositions;
 

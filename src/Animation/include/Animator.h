@@ -20,9 +20,9 @@ private:
     int columns;
     int rows;
     int currentFrame;
-    float frameTime;
 
-    // more the time slower the animation
+    // more the frametime slower the animation
+    float frameTime;
     float time = 0;
 
     sf::Texture  texture;
