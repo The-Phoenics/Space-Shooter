@@ -13,13 +13,7 @@ public:
 	inline sf::CircleShape& getEnemy() { return this->m_enemy; }
 	inline int getHealth() const       { return this->m_health; }
 
-	inline void reduceHealth() { 
-		if (m_health > 0)
-			--m_health;
-
-		if (m_health <= 0)
-			isAlive = false;
-	}
+	void reduceHealth();
 
 	void update();
 	void render();

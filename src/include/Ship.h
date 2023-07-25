@@ -27,6 +27,7 @@ private:
 
 private:
     sf::RectangleShape m_ship;
+    unsigned int m_health;
     sf::Vector2f m_vel;
     sf::Vector2f m_facingDir;
     float m_speed = 1.2f;

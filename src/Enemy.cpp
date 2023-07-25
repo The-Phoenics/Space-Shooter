@@ -26,6 +26,21 @@ void Enemy::render()
 	window.get().draw(m_enemy);
 }
 
+void Enemy::reduceHealth() { 
+    if (m_health > 0)
+    {
+        --m_health;
+        // enemy becomes darker as health drops
+        sf::Color color = m_enemy.getFillColor();
+        color.r -= 30;
+        color.g -= 30;
+        color.b -= 30;
+        m_enemy.setFillColor(color);
+    }
+    if (m_health <= 0)
+        isAlive = false;
+}
+
 void Enemy::init()
 {
     m_rotate = random_integer(45, 65) / 100.f;

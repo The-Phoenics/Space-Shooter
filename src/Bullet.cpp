@@ -5,7 +5,7 @@
 #include "TextureManager.h"
 
 Bullet::Bullet(Ship& ship, float radii)
-    : m_vel(4.f)
+    : m_vel(5.f)
 {
     m_dir = ship.getFacingDir();
     m_bullet.setRadius(10.f);

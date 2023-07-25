@@ -24,7 +24,7 @@ void Animator::update()
     if (time > frameTime) {
         currentFrame++;
 
-        if (currentFrame >= columns * rows - 3) {
+        if (currentFrame >= columns * rows) {
             currentFrame = 0;
             isAlive = false;
         }

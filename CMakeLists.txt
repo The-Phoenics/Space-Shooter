@@ -17,6 +17,7 @@ file(GLOB SOURCE_FILES
     src/*.cpp
     src/GameStates/*.cpp
     src/Animation/*.cpp
+    src/Audio/*.cpp
 )
 
 # Add the executable target
@@ -27,6 +28,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/include
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Animation/include
     ${CMAKE_CURRENT_SOURCE_DIR}/src/GameStates/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Audio/include
 )
 
 # Find SFML package
@@ -37,4 +39,5 @@ target_link_libraries(${PROJECT_NAME}
     sfml-system 
     sfml-window 
     sfml-graphics
+    sfml-audio
 )

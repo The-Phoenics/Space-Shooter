@@ -9,7 +9,10 @@ Game::Game(sf::RenderWindow& win)
       mainMenuState  (m_GameWindow),
       pauseState     (m_GameWindow),
       gameOverState  (m_GameWindow),
-      m_enemyDeathPositions()
+      m_enemyDeathPositions(),
+      m_introAudio(AudioManager::get_mainmenu_buffer(), 40.f),
+      m_gamePlayAudio(AudioManager::get_gameplay_buffer(), 40.f),
+      m_score()
 {
     m_GameWindow.setFramerateLimit(60);
 }
@@ -28,8 +31,11 @@ void Game::run()
 
             if (isInMainMenuState)
             {
+                m_introAudio.play(); // MUSIC
                 if (mainMenuState.isPlayButtonClicked()) {
                     this->isInMainMenuState = false;
+
+                    m_introAudio.stop(); // MUSIC
                     continue;
                 }
                 mainMenuState.update();
@@ -43,9 +49,12 @@ void Game::run()
                     // Gameplay 
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                         gamePlayState = Paused;
+                        m_gamePlayAudio.pause(); // MUSIC
                         continue;
                     }
-
+                    if (!m_gamePlayAudio.isPlaying()) { // MUSIC
+                        m_gamePlayAudio.play();
+                    }
                     this->update();
                     this->remove();
                     this->render();
@@ -60,6 +69,7 @@ void Game::run()
                     if (pauseState.quitButtonClicked()) {
                         this->isInMainMenuState = true;
                         gamePlayState = Playing;
+                        m_gamePlayAudio.stop(); // MUSIC
                         continue;
                     }
                     pauseState.update();
@@ -99,7 +109,18 @@ void Game::update()
             if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
                 enemy.reduceHealth(); // reduce enemy health at bullet hit
             }
+
+            // add explosions audio when enemy dies
+            if (!enemy.isAlive) {
+                m_explosionsAudio.emplace_back(Audio(AudioManager::get_explosion_buffer(), 8.f));
+                m_score.increaseScore();
+            }
         }
+    }
+
+    // play explosions audios
+    for (auto& explosionAudio : m_explosionsAudio) {
+        explosionAudio.play();
     }
 
     // update the enemy dead position stack, right after they die, before removing them from vector
@@ -107,6 +128,7 @@ void Game::update()
     m_animationManager.createNewExplosionAnimators(m_enemyDeathPositions);
 
     m_animationManager.update();
+    m_score.update();
 }
 
 // Render Game
@@ -118,6 +140,7 @@ void Game::render()
     m_animationManager.render(m_GameWindow);
     m_enemyManager.render();
     m_ship.render();
+    m_score.render(m_GameWindow);
 
     m_GameWindow.display();
 }
@@ -132,4 +155,12 @@ void Game::remove()
     // if enemy health < 0 remove it
     m_enemyManager.removeEnemy();
     m_animationManager.removeAnimator();
+
+    // remove explosion audios
+    m_explosionsAudio.erase(
+        std::remove_if(m_explosionsAudio.begin(), m_explosionsAudio.end(), [&](Audio& ea) {
+            return !ea.isPlaying();
+        }),
+        m_explosionsAudio.end()
+    );
 }

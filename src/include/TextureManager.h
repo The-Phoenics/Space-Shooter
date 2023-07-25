@@ -3,15 +3,15 @@
 #include <iostream>
 
 // if textures do not load replace path with absolute or check your current working directory
-constexpr const char* TEXT_RELATIVE_PATH_SHIP      = "/home/prime/Desktop/SpaceShooter/res/ship.png";
-constexpr const char* TEXT_RELATIVE_PATH_BULLET    = "/home/prime/Desktop/SpaceShooter/res/bullet.png";
-constexpr const char* TEXT_RELATIVE_PATH_PLAY      = "/home/prime/Desktop/SpaceShooter/res/playButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_EXIT      = "/home/prime/Desktop/SpaceShooter/res/exitButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_RESUME    = "/home/prime/Desktop/SpaceShooter/res/resumeButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_QUIT      = "/home/prime/Desktop/SpaceShooter/res/quitButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_BACKG     = "/home/prime/Desktop/SpaceShooter/res/space_background.png";
-constexpr const char* TEXT_RELATIVE_PATH_ASTEROID  = "/home/prime/Desktop/SpaceShooter/res/asteroid.png";
-constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION = "/home/prime/Desktop/SpaceShooter/res/explosion.png";
+constexpr const char* TEXT_RELATIVE_PATH_SHIP      = "/home/prime/Desktop/SpaceShooter/res/textures/ship.png";
+constexpr const char* TEXT_RELATIVE_PATH_BULLET    = "/home/prime/Desktop/SpaceShooter/res/textures/bullet.png";
+constexpr const char* TEXT_RELATIVE_PATH_PLAY      = "/home/prime/Desktop/SpaceShooter/res/textures/playButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_EXIT      = "/home/prime/Desktop/SpaceShooter/res/textures/exitButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_RESUME    = "/home/prime/Desktop/SpaceShooter/res/textures/resumeButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_QUIT      = "/home/prime/Desktop/SpaceShooter/res/textures/quitButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_BACKG     = "/home/prime/Desktop/SpaceShooter/res/textures/space_background.png";
+constexpr const char* TEXT_RELATIVE_PATH_ASTEROID  = "/home/prime/Desktop/SpaceShooter/res/textures/asteroid.png";
+constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION = "/home/prime/Desktop/SpaceShooter/res/textures/explosion.png";
 
 class TextureManager
 {

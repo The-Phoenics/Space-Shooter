@@ -5,13 +5,16 @@
             "includePath": [
                 "${workspaceFolder}/src/include",
                 "${workspaceFolder}/src/GameStates/include",
-                "${workspaceFolder}/src/Animation/include"
+                "${workspaceFolder}/src/Animation/include",
+                "${workspaceFolder}/src/Audio/include",
+                "${workspaceFolder}/src/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "linux-clang-x64"
+            "intelliSenseMode": "linux-clang-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4
