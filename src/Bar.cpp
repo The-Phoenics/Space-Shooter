@@ -20,6 +20,13 @@ void Bar::update()
     m_bar.setSize(m_size);
 }
 
+void Bar::reset()
+{
+    m_size.x = max_x;
+    m_size.y = max_y;
+    m_bar.setSize(m_size);
+}
+
 void Bar::increase()
 {
     if (m_size.x < max_x)

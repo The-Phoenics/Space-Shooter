@@ -47,8 +47,11 @@ void Game::run()
             {
                 if (gamePlayState == Playing)
                 {
+                    // switch to gameOverState
                     if (!m_ship.isAlive) {
                         gamePlayState = GameOver;
+                        m_gamePlayAudio.stop();
+                        continue;
                     }
 
                     // Gameplay 
@@ -84,6 +87,13 @@ void Game::run()
                 }
                 else if (gamePlayState == GameOver)
                 {
+                    // restart the game
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+                        this->reset();
+                        gamePlayState = Playing;
+                        continue;
+                    }
+
                     this->gameOverState.update();
                     this->gameOverState.render();
                     continue;
@@ -187,4 +197,11 @@ void Game::remove()
         }),
         m_explosionsAudio.end()
     );
+}
+
+// Reset the game
+void Game::reset()
+{
+    m_score.reset();
+    m_ship.reset();
 }

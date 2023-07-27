@@ -1,11 +1,11 @@
-#include "include/Ship.h"
-#include "include/Util.h"
-#include "include/TextureManager.h"
+#include "Ship.h"
+#include "Util.h"
+#include "TextureManager.h"
 
 //#define M_PI 3.14
 
 Ship::Ship(sf::RenderWindow& win)
-    : m_vel(sf::Vector2f(2.5f, 2.5f)),
+    : m_vel(sf::Vector2f(3.f, 3.f)),
       m_ship(),
       window(win),
       m_healthBar(5.f),
@@ -21,7 +21,7 @@ Ship::Ship(sf::RenderWindow& win)
 }
 
 Ship::Ship(float width, float height, sf::RenderWindow& win)
-    : m_vel(sf::Vector2f(2.5f, 2.5f)),
+    : m_vel(sf::Vector2f(3.f, 3.f)),
       m_health(5),
       m_ship(),
       window(win),
@@ -43,7 +43,7 @@ Ship::Ship(float width, float height, sf::RenderWindow& win)
 
 void Ship::initHpText()
 {
-    if (!m_HpFont.loadFromFile("/home/prime/Desktop/SpaceShooter/res/font/dogicapixel.ttf")) {
+    if (!m_HpFont.loadFromFile(PATH_TO_FONT)) {
         std::cout << "Failed to load font\n";
     }
 
@@ -147,9 +147,17 @@ void Ship::update()
     this->move();
     this->calcFacingDir();
     this->m_healthBar.update();
+
+    // DBG
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+        m_healthBar.decrease();
+    }
 }
 
 void Ship::reset()
 {
-    // TODO: Implement reset, it will be called when game over
+    m_healthBar.reset();
+    m_health = m_healthBar.getBarValue() / m_healthBar.getAmount();
+    m_ship.setPosition(MIDDLE_OF_SCREEN);
+    isAlive = true;
 }

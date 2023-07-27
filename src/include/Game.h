@@ -31,6 +31,7 @@ public:
 	};
 
 	void run();
+	void reset();
 
 private:
 	void processEvents();

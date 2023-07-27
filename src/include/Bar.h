@@ -13,6 +13,7 @@ public:
     void init();
     void update();
     void render(sf::RenderWindow& window);
+    void reset();
 
     void setAmount  (float amount)      { m_amount = amount; }
     void setPosition(sf::Vector2f& pos) { m_bar.setPosition(pos); }

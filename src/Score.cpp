@@ -12,10 +12,9 @@ Score::Score()
 
 void Score::init()
 {
-    if (!m_font.loadFromFile("/home/prime/Desktop/SpaceShooter/res/font/dogicapixel.ttf")) {
+    if (!m_font.loadFromFile(PATH_TO_FONT)) {
         std::cout << "Failed to load font\n";
     }
-
     
     m_text.setFont(m_font);
     m_text.setString("Score  " + std::to_string(m_score));
@@ -29,4 +28,9 @@ void Score::update()
 void Score::render(sf::RenderWindow& window)
 {
     window.draw(m_text);
+}
+
+void Score::reset()
+{
+    m_score = 0;
 }

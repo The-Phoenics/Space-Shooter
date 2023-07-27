@@ -7,4 +7,7 @@ const int WINDOW_HEIGHT = window.getSize().y;
 
 static sf::Vector2f MIDDLE_OF_SCREEN(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
 
+
+constexpr const char* PATH_TO_FONT = "/home/prime/Desktop/SpaceShooter/res/font/dogicapixel.ttf";
+
 constexpr float TEXT_SIZE = 15.f;
