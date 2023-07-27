@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Collision.h"
+#include "Bar.h"
 
 class Ship
 {
@@ -14,11 +15,18 @@ public:
 
     inline sf::RectangleShape& getShip() { return m_ship; }
     inline sf::Vector2f getFacingDir()   { return m_facingDir; }
+
+    void reset();
+    void reduceHealth();
     
     void update();
     void render();
 
+public:
+    bool isAlive = true;
+
 private:
+    void initHpText();
     void  movementControls();
     void  move();
     void  calcFacingDir();
@@ -26,10 +34,16 @@ private:
     void  onCollisionWithWall(int Collision_Side);
 
 private:
+    sf::RenderWindow& window;
     sf::RectangleShape m_ship;
-    unsigned int m_health;
+
     sf::Vector2f m_vel;
     sf::Vector2f m_facingDir;
-    float m_speed = 1.2f;
-    sf::RenderWindow& window;
+    float m_speed { 1.2f };
+
+    Bar m_healthBar;
+    unsigned int m_health;
+
+    sf::Text m_HpText;
+    sf::Font m_HpFont;
 };

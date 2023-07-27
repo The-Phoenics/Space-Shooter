@@ -6,10 +6,13 @@
 
 Ship::Ship(sf::RenderWindow& win)
     : m_vel(sf::Vector2f(2.5f, 2.5f)),
-      m_health(5),
       m_ship(),
-      window(win)
+      window(win),
+      m_healthBar(5.f),
+      m_HpText(),
+      m_HpFont()
 {
+    m_health = m_healthBar.getBarValue() / m_healthBar.getAmount();
     m_ship.setSize(sf::Vector2f(100.f, 100.f));
     m_ship.setPosition(MIDDLE_OF_SCREEN);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
@@ -18,9 +21,19 @@ Ship::Ship(sf::RenderWindow& win)
 }
 
 Ship::Ship(float width, float height, sf::RenderWindow& win)
-    : m_vel(sf::Vector2f(1.f, 1.f)),
-      window(win)
+    : m_vel(sf::Vector2f(2.5f, 2.5f)),
+      m_health(5),
+      m_ship(),
+      window(win),
+      m_healthBar(5.f),
+      m_HpText(),
+      m_HpFont()
 {
+    initHpText();
+
+    sf::Vector2f pos(50.f, 20.f);
+    m_healthBar.setPosition(pos);
+
     m_ship = sf::RectangleShape(sf::Vector2f(width, height));
     m_ship.setPosition(MIDDLE_OF_SCREEN);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
@@ -28,18 +41,42 @@ Ship::Ship(float width, float height, sf::RenderWindow& win)
     m_ship.setTexture(&TextureManager::get_ship_texture());
 }
 
+void Ship::initHpText()
+{
+    if (!m_HpFont.loadFromFile("/home/prime/Desktop/SpaceShooter/res/font/dogicapixel.ttf")) {
+        std::cout << "Failed to load font\n";
+    }
+
+    m_HpText.setCharacterSize(TEXT_SIZE);
+    m_HpText.setFont(m_HpFont);
+    m_HpText.setString("HP ");
+    sf::Vector2f pos = m_healthBar.getPosition();
+    m_HpText.setPosition(pos.x - 10.f, pos.y);
+}
+
 void Ship::calcFacingDir()
 {
     sf::Vector2f centre = sf::Vector2f(m_ship.getPosition());
-    sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
+    sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(window).x, 
+                                         (float)sf::Mouse::getPosition(window).y);
 
     sf::Vector2f dir = mousePos - centre;
     m_facingDir = normalize(dir);
 }
 
+void Ship::reduceHealth()
+{
+    if (m_health > 0)
+        m_healthBar.decrease();
+    if (m_health <= 0)
+        isAlive = false;
+}
+
 void Ship::render()
 {
     window.draw(m_ship);
+    m_healthBar.render(window);
+    window.draw(m_HpText);
 }
 
 void Ship::onCollisionWithWall(int Collision_Side) {
@@ -105,7 +142,14 @@ float Ship::angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::
 
 void Ship::update()
 {
+    m_health = m_healthBar.getBarValue() / m_healthBar.getAmount();
     this->onCollisionWithWall(isColliding(m_ship, window));
     this->move();
     this->calcFacingDir();
+    this->m_healthBar.update();
+}
+
+void Ship::reset()
+{
+    // TODO: Implement reset, it will be called when game over
 }

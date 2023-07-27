@@ -6,9 +6,9 @@ GameOverState::GameOverState(sf::RenderWindow& win)
 
 }
 
-GameOverState::~GameOverState()
+void GameOverState::init()
 {
-    
+
 }
 
 void GameOverState::update()
@@ -18,5 +18,7 @@ void GameOverState::update()
 
 void GameOverState::render()
 {
+    window.clear();
 
+    window.display();
 }

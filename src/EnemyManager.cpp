@@ -33,7 +33,7 @@ void EnemyManager::updateStackOfDeadEnemyPositions(std::stack<sf::Vector2f>& ene
 	// update stack
 	for (auto& enemy : m_enemies)
 	{
-		if (!enemy.isAlive) {
+		if (!enemy.isAlive && !enemy.hasHitShip) {
 			enemyDeathPositions.push(enemy.getEnemy().getPosition());
 		}
 	}

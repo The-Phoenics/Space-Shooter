@@ -19,25 +19,29 @@ Animator::Animator(const sf::Texture& spriteSheet, int c, int r, const sf::Vecto
 
 void Animator::update()
 {
-    time += 0.5;
+    if (isAlive) {
+        time += 0.5;
 
-    if (time > frameTime) {
-        currentFrame++;
+        if (time > frameTime) {
+            currentFrame++;
 
-        if (currentFrame >= columns * rows) {
-            currentFrame = 0;
-            isAlive = false;
+            if (currentFrame > columns * rows) {
+                currentFrame = 0;
+                isAlive = false;
+                return;
+            }
+
+            int frameX = currentFrame % columns;
+            int frameY = currentFrame / columns;
+
+            sprite.setTextureRect(sf::IntRect(
+                frameX * sprite.getTextureRect().width,
+                frameY * sprite.getTextureRect().height,
+                sprite.getTextureRect().width,
+                sprite.getTextureRect().height)
+            );
+            time = 0.f;
         }
-
-        int frameX = currentFrame % columns;
-        int frameY = currentFrame / columns;
-
-        sprite.setTextureRect(sf::IntRect(
-            frameX * sprite.getTextureRect().width, frameY * sprite.getTextureRect().height,
-            sprite.getTextureRect().width, sprite.getTextureRect().height)
-        );
-
-        time = 0.f;
     }
 }
 
@@ -53,5 +57,7 @@ void Animator::setScale(float scaleX, float scaleY)
 
 void Animator::render(sf::RenderWindow& window)
 {
-    window.draw(sprite);
+    if (isAlive) {
+        window.draw(sprite);
+    }
 }

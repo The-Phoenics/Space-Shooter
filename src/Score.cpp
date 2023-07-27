@@ -7,7 +7,7 @@ Score::Score()
     init();
     sf::Vector2f pos(0 + 30.f, 0 + 30.f);
     m_text.setPosition(pos);
-    m_text.setCharacterSize(20.f);
+    m_text.setCharacterSize(TEXT_SIZE);
 }
 
 void Score::init()
@@ -18,12 +18,12 @@ void Score::init()
 
     
     m_text.setFont(m_font);
-    m_text.setString("Score: " + std::to_string(m_score));
+    m_text.setString("Score  " + std::to_string(m_score));
 }
 
 void Score::update()
 {
-    m_text.setString("Score: " + std::to_string(m_score));
+    m_text.setString("Score  " + std::to_string(m_score));
 }
 
 void Score::render(sf::RenderWindow& window)

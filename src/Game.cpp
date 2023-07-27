@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Util.h"
 
 Game::Game(sf::RenderWindow& win)
     : m_GameWindow(win),
@@ -14,7 +13,9 @@ Game::Game(sf::RenderWindow& win)
       m_gamePlayAudio(AudioManager::get_gameplay_buffer(), 40.f),
       m_score()
 {
-    m_GameWindow.setFramerateLimit(60);
+    sf::Vector2f pos(10.f, 45.f);
+    m_score.setPosition(pos);
+    this->m_GameWindow.setFramerateLimit(60);
 }
 
 void Game::run()
@@ -23,10 +24,10 @@ void Game::run()
 
     while (m_GameWindow.isOpen())
     {
-        // only run the game is window has focus
+        // only run the game is window/game has focus
         if (m_GameWindow.hasFocus()) 
         {
-            // sfml event polling
+            // polling events
             this->processEvents();
 
             if (isInMainMenuState)
@@ -35,21 +36,25 @@ void Game::run()
                 if (mainMenuState.isPlayButtonClicked()) {
                     this->isInMainMenuState = false;
 
-                    m_introAudio.stop(); // MUSIC
+                    this->m_introAudio.stop(); // MUSIC
                     continue;
                 }
-                mainMenuState.update();
-                mainMenuState.render();
+                this->mainMenuState.update();
+                this->mainMenuState.render();
             }
 
             else // If not in MainMenuState
             {
                 if (gamePlayState == Playing)
-                { 
+                {
+                    if (!m_ship.isAlive) {
+                        gamePlayState = GameOver;
+                    }
+
                     // Gameplay 
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                        gamePlayState = Paused;
-                        m_gamePlayAudio.pause(); // MUSIC
+                        this->gamePlayState = Paused;
+                        this->m_gamePlayAudio.pause(); // MUSIC
                         continue;
                     }
                     if (!m_gamePlayAudio.isPlaying()) { // MUSIC
@@ -63,23 +68,24 @@ void Game::run()
                 else if (gamePlayState == Paused)
                 {
                     if (pauseState.resumeButtonClicked()) {
-                        gamePlayState = Playing;
+                        this->gamePlayState = Playing;
+                        this->m_gamePlayAudio.resume();
                         continue;
                     }
                     if (pauseState.quitButtonClicked()) {
                         this->isInMainMenuState = true;
-                        gamePlayState = Playing;
-                        m_gamePlayAudio.stop(); // MUSIC
+                        this->gamePlayState = Playing;
+                        this->m_gamePlayAudio.stop(); // MUSIC
                         continue;
                     }
-                    pauseState.update();
-                    pauseState.render();
+                    this->pauseState.update();
+                    this->pauseState.render();
                     continue;
                 }
                 else if (gamePlayState == GameOver)
                 {
-                    gameOverState.update();
-                    gameOverState.render();
+                    this->gameOverState.update();
+                    this->gameOverState.render();
                     continue;
                 }
             }
@@ -90,74 +96,92 @@ void Game::run()
 void Game::processEvents()
 {
     sf::Event event;
-    while (m_GameWindow.pollEvent(event))
+    while (this->m_GameWindow.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            m_GameWindow.close();
+            this->m_GameWindow.close();
     }
 }
 
 // Update Game
 void Game::update()
 {
-    m_ship.update();
-    m_enemyManager.update();
-    m_bulletManager.update();
+    this->m_ship.update();
+    this->m_enemyManager.update();
+    this->m_bulletManager.update();
 
     for (auto& bullet : m_bulletManager.m_bullets) {
         for (auto& enemy : m_enemyManager.m_enemies) {
             if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
                 enemy.reduceHealth(); // reduce enemy health at bullet hit
             }
+            
+            // damage ship if it collides with rocks
+            if (isColliding(m_ship.getShip(), enemy.getEnemy())) {
+                if (m_ship.isAlive)
+                    this->m_ship.reduceHealth();
+            }
 
             // add explosions audio when enemy dies
             if (!enemy.isAlive) {
-                m_explosionsAudio.emplace_back(Audio(AudioManager::get_explosion_buffer(), 8.f));
-                m_score.increaseScore();
+                this->m_explosionsAudio.emplace_back(Audio(AudioManager::get_explosion_buffer(), 8.f));
+                this->m_score.increaseScore();
             }
         }
     }
 
+    // damage ship if it collides with rocks
+    for (auto& enemy : m_enemyManager.m_enemies) {
+        if (isColliding(m_ship.getShip(), enemy.getEnemy())) {
+            if (m_ship.isAlive) {
+                this->m_ship.reduceHealth();
+            }
+            enemy.isAlive = false;
+            enemy.hasHitShip = true;
+        }
+    }
+
     // play explosions audios
-    for (auto& explosionAudio : m_explosionsAudio) {
+    for (auto& explosionAudio : this->m_explosionsAudio) {
         explosionAudio.play();
     }
 
     // update the enemy dead position stack, right after they die, before removing them from vector
-    m_enemyManager.updateStackOfDeadEnemyPositions(m_enemyDeathPositions);
-    m_animationManager.createNewExplosionAnimators(m_enemyDeathPositions);
+    this->m_enemyManager.updateStackOfDeadEnemyPositions(m_enemyDeathPositions);
+    this->m_animationManager.createNewExplosionAnimators(m_enemyDeathPositions);
 
-    m_animationManager.update();
-    m_score.update();
+    this->m_animationManager.update();
+    this->m_score.update();
 }
 
 // Render Game
 void Game::render()
 {
-    m_GameWindow.clear();
+    this->m_GameWindow.clear();
 
-    m_bulletManager.render();
-    m_animationManager.render(m_GameWindow);
-    m_enemyManager.render();
-    m_ship.render();
-    m_score.render(m_GameWindow);
+    this->m_bulletManager.render();
+    this->m_animationManager.render(m_GameWindow);
+    this->m_enemyManager.render();
+    this->m_ship.render();
+    this->m_score.render(m_GameWindow);
 
-    m_GameWindow.display();
+    this->m_GameWindow.display();
 }
 
+// Remove entities
 void Game::remove()
 {
     // remove enemies
-    for (auto& enemy : m_enemyManager.m_enemies) {
+    for (auto& enemy : this->m_enemyManager.m_enemies) {
         m_bulletManager.removeBullets(enemy.getEnemy());
     }
 
     // if enemy health < 0 remove it
-    m_enemyManager.removeEnemy();
-    m_animationManager.removeAnimator();
+    this->m_enemyManager.removeEnemy();
+    this->m_animationManager.removeAnimator();
 
     // remove explosion audios
-    m_explosionsAudio.erase(
+    this->m_explosionsAudio.erase(
         std::remove_if(m_explosionsAudio.begin(), m_explosionsAudio.end(), [&](Audio& ea) {
             return !ea.isPlaying();
         }),

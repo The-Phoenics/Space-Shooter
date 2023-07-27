@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
+#include "DEFINES.h"
 
 class Score
 {    
@@ -18,8 +19,8 @@ public:
     void increaseScore(int n = 5) { m_score += n; }
     void decreaseScore(int n = 5) { m_score -= n; }
 
-    void setPos(sf::Vector2f& pos)  { m_text.setPosition(pos); }
-    sf::Vector2f getPos() const { return m_text.getPosition(); }
+    void setPosition(sf::Vector2f& pos)  { m_text.setPosition(pos); }
+    sf::Vector2f getPosition() const { return m_text.getPosition(); }
 
 private:
     unsigned int m_score { 0 };

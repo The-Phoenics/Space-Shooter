@@ -19,7 +19,8 @@ public:
 	void render();
 
 public:
-	bool  isAlive = true;
+	bool isAlive = true;
+	bool hasHitShip = false;
 
 private:
 	void init();

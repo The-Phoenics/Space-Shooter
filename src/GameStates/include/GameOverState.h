@@ -11,6 +11,9 @@ public:
     void render();
 
 private:
+    void init();
+
+private:
     sf::RenderWindow& window;
 
 };

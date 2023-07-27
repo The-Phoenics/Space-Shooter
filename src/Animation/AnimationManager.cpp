@@ -8,16 +8,14 @@ AnimationManager::AnimationManager()
 void AnimationManager::update()
 {
 	for (auto& a : m_explosionAnimators) {
-		if (a.isAlive)
-			a.update();
+		a.update();
 	}
 }
 
 void AnimationManager::render(sf::RenderWindow& window)
 {
 	for (auto& a : m_explosionAnimators) {
-		if (a.isAlive)
-			a.render(window);
+		a.render(window);
 	}
 }
 
