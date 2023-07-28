@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "Ship.h"
 #include "Collision.h"
+#include "Timer.h"
 
 class BulletManager {
 public:
@@ -20,11 +21,13 @@ public:
 
 public:
     std::vector<Bullet> m_bullets;
+    bool m_canShoot = true;
 
 private:
     Ship& shootingShip;
     sf::RenderWindow& window;
     
     // TODO: Replace this with timer
+    Timer m_timer;
     int tick = 0;
 };

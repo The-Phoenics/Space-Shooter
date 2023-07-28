@@ -8,7 +8,8 @@
                 "${workspaceFolder}/src/Animation/include",
                 "${workspaceFolder}/src/Audio/include",
                 "${workspaceFolder}/src/",
-                "${workspaceFolder}/src/include"
+                "${workspaceFolder}/src/include",
+                "${workspaceFolder}/src/GameStates/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",

@@ -3,8 +3,10 @@
 BulletManager::BulletManager(Ship& shootingObj, sf::RenderWindow& win)
     : m_bullets(),
       shootingShip(shootingObj),
-      window(win)
+      window(win),
+      m_timer()
 {
+    m_timer.start();
 }
 
 void BulletManager::renderBullet()
@@ -17,6 +19,7 @@ void BulletManager::updateBulletCount(Ship& ship)
 {
     if (sf::Mouse().isButtonPressed(sf::Mouse::Left)) {
         m_bullets.push_back(Bullet(ship));
+        m_canShoot = false;
     }
 }
 
@@ -38,12 +41,14 @@ void BulletManager::removeBullets(sf::CircleShape& enemy)
 
 void BulletManager::update()
 {
-    // TODO: Replace Ticking with Timer
-    if (tick > 20)
-        tick = 0;
-    tick++;
+    m_timer.update();
 
-    if (tick > 20)
+    if (m_timer.getElapsedTime() >= 0.5f && !m_canShoot) {
+        m_timer.reset();
+        m_canShoot = true;
+    }
+
+    if (m_canShoot)
         this->updateBulletCount(shootingShip);
     this->bulletsMovement();
 }

@@ -19,5 +19,5 @@ private:
 
     std::chrono::time_point<Clock> m_beg;
     float m_elapsedtime;
-    bool m_isActive;
+    bool  m_isActive;
 };

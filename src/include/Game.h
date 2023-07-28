@@ -46,6 +46,8 @@ private:
 	sf::RenderWindow& m_GameWindow;
 
     Ship  m_ship;
+
+	// DBG
 	EnemyManager     m_enemyManager;
 	BulletManager    m_bulletManager;
 	AnimationManager m_animationManager;

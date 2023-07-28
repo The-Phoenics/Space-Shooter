@@ -23,7 +23,8 @@ void Timer::update()
 void Timer::reset()
 {
     if (m_isActive) {
+        m_elapsedtime = 0.0f;
         m_beg = Clock::now();
-        m_isActive = false;
+        // m_isActive = false;
     }
 }
