@@ -125,7 +125,7 @@ void Game::update()
             if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
                 enemy.reduceHealth(); // reduce enemy health at bullet hit
             }
-            
+
             // damage ship if it collides with rocks
             if (isColliding(m_ship.getShip(), enemy.getEnemy())) {
                 if (m_ship.isAlive)

@@ -65,7 +65,20 @@ inline bool isColliding(sf::RectangleShape& obj1, sf::RectangleShape& obj2)
 
 inline bool isColliding(sf::CircleShape& obj1, sf::CircleShape& obj2)
 {
-    return (obj1.getGlobalBounds().intersects(obj2.getGlobalBounds()));
+    float amount1 = obj1.getRadius() / 3.f;
+    sf::FloatRect frect1 = obj1.getGlobalBounds();
+    frect1.height -= amount1;
+    frect1.width  -= amount1;
+    frect1.top    -= amount1;   
+
+    float amount2 = obj2.getRadius() / 3.f;
+    sf::FloatRect frect2 = obj2.getGlobalBounds();
+    frect2.height -= amount2;
+    frect2.width  -= amount2;
+    frect2.top    -= amount2;   
+
+    return frect1.intersects(frect2);
+    //return (obj1.getGlobalBounds().intersects(obj2.getGlobalBounds()));
 }
 
 inline bool isColliding(sf::RectangleShape & obj1, sf::CircleShape & obj2)

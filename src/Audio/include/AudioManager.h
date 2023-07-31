@@ -3,9 +3,9 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
-inline static constexpr const char* AUDIO_MAINMENU_PATH  = "/home/prime/Desktop/SpaceShooter/res/audio/BravePilots.ogg";
-inline static constexpr const char* AUDIO_EXPLOSION_PATH = "/home/prime/Desktop/SpaceShooter/res/audio/explosion.wav";
-inline static constexpr const char* AUDIO_GAMEPLAY_PATH  = "/home/prime/Desktop/SpaceShooter/res/audio/through_space.ogg";
+inline static constexpr const char* AUDIO_MAINMENU_PATH  = "/home/prime/Desktop/dev/SpaceShooter/res/audio/BravePilots.ogg";
+inline static constexpr const char* AUDIO_EXPLOSION_PATH = "/home/prime/Desktop/dev/SpaceShooter/res/audio/explosion.wav";
+inline static constexpr const char* AUDIO_GAMEPLAY_PATH  = "/home/prime/Desktop/dev/SpaceShooter/res/audio/through_space.ogg";
 
 class AudioManager
 {

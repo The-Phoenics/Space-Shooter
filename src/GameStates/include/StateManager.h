@@ -14,11 +14,15 @@ public:
 
     void switchStates();
 
-    void setState();
-    void getState() const;
-
 private:
     sf::RenderWindow& window;
+
+    enum GameState
+    {
+        MainMenuState,
+        GamePlayState,
+        OverState
+    };
 
     enum PlayState
 	{
@@ -26,6 +30,9 @@ private:
 		Paused,
 		GameOver
 	};
+
+    GameState m_gameState;
+    PlayState m_playState;
 
     MainMenu       mainMenuState;
 	PauseState     pauseState;
