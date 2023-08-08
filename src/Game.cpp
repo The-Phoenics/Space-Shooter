@@ -60,8 +60,10 @@ void Game::run()
                         this->m_gamePlayAudio.pause(); // MUSIC
                         continue;
                     }
-                    if (!m_gamePlayAudio.isPlaying()) { // MUSIC
-                        m_gamePlayAudio.play();
+                    if (pauseState.soundIsOn) {
+                        if (!m_gamePlayAudio.isPlaying()) { // MUSIC
+                            m_gamePlayAudio.play();
+                        }
                     }
                     this->update();
                     this->remove();
@@ -72,7 +74,9 @@ void Game::run()
                 {
                     if (pauseState.resumeButtonClicked()) {
                         this->gamePlayState = Playing;
-                        this->m_gamePlayAudio.resume();
+                        if (pauseState.soundIsOn) {
+                            this->m_gamePlayAudio.resume();
+                        }
                         continue;
                     }
                     if (pauseState.quitButtonClicked()) {

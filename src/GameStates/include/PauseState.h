@@ -14,8 +14,12 @@ public:
     void update();
     void render();
 
-    inline bool resumeButtonClicked() { return resumeButton.isClicked(); }
-    inline bool quitButtonClicked()   { return quitButton.isClicked(); }
+    inline bool resumeButtonClicked() { return resumeButton.isClicked();      }
+    inline bool quitButtonClicked()   { return quitButton.isClicked();        }
+    inline bool soundButtonClicked()  { return soundOptionButton.isClicked(); }
+
+public:
+    bool soundIsOn = true;
 
 private:
     void setup();
@@ -25,7 +29,5 @@ private:
 
     Button resumeButton;
     Button quitButton;
-
-    sf::Texture resumeButText;
-    sf::Texture quitButText;
+    Button soundOptionButton;
 };

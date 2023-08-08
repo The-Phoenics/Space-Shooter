@@ -12,6 +12,9 @@ constexpr const char* TEXT_RELATIVE_PATH_QUIT      = "/home/prime/Desktop/dev/Sp
 constexpr const char* TEXT_RELATIVE_PATH_BACKG     = "/home/prime/Desktop/dev/SpaceShooter/res/textures/space_background.png";
 constexpr const char* TEXT_RELATIVE_PATH_ASTEROID  = "/home/prime/Desktop/dev/SpaceShooter/res/textures/asteroid.png";
 constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION = "/home/prime/Desktop/dev/SpaceShooter/res/textures/explosion.png";
+constexpr const char* TEXT_RELATIVE_SOUND_ENABLE   = "/home/prime/Desktop/dev/SpaceShooter/res/textures/soundEnable.png";
+constexpr const char* TEXT_RELATIVE_SOUND_DISABLE  = "/home/prime/Desktop/dev/SpaceShooter/res/textures/soundDisable.png";
+
 
 class TextureManager
 {
@@ -27,6 +30,8 @@ public:
     static const sf::Texture& get_background_texture()   { return backgText;        }
     static const sf::Texture& get_asteroid_texture()     { return asteroidText;     }
     static       sf::Texture& get_explosion_texture()    { return explosionText;    }
+    static const sf::Texture& get_soundEnable_texture()  { return soundEnableText;  }
+    static const sf::Texture& get_soundDisable_texture() { return soundDisableText; }
 
 public:
     static constexpr size_t EXPLOSION_TEXT_ROWS    = 1;
@@ -42,4 +47,6 @@ private:
     static sf::Texture backgText;
     static sf::Texture asteroidText;
     static sf::Texture explosionText;
+    static sf::Texture soundEnableText;
+    static sf::Texture soundDisableText;
 };

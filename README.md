@@ -30,9 +30,11 @@ sudo apt-get install libsfml-dev
 
 2. `cd Space-Shooter`
 
-3. `cmake -S . -B build`
+3. `mkdir build && cd build`
 
-4. Run `./Space_Shooter`
+4. `cmake .. && make`
+
+4. Run game  `./Space_Shooter`
 
 
 ---

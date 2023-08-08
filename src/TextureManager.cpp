@@ -9,6 +9,9 @@ sf::Texture TextureManager::quitButtonText;
 sf::Texture TextureManager::backgText;
 sf::Texture TextureManager::asteroidText;
 sf::Texture TextureManager::explosionText;
+sf::Texture TextureManager::soundEnableText;
+sf::Texture TextureManager::soundDisableText;
+
 
 void TextureManager::instantiate_textures()
 {
@@ -21,4 +24,6 @@ void TextureManager::instantiate_textures()
     backgText.loadFromFile(TEXT_RELATIVE_PATH_BACKG);
     asteroidText.loadFromFile(TEXT_RELATIVE_PATH_ASTEROID);
     explosionText.loadFromFile(TEXT_RELATIVE_PATH_EXPLOSION);
+    soundEnableText.loadFromFile(TEXT_RELATIVE_SOUND_ENABLE);
+    soundDisableText.loadFromFile(TEXT_RELATIVE_SOUND_DISABLE);
 }
