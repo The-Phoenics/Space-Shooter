@@ -16,15 +16,17 @@ constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION = "/home/prime/Desktop/dev/Sp
 class TextureManager
 {
 public:
-    static const sf::Texture& get_ship_texture();
-    static const sf::Texture& get_bullet_texture();
-    static const sf::Texture& get_playButton_texture();
-    static const sf::Texture& get_exitButton_texture();
-    static const sf::Texture& get_resumeButton_texture();
-    static const sf::Texture& get_quitButton_texture();
-    static const sf::Texture& get_background_texture();
-    static const sf::Texture& get_asteroid_texture();
-    static const sf::Texture& get_explosion_texture();
+    static void instantiate_textures();
+
+    static const sf::Texture& get_ship_texture()         { return shipText;         }
+    static const sf::Texture& get_bullet_texture()       { return bulletText;       }
+    static const sf::Texture& get_playButton_texture()   { return playButtonText;   }
+    static const sf::Texture& get_exitButton_texture()   { return exitButtonText;   }
+    static const sf::Texture& get_resumeButton_texture() { return resumeButtonText; }
+    static const sf::Texture& get_quitButton_texture()   { return quitButtonText;   }
+    static const sf::Texture& get_background_texture()   { return backgText;        }
+    static const sf::Texture& get_asteroid_texture()     { return asteroidText;     }
+    static       sf::Texture& get_explosion_texture()    { return explosionText;    }
 
 public:
     static constexpr size_t EXPLOSION_TEXT_ROWS    = 1;

@@ -120,28 +120,17 @@ void Game::update()
     this->m_enemyManager.update();
     this->m_bulletManager.update();
 
+    // reduce enemy health at bullet hit
     for (auto& bullet : m_bulletManager.m_bullets) {
         for (auto& enemy : m_enemyManager.m_enemies) {
             if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
-                enemy.reduceHealth(); // reduce enemy health at bullet hit
-            }
-
-            // damage ship if it collides with rocks
-            if (isColliding(m_ship.getShip(), enemy.getEnemy())) {
-                if (m_ship.isAlive)
-                    this->m_ship.reduceHealth();
-            }
-
-            // add explosions audio when enemy dies
-            if (!enemy.isAlive) {
-                this->m_explosionsAudio.emplace_back(Audio(AudioManager::get_explosion_buffer(), 8.f));
-                this->m_score.increaseScore();
+                enemy.reduceHealth();
             }
         }
     }
 
-    // damage ship if it collides with rocks
     for (auto& enemy : m_enemyManager.m_enemies) {
+        // damage ship if it collides with rocks
         if (isColliding(m_ship.getShip(), enemy.getEnemy())) {
             if (m_ship.isAlive) {
                 this->m_ship.reduceHealth();
@@ -149,11 +138,18 @@ void Game::update()
             enemy.isAlive = false;
             enemy.hasHitShip = true;
         }
+
+        // add explosions audio when enemy dies
+        if (!enemy.isAlive) {
+            this->m_explosionsAudio.emplace_back(Audio(AudioManager::get_explosion_buffer(), 8.f));
+            this->m_score.increaseScore();
+        }
     }
 
     // play explosions audios
-    for (auto& explosionAudio : this->m_explosionsAudio) {
-        explosionAudio.play();
+    for (auto& explAudio : this->m_explosionsAudio) {
+        if (!explAudio.isPlaying()) // DBG
+            explAudio.play();
     }
 
     // update the enemy dead position stack, right after they die, before removing them from vector

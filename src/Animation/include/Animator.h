@@ -1,11 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Timer.h"
 
 class Animator
 {
 public:
-    Animator(const sf::Texture& spriteSheet, int c, int r, const sf::Vector2f& pos, float ft);
+    Animator(sf::Texture& spriteSheet, int c, int r, const sf::Vector2f& pos, float ft);
     ~Animator() { }
 
     void setPosition(sf::Vector2f& pos);
@@ -21,11 +22,11 @@ private:
     int rows;
     int currentFrame;
 
-    // more the frametime slower the animation
+    // speed of animation
     float frameTime;
-    float time = 0;
+    Timer m_timer;
 
-    sf::Texture  texture;
+    sf::Texture* texture;
     sf::Vector2f position;
     sf::Sprite   sprite;
 };

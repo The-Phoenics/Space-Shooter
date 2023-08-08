@@ -43,7 +43,7 @@ void BulletManager::update()
 {
     m_timer.update();
 
-    if (m_timer.getElapsedTime() >= 0.5f && !m_canShoot) {
+    if (m_timer.getElapsedTime() >= 0.1f && !m_canShoot) {
         m_timer.reset();
         m_canShoot = true;
     }

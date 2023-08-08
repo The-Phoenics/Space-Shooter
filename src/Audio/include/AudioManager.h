@@ -10,9 +10,11 @@ inline static constexpr const char* AUDIO_GAMEPLAY_PATH  = "/home/prime/Desktop/
 class AudioManager
 {
 public:
-    static const sf::SoundBuffer& get_mainmenu_buffer();
-    static const sf::SoundBuffer& get_explosion_buffer();
-    static const sf::SoundBuffer& get_gameplay_buffer();
+    static void instantiate_audio();
+    
+    static const sf::SoundBuffer& get_mainmenu_buffer()  { return mainMenuBuffer;  }
+    static const sf::SoundBuffer& get_explosion_buffer() { return explosionBuffer; }
+    static const sf::SoundBuffer& get_gameplay_buffer()  { return gameplayBuffer;  }
 
 private:
     static sf::SoundBuffer mainMenuBuffer;

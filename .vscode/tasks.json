@@ -5,7 +5,7 @@
             "label": "CMake: build",
             "command": "build",
             "targets": [
-                "all"
+                "[N/A - Select Kit]"
             ],
             "group": "build",
             "problemMatcher": [],

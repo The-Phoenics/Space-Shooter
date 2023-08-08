@@ -12,14 +12,12 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::update()
 {
-
 	// update enemies
 	for (auto& enemy : m_enemies)
 		enemy.update();
 
 	// respawn enemies
 	spawnEnemies();
-
 }
 
 void EnemyManager::render()
@@ -33,8 +31,9 @@ void EnemyManager::updateStackOfDeadEnemyPositions(std::stack<sf::Vector2f>& ene
 	// update stack
 	for (auto& enemy : m_enemies)
 	{
-		if (!enemy.isAlive && !enemy.hasHitShip) {
-			enemyDeathPositions.push(enemy.getEnemy().getPosition());
+		if (!enemy.isAlive) {
+			sf::Vector2f pos = enemy.getEnemy().getPosition();
+			enemyDeathPositions.push(pos);
 		}
 	}
 }
@@ -52,13 +51,13 @@ void EnemyManager::removeEnemy()
 void EnemyManager::spawnEnemies()
 {
 	while (m_enemies.size() < MAX_COUNT) {
-		m_enemies.push_back(Enemy(window));
+		m_enemies.emplace_back(Enemy(window));
 	}
 }
 
 void EnemyManager::init()
 {
 	for (size_t i = 0; i < MAX_COUNT; ++i) {
-		m_enemies.push_back(Enemy(window));
+		m_enemies.emplace_back(Enemy(window));
 	}
 }
