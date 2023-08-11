@@ -1,7 +1,6 @@
 #include "EnemyManager.h"
 
-EnemyManager::EnemyManager(sf::RenderWindow& win)
-	: window(win)
+EnemyManager::EnemyManager()
 {
 	init();
 }
@@ -20,10 +19,10 @@ void EnemyManager::update()
 	spawnEnemies();
 }
 
-void EnemyManager::render()
+void EnemyManager::render(sf::RenderWindow& window)
 {
 	for (auto& enemy : this->m_enemies)
-		enemy.render();
+		enemy.render(window);
 }
 
 void EnemyManager::updateStackOfDeadEnemyPositions(std::stack<sf::Vector2f>& enemyDeathPositions)
@@ -51,13 +50,13 @@ void EnemyManager::removeEnemy()
 void EnemyManager::spawnEnemies()
 {
 	while (m_enemies.size() < MAX_COUNT) {
-		m_enemies.emplace_back(Enemy(window));
+		m_enemies.emplace_back(Enemy());
 	}
 }
 
 void EnemyManager::init()
 {
 	for (size_t i = 0; i < MAX_COUNT; ++i) {
-		m_enemies.emplace_back(Enemy(window));
+		m_enemies.emplace_back(Enemy());
 	}
 }

@@ -1,13 +1,13 @@
 #include "Game.h"
 
 Game::Game(sf::RenderWindow& win)
-    : m_GameWindow(win),
-      m_ship         (50, 50, m_GameWindow),
-      m_enemyManager (m_GameWindow),
-      m_bulletManager(m_ship, m_GameWindow),
-      mainMenuState  (m_GameWindow),
-      pauseState     (m_GameWindow),
-      gameOverState  (m_GameWindow),
+    : window(win),
+      m_ship         (50, 50, window),
+      m_enemyManager (),
+      m_bulletManager(m_ship, window),
+      mainMenuState  (win),
+      pauseState     (win),
+      gameOverState  (),
       m_enemyDeathPositions(),
       m_introAudio(AudioManager::get_mainmenu_buffer(), 40.f),
       m_gamePlayAudio(AudioManager::get_gameplay_buffer(), 40.f),
@@ -15,17 +15,17 @@ Game::Game(sf::RenderWindow& win)
 {
     sf::Vector2f pos(10.f, 45.f);
     m_score.setPosition(pos);
-    this->m_GameWindow.setFramerateLimit(60);
+    this->window.setFramerateLimit(60);
 }
 
 void Game::run()
 {
     gamePlayState = Playing;
 
-    while (m_GameWindow.isOpen())
+    while (window.isOpen())
     {
         // only run the game is window/game has focus
-        if (m_GameWindow.hasFocus()) 
+        if (window.hasFocus()) 
         {
             // polling events
             this->processEvents();
@@ -40,7 +40,7 @@ void Game::run()
                     continue;
                 }
                 this->mainMenuState.update();
-                this->mainMenuState.render();
+                this->mainMenuState.render(window);
             }
 
             else // If not in MainMenuState
@@ -67,7 +67,7 @@ void Game::run()
                     }
                     this->update();
                     this->remove();
-                    this->render();
+                    this->render(window);
                     continue;
                 }
                 else if (gamePlayState == Paused)
@@ -86,7 +86,7 @@ void Game::run()
                         continue;
                     }
                     this->pauseState.update();
-                    this->pauseState.render();
+                    this->pauseState.render(window);
                     continue;
                 }
                 else if (gamePlayState == GameOver)
@@ -99,7 +99,7 @@ void Game::run()
                     }
 
                     this->gameOverState.update();
-                    this->gameOverState.render();
+                    this->gameOverState.render(window);
                     continue;
                 }
             }
@@ -110,10 +110,10 @@ void Game::run()
 void Game::processEvents()
 {
     sf::Event event;
-    while (this->m_GameWindow.pollEvent(event))
+    while (this->window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            this->m_GameWindow.close();
+            this->window.close();
     }
 }
 
@@ -152,7 +152,7 @@ void Game::update()
 
     // play explosions audios
     for (auto& explAudio : this->m_explosionsAudio) {
-        if (!explAudio.isPlaying()) // DBG
+        if (!explAudio.isPlaying())
             explAudio.play();
     }
 
@@ -165,17 +165,17 @@ void Game::update()
 }
 
 // Render Game
-void Game::render()
+void Game::render(sf::RenderWindow& window)
 {
-    this->m_GameWindow.clear();
+    this->window.clear();
 
-    this->m_bulletManager.render();
-    this->m_animationManager.render(m_GameWindow);
-    this->m_enemyManager.render();
+    this->m_bulletManager.render(window);
+    this->m_animationManager.render(window);
+    this->m_enemyManager.render(window);
     this->m_ship.render();
-    this->m_score.render(m_GameWindow);
+    this->m_score.render(window);
 
-    this->m_GameWindow.display();
+    this->window.display();
 }
 
 // Remove entities

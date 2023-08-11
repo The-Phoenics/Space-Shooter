@@ -6,18 +6,16 @@
 class GameOverState
 {
 public:
-    GameOverState(sf::RenderWindow& win);
+    GameOverState();
     ~GameOverState() { }
 
     void update();
-    void render();
+    void render(sf::RenderWindow& window);
 
 private:
     void init();
 
 private:
-    sf::RenderWindow& window;
-
     sf::Text m_gameOver;
     sf::Text m_playAgain;
     sf::Font m_gameOverFont;

@@ -25,7 +25,7 @@ void Score::update()
     m_text.setString("Score  " + std::to_string(m_score));
 }
 
-void Score::render(sf::RenderWindow& window)
+void Score:: render(sf::RenderWindow& window)
 {
     window.draw(m_text);
 }

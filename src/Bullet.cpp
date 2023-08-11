@@ -15,7 +15,7 @@ Bullet::Bullet(Ship& ship, float radii)
     m_bullet.rotate(ship.getShip().getRotation());
 }
 
-void Bullet::render(sf::RenderWindow& window) 
+void Bullet:: render(sf::RenderWindow& window) 
 {
     window.draw(m_bullet);
 }
@@ -26,9 +26,4 @@ void Bullet::move()
     sf::Vector2f speed = (m_dir * m_vel);
     sf::Vector2f newPos = currentPos + speed;
     m_bullet.setPosition(newPos);
-}
-
-void Bullet::onCollisionWithWall(int Collision_Side)
-{
-    // TODO: delete the bullets
 }

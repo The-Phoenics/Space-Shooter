@@ -12,7 +12,7 @@ public:
     ~PauseState();
 
     void update();
-    void render();
+    void render(sf::RenderWindow& window);
 
     inline bool resumeButtonClicked() { return resumeButton.isClicked();      }
     inline bool quitButtonClicked()   { return quitButton.isClicked();        }
@@ -25,8 +25,6 @@ private:
     void setup();
 
 private:
-    sf::RenderWindow& window;
-
     Button resumeButton;
     Button quitButton;
     Button soundOptionButton;

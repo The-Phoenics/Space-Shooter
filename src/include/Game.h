@@ -20,7 +20,7 @@
 class Game
 {
 public:
-	Game(sf::RenderWindow& win);
+	Game(sf::RenderWindow& window);
 	~Game() { }
 
 	enum PlayState
@@ -36,38 +36,34 @@ public:
 private:
 	void processEvents();
 	void update();
-	void render();
+	void render(sf::RenderWindow& window);
 	void remove();
 
 public:
     bool isplaying = false;
 
 private:
-	sf::RenderWindow& m_GameWindow;
+	sf::RenderWindow& window;
 
     Ship  m_ship;
 
-	// DBG
 	EnemyManager     m_enemyManager;
 	BulletManager    m_bulletManager;
 	AnimationManager m_animationManager;
 
-	// for explosions at dead positions
 	std::stack<sf::Vector2f> m_enemyDeathPositions;
 
 	// GameState instances
 	MainMenu       mainMenuState;
 	PauseState     pauseState;
 	GameOverState  gameOverState;
-
-	bool isInMainMenuState = true;
 	PlayState  gamePlayState;
+	bool isInMainMenuState = true;
 
-	Audio m_introAudio; // DBG
-	std::vector<Audio> m_explosionsAudio; // DBG
-	Audio m_gamePlayAudio; // DBG
+	Audio m_introAudio;
+	std::vector<Audio> m_explosionsAudio;
+	Audio m_gamePlayAudio;
 
 	// Scrore instance
 	Score m_score;
-	
 };

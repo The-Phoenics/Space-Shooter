@@ -1,8 +1,7 @@
 #include "Enemy.h"
 
-Enemy::Enemy(sf::RenderWindow& win)
-	: window(win),
-	  m_enemy()
+Enemy::Enemy()
+	: m_enemy()
 {
     sf::Vector2f dir = randomVector2f(-360, 360);
 	m_dir = normalize(dir);
@@ -21,9 +20,9 @@ void Enemy::update()
     this->onCollisionWithWall();
 }
 
-void Enemy::render()
+void Enemy::render(sf::RenderWindow& window)
 {
-	window.get().draw(m_enemy);
+	window.draw(m_enemy);
 }
 
 void Enemy::reduceHealth() { 
@@ -43,11 +42,17 @@ void Enemy::reduceHealth() {
 
 void Enemy::init()
 {
-    m_rotate = random_integer(45, 65) / 100.f;
-    float ri = random_integer(111, 185) / 100.f; 
-    m_vel    = sf::Vector2f(ri, ri);
-    m_size   = random_integer(40, 60);
-	sf::Vector2f pos = randomVector2f(100, 800);
+    m_rotate  = random_integer(45, 65)   / 100.f;
+    float vel = random_integer(111, 185) / 100.f; 
+    m_vel     = sf::Vector2f(vel, vel);
+    m_size    = random_integer(40, 60); // radius
+
+	sf::Vector2f pos(0.f, 0.f);
+    pos.x = random_integer(m_size, WINDOW_WIDTH);
+    if (random_integer(1, 10) % 2)
+        pos.y = random_integer(WINDOW_HEIGHT - WINDOW_HEIGHT / 3, WINDOW_HEIGHT);
+    else 
+        pos.y = random_integer(m_size, WINDOW_HEIGHT - WINDOW_HEIGHT / 5);
     
 	m_enemy.setRadius(m_size);
 	m_enemy.setPosition(pos);

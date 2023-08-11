@@ -1,17 +1,21 @@
 #include "Button.h"
 
 Button::Button(sf::RenderWindow& win)
-    : window(win)
+    : window(win),
+      m_timer(0.5f)
 {
     init();
+    m_timer.start();
 }
 
 Button::Button(sf::RenderWindow& win, const sf::Texture& texture)
     : buttonText(texture),
-      window(win)
+      window(win),
+      m_timer(0.5f)
 {
     init();
     button.setTexture(&texture);
+    m_timer.start();
 }
 
 Button::~Button()
@@ -28,10 +32,14 @@ void Button::onFocus()
 
 bool Button::isClicked()
 {
-    if (isFocused())
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-            return true;
-
+    if (m_timer.getElapsedTime() >= 0.6f) {
+        if (isFocused()) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                m_timer.reset();
+                return true;
+            }
+        }
+    }
     return false;
 }
 

@@ -17,7 +17,7 @@ public:
 	~AnimationManager() {}
 
 	void update();
-	void render(sf::RenderWindow& window);
+	void  render(sf::RenderWindow& window);
 	void removeAnimator();
 
 	void createNewExplosionAnimators(std::stack<sf::Vector2f>& enemyDeathPositions);

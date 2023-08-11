@@ -17,7 +17,7 @@ public:
     void removeBullets(sf::CircleShape& enemy);
 
     void update();
-    void render();
+    void render(sf::RenderWindow& window);
 
 public:
     std::vector<Bullet> m_bullets;
@@ -25,8 +25,7 @@ public:
 
 private:
     Ship& shootingShip;
-    sf::RenderWindow& window;
-    
+
     // TODO: Replace this with timer
     Timer m_timer;
     int tick = 0;

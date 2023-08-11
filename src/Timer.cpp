@@ -7,6 +7,13 @@ Timer::Timer()
 {
 }
 
+Timer::Timer(float elapsedTime)
+    : m_beg(),
+      m_isActive(),
+      m_elapsedtime(elapsedTime)
+{
+}
+
 void Timer::start()
 {
     if (!m_isActive) {
@@ -25,6 +32,5 @@ void Timer::reset()
     if (m_isActive) {
         m_elapsedtime = 0.0f;
         m_beg = Clock::now();
-        // m_isActive = false;
     }
 }

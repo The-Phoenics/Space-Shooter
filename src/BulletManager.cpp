@@ -1,9 +1,9 @@
-#include "include/BulletManager.h"
+#include "BulletManager.h"
 
 BulletManager::BulletManager(Ship& shootingObj, sf::RenderWindow& win)
     : m_bullets(),
       shootingShip(shootingObj),
-      window(win),
+      
       m_timer()
 {
     m_timer.start();
@@ -43,7 +43,7 @@ void BulletManager::update()
 {
     m_timer.update();
 
-    if (m_timer.getElapsedTime() >= 0.1f && !m_canShoot) {
+    if (m_timer.getElapsedTime() >= BULLET_COUNT_UPDATE_TIME_INTERVAL && !m_canShoot) {
         m_timer.reset();
         m_canShoot = true;
     }
@@ -53,7 +53,7 @@ void BulletManager::update()
     this->bulletsMovement();
 }
 
-void BulletManager::render()
+void BulletManager::render(sf::RenderWindow& window)
 {
     this->renderBullet();
 }

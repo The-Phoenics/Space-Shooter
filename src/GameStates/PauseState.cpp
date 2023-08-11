@@ -1,10 +1,9 @@
-#include "include/PauseState.h"
+#include "PauseState.h"
 
 PauseState::PauseState(sf::RenderWindow& win)
-    : window(win),
-      resumeButton(window),
-      quitButton(window),
-      soundOptionButton(window)
+    : resumeButton(win),
+      quitButton(win),
+      soundOptionButton(win)
 {
     setup();
 }
@@ -15,8 +14,10 @@ PauseState::~PauseState()
 
 void PauseState::update()
 {
-    // ISSUE: Cannot apply effect on these buttons as window nevers gets cleared in this state
-    // for now changed non-clearing of window to clearing window
+    resumeButton.update();
+    quitButton.update();
+    soundOptionButton.update();
+
     if (resumeButton.isFocused()) {
         resumeButton.onFocus();
     } else {
@@ -34,25 +35,25 @@ void PauseState::update()
     }
 
     if (quitButton.isClicked()) {
-        std::cout << "Quit clicked\n";
+        std::cout << "Quit clicked!\n";
         window.close();
     }
 
     if (soundOptionButton.isClicked()) {
         if (soundIsOn) {
-            std::cout << "Disabling sound\n";
+            std::cout << "Disabling sound!\n";
             soundOptionButton.setButtonText(TextureManager::get_soundDisable_texture());
             soundIsOn = false;
         }
         else {
-            std::cout << "Enabling sound\n";
+            std::cout << "Enabling sound!\n";
             soundOptionButton.setButtonText(TextureManager::get_soundEnable_texture());
             soundIsOn = true;
         }
     }
 }
 
-void PauseState::render()
+void PauseState::render(sf::RenderWindow& window)
 {
     window.clear();
     resumeButton.render();
@@ -72,7 +73,7 @@ void PauseState::setup()
 
     soundOptionButton.getButton().setOrigin(soundOptionButton.getButton().getSize() / 2.f);
     soundOptionButton.setButtonSize(sf::Vector2f(45.f, 45.f));
-    soundOptionButton.setButtonPos(sf::Vector2f(WINDOW_WIDTH + 35, 0 + 40.f)); // DBG
+    soundOptionButton.setButtonPos(sf::Vector2f(WINDOW_WIDTH + 35, 0 + 40.f));
 
     // Load textures
     resumeButton.setButtonText(TextureManager::get_resumeButton_texture());

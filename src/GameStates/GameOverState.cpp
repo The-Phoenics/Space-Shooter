@@ -1,7 +1,6 @@
 #include "GameOverState.h"
 
-GameOverState::GameOverState(sf::RenderWindow& win)
-    : window(win)
+GameOverState::GameOverState()
 {
     init();
 }
@@ -29,7 +28,7 @@ void GameOverState::update()
 {
 }
 
-void GameOverState::render()
+void GameOverState::render(sf::RenderWindow& window)
 {
     window.clear();
     window.draw(m_gameOver);

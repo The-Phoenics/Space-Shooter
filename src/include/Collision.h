@@ -78,7 +78,6 @@ inline bool isColliding(sf::CircleShape& obj1, sf::CircleShape& obj2)
     frect2.top    -= amount2;   
 
     return frect1.intersects(frect2);
-    //return (obj1.getGlobalBounds().intersects(obj2.getGlobalBounds()));
 }
 
 inline bool isColliding(sf::RectangleShape & obj1, sf::CircleShape & obj2)

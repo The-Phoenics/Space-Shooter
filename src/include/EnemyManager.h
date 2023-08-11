@@ -8,11 +8,11 @@
 class EnemyManager
 {
 public:
-	EnemyManager(sf::RenderWindow& win);
+	EnemyManager();
 	~EnemyManager();
 
 	void update();
-	void render();
+	void render(sf::RenderWindow& window);
 
 	void updateStackOfDeadEnemyPositions(std::stack<sf::Vector2f>& enemyDeathPositions);
 
@@ -25,7 +25,4 @@ private:
 public:
 	std::vector<Enemy> m_enemies;
 	const size_t MAX_COUNT = 5;
-
-private:
-	sf::RenderWindow& window;
 };

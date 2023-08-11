@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Timer.h"
 
 class Button
 {
@@ -19,6 +20,7 @@ public:
     inline void setButtonText(const sf::Texture& texture) { button.setTexture(&texture); }
     inline void setButtonSize(const sf::Vector2f& size)   { button.setSize(size); }
 
+    inline void update() { m_timer.update(); }
     inline void render() { window.draw(this->button); }
 
     void onFocus();
@@ -28,4 +30,6 @@ private:
     sf::RenderWindow& window;
     sf::RectangleShape button;
     sf::Texture buttonText;
+
+    Timer m_timer;
 };

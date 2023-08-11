@@ -42,11 +42,6 @@ void Animator::update()
                 sprite.getTextureRect().width,
                 sprite.getTextureRect().height)
             );
-
-            // DBG
-            if (this->sprite.getTexture() == nullptr) {
-                std::cout << "No texture\n";
-            }
         }
         m_timer.update();
     }
@@ -62,7 +57,7 @@ void Animator::setScale(float scaleX, float scaleY)
     sprite.setScale(scaleX, scaleY);
 }
 
-void Animator::render(sf::RenderWindow& window)
+void Animator:: render(sf::RenderWindow& window)
 {
     window.draw(sprite);
 }

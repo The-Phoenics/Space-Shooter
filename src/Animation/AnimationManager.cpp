@@ -12,7 +12,7 @@ void AnimationManager::update()
 	}
 }
 
-void AnimationManager::render(sf::RenderWindow& window)
+void AnimationManager:: render(sf::RenderWindow& window)
 {
 	for (auto& a : m_explosionAnimators) {
 		a.render(window);

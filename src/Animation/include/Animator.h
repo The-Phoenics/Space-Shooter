@@ -13,7 +13,7 @@ public:
     void setScale(float scaleX, float scaleY);
 
     void update();
-    void render(sf::RenderWindow& window);
+    void  render(sf::RenderWindow& window);
 
 public:
     bool isAlive = true;

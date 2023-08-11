@@ -39,7 +39,7 @@ void Bar::decrease()
         m_size.x -= m_amount;
 }
 
-void Bar::render(sf::RenderWindow& window)
+void Bar:: render(sf::RenderWindow& window)
 {
     window.draw(m_bar);
 }

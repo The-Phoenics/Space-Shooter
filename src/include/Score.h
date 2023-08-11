@@ -15,7 +15,7 @@ public:
     void init();
 
     void update();
-    void render(sf::RenderWindow& window);
+    void  render(sf::RenderWindow& window);
     void reset();
 
     void increaseScore(int n = 5) { m_score += n; }

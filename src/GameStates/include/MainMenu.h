@@ -12,7 +12,7 @@ public:
     ~MainMenu();
     
     void update();
-    void render();
+    void render(sf::RenderWindow& window);
 
     inline bool isPlayButtonClicked() { return playButton.isClicked(); }
 
@@ -20,8 +20,6 @@ private:
     void init();
 
 private:
-    sf::RenderWindow& window;
-
     sf::RectangleShape m_background;
     Button playButton;
     Button exitButton;

@@ -5,6 +5,7 @@ class Timer
 {
 public:
     Timer();
+    Timer(float elapsedTime);
     ~Timer() { }
 
     void start();

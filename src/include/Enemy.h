@@ -7,7 +7,7 @@
 class Enemy
 {
 public:
-	Enemy(sf::RenderWindow& win);
+	Enemy();
 	~Enemy();
 
 	inline sf::CircleShape& getEnemy() { return this->m_enemy; }
@@ -16,7 +16,7 @@ public:
 	void reduceHealth();
 
 	void update();
-	void render();
+	void render(sf::RenderWindow& window);
 
 public:
 	bool isAlive = true;
@@ -29,7 +29,6 @@ private:
 	void onCollisionWithWall();
 
 private:
-	std::reference_wrapper<sf::RenderWindow> window;
 	sf::CircleShape   m_enemy;
 
 	sf::Vector2f m_dir;

@@ -1,9 +1,8 @@
-#include "include/MainMenu.h"
+#include "MainMenu.h"
 
 MainMenu::MainMenu(sf::RenderWindow& win)
-  : window(win),
-    playButton(window),
-    exitButton(window),
+  : playButton(win),
+    exitButton(win),
     m_background(),
     playButText(),
     exitButText()
@@ -29,6 +28,9 @@ void MainMenu::init()
 
 void MainMenu::update()
 {
+    playButton.update();
+    exitButton.update();
+
     if (playButton.isFocused()) {
         playButton.onFocus();
     } else {
@@ -46,12 +48,12 @@ void MainMenu::update()
     }
 
     if (exitButton.isClicked()) {
-        std::cout << "Exiting the Game ...\n";
+        std::cout << "Exiting game!\n";
         window.close();
     }
 }
 
-void MainMenu::render()
+void MainMenu::render(sf::RenderWindow& window)
 {
     window.clear();
     window.draw(m_background);

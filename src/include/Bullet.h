@@ -8,19 +8,15 @@ public:
     Bullet(Ship& ship, float radii = 10.f);
     ~Bullet() {}
 
-    void render(sf::RenderWindow& window);
-
-    void onCollisionWithWall(int Collision_Side);
+    void  render(sf::RenderWindow& window);
     void move();
 
-    // getter .. setters
-    inline float getVel()         { return m_vel; }
+    inline float     getVel()    const  { return m_vel; }
+    inline float     getRadii()  const  { return m_bullet.getRadius(); }
+    sf::CircleShape& getBullet()        { return m_bullet; }
+
     inline void  setVel(float vel) { m_vel = vel;  }
-
-    sf::CircleShape& getBullet() { return m_bullet; }
-
     inline void  setRadii(float radii) { m_bullet.setRadius(radii); }
-    inline float getRadii() const      { return m_bullet.getRadius(); }
 
 private:
     sf::CircleShape m_bullet;
