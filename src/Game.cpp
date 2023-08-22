@@ -45,63 +45,64 @@ void Game::run()
 
             else // If not in MainMenuState
             {
-                if (gamePlayState == Playing)
+                switch (gamePlayState)
                 {
-                    // switch to gameOverState
-                    if (!m_ship.isAlive) {
-                        gamePlayState = GameOver;
-                        m_gamePlayAudio.stop();
-                        continue;
-                    }
-
-                    // Gameplay 
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                        this->gamePlayState = Paused;
-                        this->m_gamePlayAudio.pause(); // MUSIC
-                        continue;
-                    }
-                    if (pauseState.soundIsOn) {
-                        if (!m_gamePlayAudio.isPlaying()) { // MUSIC
-                            m_gamePlayAudio.play();
+                    case Playing:
+                    {
+                        // switch to gameOverState
+                        if (!m_ship.isAlive) {
+                            gamePlayState = GameOver;
+                            m_gamePlayAudio.stop();
+                            continue;
                         }
-                    }
-                    this->update();
-                    this->remove();
-                    this->render(window);
-                    continue;
-                }
-                else if (gamePlayState == Paused)
-                {
-                    if (pauseState.resumeButtonClicked()) {
-                        this->gamePlayState = Playing;
+    
+                        // Gameplay 
+                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                            this->gamePlayState = Paused;
+                            this->m_gamePlayAudio.pause(); // MUSIC
+                            continue;
+                        }
                         if (pauseState.soundIsOn) {
-                            this->m_gamePlayAudio.resume();
+                            if (!m_gamePlayAudio.isPlaying()) { // MUSIC
+                                m_gamePlayAudio.play();
+                            }
                         }
-                        continue;
-                    }
-                    if (pauseState.quitButtonClicked()) {
-                        this->isInMainMenuState = true;
-                        this->gamePlayState = Playing;
-                        this->m_gamePlayAudio.stop(); // MUSIC
-                        continue;
-                    }
-                    this->pauseState.update();
-                    this->pauseState.render(window);
-                    continue;
-                }
-                else if (gamePlayState == GameOver)
-                {
-                    // restart the game
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-                        this->reset();
-                        gamePlayState = Playing;
-                        continue;
-                    }
+                        this->update();
+                        this->remove();
+                        this->render(window);
+                    } break;
 
-                    this->gameOverState.update();
-                    this->gameOverState.render(window);
-                    continue;
-                }
+                    case Paused:
+                    {
+                        if (pauseState.resumeButtonClicked()) {
+                            this->gamePlayState = Playing;
+                            if (pauseState.soundIsOn) {
+                                this->m_gamePlayAudio.resume();
+                            }
+                            continue;
+                        }
+                        if (pauseState.quitButtonClicked()) {
+                            this->isInMainMenuState = true;
+                            this->gamePlayState = Playing;
+                            this->m_gamePlayAudio.stop(); // MUSIC
+                            continue;
+                        }
+                        this->pauseState.update();
+                        this->pauseState.render(window);
+                    } break;
+
+                    case GameOver:
+                    {
+                        // restart the game
+                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+                            this->reset();
+                            gamePlayState = Playing;
+                            continue;
+                        }
+                        this->gameOverState.update();
+                        this->gameOverState.render(window);
+                    } break;
+                };
             }
         }
     }
