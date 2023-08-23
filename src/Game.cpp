@@ -35,15 +35,13 @@ void Game::run()
                 m_introAudio.play(); // MUSIC
                 if (mainMenuState.isPlayButtonClicked()) {
                     this->isInMainMenuState = false;
-
-                    this->m_introAudio.stop(); // MUSIC
+                    this->m_introAudio.stop();
                     continue;
                 }
                 this->mainMenuState.update();
                 this->mainMenuState.render(window);
             }
-
-            else // If not in MainMenuState
+            else
             {
                 switch (gamePlayState)
                 {
@@ -59,11 +57,11 @@ void Game::run()
                         // Gameplay 
                         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                             this->gamePlayState = Paused;
-                            this->m_gamePlayAudio.pause(); // MUSIC
+                            this->m_gamePlayAudio.pause();
                             continue;
                         }
                         if (pauseState.soundIsOn) {
-                            if (!m_gamePlayAudio.isPlaying()) { // MUSIC
+                            if (!m_gamePlayAudio.isPlaying()) {
                                 m_gamePlayAudio.play();
                             }
                         }
@@ -84,7 +82,8 @@ void Game::run()
                         if (pauseState.quitButtonClicked()) {
                             this->isInMainMenuState = true;
                             this->gamePlayState = Playing;
-                            this->m_gamePlayAudio.stop(); // MUSIC
+                            this->m_gamePlayAudio.stop();
+                            this->reset();
                             continue;
                         }
                         this->pauseState.update();

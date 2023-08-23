@@ -3,17 +3,17 @@
 #include <iostream>
 
 // if textures do not load replace path with absolute or check your current working directory
-constexpr const char* TEXT_RELATIVE_PATH_SHIP      = "res/textures/ship.png";
-constexpr const char* TEXT_RELATIVE_PATH_BULLET    = "res/textures/bullet.png";
-constexpr const char* TEXT_RELATIVE_PATH_PLAY      = "res/textures/playButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_EXIT      = "res/textures/exitButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_RESUME    = "res/texturesresumeButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_QUIT      = "res/textures/quitButton.png";
-constexpr const char* TEXT_RELATIVE_PATH_BACKG     = "res/textures/space_background.png";
-constexpr const char* TEXT_RELATIVE_PATH_ASTEROID  = "res/textures/asteroid.png";
-constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION = "res/textures/explosion.png";
-constexpr const char* TEXT_RELATIVE_SOUND_ENABLE   = "res/textures/soundEnable.png";
-constexpr const char* TEXT_RELATIVE_SOUND_DISABLE  = "res/textures/soundDisable.png";
+constexpr const char* TEXT_RELATIVE_PATH_SHIP      = "../res/textures/ship.png";
+constexpr const char* TEXT_RELATIVE_PATH_BULLET    = "../res/textures/bullet.png";
+constexpr const char* TEXT_RELATIVE_PATH_PLAY      = "../res/textures/playButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_EXIT      = "../res/textures/exitButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_RESUME    = "../res/textures/resumeButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_QUIT      = "../res/textures/quitButton.png";
+constexpr const char* TEXT_RELATIVE_PATH_BACKG     = "../res/textures/space_background.png";
+constexpr const char* TEXT_RELATIVE_PATH_ASTEROID  = "../res/textures/asteroid.png";
+constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION = "../res/textures/explosion.png";
+constexpr const char* TEXT_RELATIVE_SOUND_ENABLE   = "../res/textures/soundEnable.png";
+constexpr const char* TEXT_RELATIVE_SOUND_DISABLE  = "../res/textures/soundDisable.png";
 
 class TextureManager
 {

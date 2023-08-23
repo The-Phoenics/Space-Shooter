@@ -2,8 +2,6 @@
 #include "Util.h"
 #include "TextureManager.h"
 
-//#define M_PI 3.14
-
 Ship::Ship(sf::RenderWindow& win)
     : m_vel(sf::Vector2f(3.f, 3.f)),
       m_ship(),
@@ -147,11 +145,6 @@ void Ship::update()
     this->move();
     this->calcFacingDir();
     this->m_healthBar.update();
-
-    // DBG
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-        m_healthBar.decrease();
-    }
 }
 
 void Ship::reset()
