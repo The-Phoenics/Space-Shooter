@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+# shell scripts
+clean.sh
+run.sh
+
+# build directory
+build

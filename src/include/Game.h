@@ -46,10 +46,10 @@ private:
 	sf::RenderWindow& window;
 
     Ship  m_ship;
-
-	EnemyManager     m_enemyManager;
-	BulletManager    m_bulletManager;
-	AnimationManager m_animationManager;
+	sf::RectangleShape m_background;
+	EnemyManager       m_enemyManager;
+	BulletManager      m_bulletManager;
+	AnimationManager   m_animationManager;
 
 	std::stack<sf::Vector2f> m_enemyDeathPositions;
 
@@ -57,7 +57,7 @@ private:
 	MainMenu       mainMenuState;
 	PauseState     pauseState;
 	GameOverState  gameOverState;
-	PlayState  gamePlayState;
+	PlayState      gamePlayState;
 	bool isInMainMenuState = true;
 
 	Audio m_introAudio;

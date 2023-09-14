@@ -11,10 +11,13 @@ Game::Game(sf::RenderWindow& win)
       m_enemyDeathPositions(),
       m_introAudio(AudioManager::get_mainmenu_buffer(), 40.f),
       m_gamePlayAudio(AudioManager::get_gameplay_buffer(), 40.f),
-      m_score()
+      m_score(),
+      m_background()
 {
     sf::Vector2f pos(10.f, 45.f);
     m_score.setPosition(pos);
+    m_background.setTexture(&TextureManager::get_gameBackground_texture());
+    m_background.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
     this->window.setFramerateLimit(60);
 }
 
@@ -169,6 +172,7 @@ void Game::render(sf::RenderWindow& window)
 {
     this->window.clear();
 
+    this->window.draw(this->m_background);
     this->m_bulletManager.render(window);
     this->m_animationManager.render(window);
     this->m_enemyManager.render(window);
