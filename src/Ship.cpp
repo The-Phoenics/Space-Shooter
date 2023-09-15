@@ -109,6 +109,12 @@ void Ship::movementControls()
         m_ship.setPosition(sf::Vector2f(currentPos.x, currentPos.y + m_speed));
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         m_ship.setPosition(sf::Vector2f(currentPos.x + m_speed, currentPos.y));
+
+    // TODO: Improve ship movement
+    // TODO: Add lerp to ship movement
+
+    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    //     m_ship.setPosition(sf::Vector2f(currentPos + m_facingDir * 2.f));
 }
 
 void Ship::move()

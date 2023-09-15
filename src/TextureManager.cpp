@@ -12,6 +12,7 @@ sf::Texture TextureManager::explosionText;
 sf::Texture TextureManager::soundEnableText;
 sf::Texture TextureManager::soundDisableText;
 sf::Texture TextureManager::backgroundText;
+sf::Texture TextureManager::crosshairText;
 
 void TextureManager::instantiate_textures()
 {
@@ -27,4 +28,5 @@ void TextureManager::instantiate_textures()
     soundEnableText.loadFromFile(TEXT_RELATIVE_SOUND_ENABLE);
     soundDisableText.loadFromFile(TEXT_RELATIVE_SOUND_DISABLE);
     backgroundText.loadFromFile(TEXT_RELATIVE_PATH_BACKGROUND);
+    crosshairText.loadFromFile(TEXT_RELATIVE_PATH_CROSSHAIR);
 }

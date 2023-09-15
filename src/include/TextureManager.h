@@ -15,6 +15,7 @@ constexpr const char* TEXT_RELATIVE_PATH_EXPLOSION   = "../res/textures/explosio
 constexpr const char* TEXT_RELATIVE_SOUND_ENABLE     = "../res/textures/soundEnable.png";
 constexpr const char* TEXT_RELATIVE_SOUND_DISABLE    = "../res/textures/soundDisable.png";
 constexpr const char* TEXT_RELATIVE_PATH_BACKGROUND  = "../res/textures/spacebackground.png";
+constexpr const char* TEXT_RELATIVE_PATH_CROSSHAIR   = "../res/textures/crosshair.png";
 
 class TextureManager
 {
@@ -33,6 +34,7 @@ public:
     static const sf::Texture& get_soundEnable_texture()      { return soundEnableText;  }
     static const sf::Texture& get_soundDisable_texture()     { return soundDisableText; }
     static const sf::Texture& get_gameBackground_texture()   { return backgroundText;   }
+    static const sf::Texture& get_crosshair_texture()        { return crosshairText;    }
 
 public:
     static constexpr size_t EXPLOSION_TEXT_ROWS    = 1;
@@ -51,4 +53,5 @@ private:
     static sf::Texture soundEnableText;
     static sf::Texture soundDisableText;
     static sf::Texture backgroundText;
+    static sf::Texture crosshairText;
 };

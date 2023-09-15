@@ -44,6 +44,7 @@ public:
 
 private:
 	sf::RenderWindow& window;
+	sf::RectangleShape m_crosshair;
 
     Ship  m_ship;
 	sf::RectangleShape m_background;
