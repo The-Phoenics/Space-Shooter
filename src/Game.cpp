@@ -53,10 +53,12 @@ void Game::run()
                 {
                     case Playing:
                     {
+                        window.setMouseCursorVisible(false);
                         // switch to gameOverState
                         if (!m_ship.isAlive) {
                             gamePlayState = GameOver;
                             m_gamePlayAudio.stop();
+                            window.setMouseCursorVisible(true);
                             continue;
                         }
     
@@ -64,6 +66,7 @@ void Game::run()
                         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                             this->gamePlayState = Paused;
                             this->m_gamePlayAudio.pause();
+                            window.setMouseCursorVisible(true);
                             continue;
                         }
                         if (pauseState.soundIsOn) {
