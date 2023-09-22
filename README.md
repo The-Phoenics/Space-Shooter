@@ -34,6 +34,8 @@ sudo apt-get install cmake libsfml-dev
 
 ## Gameplay
 
-https://github.com/Karansemwal/Space-Shooter/assets/96228962/427dc214-5b44-4c59-bae7-5bf9e7fc0425
+
+https://github.com/Karansemwal/Space-Shooter/assets/96228962/2a63a829-1873-4b44-82a5-251cb5ed45b8
+
 
 ---
