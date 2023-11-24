@@ -7,27 +7,25 @@
 
 ---
 
-## Linux build
-
-### Dependencies
+### Requirements
 - C++ >= 17
-- SFML  >= 2.5.1
-- CMake >= 3.0
+- CMake >= 3.10
 
-```
-sudo apt-get install cmake libsfml-dev
-```
 ### Build
 
-1. Clone repository  `git clone https://github.com/Karansemwal/Space-Shooter.git`
+Clone repository  `git clone https://github.com/Karansemwal/Space-Shooter.git`
 
-2. `cd Space-Shooter`
+`cd Space-Shooter`
 
-3. `mkdir build && cd build`
+`mkdir build`
 
-4. `cmake .. && make`
+`cd build`
 
-5. Run game  `./Space_Shooter`
+`cmake ..`
+
+`cmake --build .`
+
+Run **Space_Shooter** executable.
 
 ---
 
