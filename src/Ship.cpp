@@ -2,6 +2,8 @@
 #include "Util.h"
 #include "TextureManager.h"
 
+#define M_PI 3.14
+
 Ship::Ship(sf::RenderWindow& win)
     : m_vel(sf::Vector2f(3.f, 3.f)),
       m_ship(),
