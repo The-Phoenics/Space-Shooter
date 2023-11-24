@@ -9,7 +9,7 @@ BulletManager::BulletManager(Ship& shootingObj, sf::RenderWindow& win)
     m_timer.start();
 }
 
-void BulletManager::renderBullet()
+void BulletManager::renderBullet(sf::RenderWindow& window)
 {
     for (Bullet& bullet : m_bullets)
         window.draw(bullet.getBullet());
@@ -55,5 +55,5 @@ void BulletManager::update()
 
 void BulletManager::render(sf::RenderWindow& window)
 {
-    this->renderBullet();
+    this->renderBullet(window);
 }

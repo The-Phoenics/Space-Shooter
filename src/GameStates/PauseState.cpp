@@ -12,7 +12,7 @@ PauseState::~PauseState()
 {
 }
 
-void PauseState::update()
+void PauseState::update(sf::RenderWindow& window)
 {
     resumeButton.update();
     quitButton.update();

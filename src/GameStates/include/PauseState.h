@@ -11,7 +11,7 @@ public:
     PauseState(sf::RenderWindow& win);
     ~PauseState();
 
-    void update();
+    void update(sf::RenderWindow& window);
     void render(sf::RenderWindow& window);
 
     inline bool resumeButtonClicked() { return resumeButton.isClicked();      }

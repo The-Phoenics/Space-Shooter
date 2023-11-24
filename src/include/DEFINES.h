@@ -1,8 +1,7 @@
 #pragma once
 
-inline sf::RenderWindow window(sf::VideoMode(1000, 800), "Space Shooter", sf::Style::Close);
-const int WINDOW_WIDTH  = window.getSize().x;
-const int WINDOW_HEIGHT = window.getSize().y;
+const int WINDOW_WIDTH  = 1000;
+const int WINDOW_HEIGHT = 800;
 
 static sf::Vector2f MIDDLE_OF_SCREEN(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
 

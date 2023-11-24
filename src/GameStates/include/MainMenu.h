@@ -11,7 +11,7 @@ public:
     MainMenu(sf::RenderWindow& win);
     ~MainMenu();
     
-    void update();
+    void update(sf::RenderWindow& window);
     void render(sf::RenderWindow& window);
 
     inline bool isPlayButtonClicked() { return playButton.isClicked(); }

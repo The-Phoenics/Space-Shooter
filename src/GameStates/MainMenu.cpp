@@ -19,14 +19,14 @@ MainMenu::~MainMenu()
 
 void MainMenu::init()
 {
-    m_background.setSize(sf::Vector2f(window.getSize()));
+    m_background.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     playButton.getButton().setPosition(MIDDLE_OF_SCREEN);
     sf::Vector2f exitButPos(playButton.getButton().getPosition().x, playButton.getButton().getPosition().y + 100.f);
     exitButton.setButtonPos(exitButPos);
     exitButton.getButton().setFillColor(sf::Color::Cyan);
 }
 
-void MainMenu::update()
+void MainMenu::update(sf::RenderWindow& window)
 {
     playButton.update();
     exitButton.update();

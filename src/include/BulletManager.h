@@ -11,7 +11,7 @@ public:
     BulletManager(Ship& shootingObj, sf::RenderWindow& win);
     ~BulletManager() {}
 
-    void renderBullet();
+    void renderBullet(sf::RenderWindow& window);
     void updateBulletCount(Ship& ship);
     void bulletsMovement();
     void removeBullets(sf::CircleShape& enemy);

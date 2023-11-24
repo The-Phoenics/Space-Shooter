@@ -44,7 +44,7 @@ void Game::run()
                     this->m_introAudio.stop();
                     continue;
                 }
-                this->mainMenuState.update();
+                this->mainMenuState.update(window);
                 this->mainMenuState.render(window);
             }
             else
@@ -95,7 +95,7 @@ void Game::run()
                             this->reset();
                             continue;
                         }
-                        this->pauseState.update();
+                        this->pauseState.update(window);
                         this->pauseState.render(window);
                     } break;
 
