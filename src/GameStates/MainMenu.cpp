@@ -8,9 +8,9 @@ MainMenu::MainMenu(sf::RenderWindow& win)
     exitButText()
 {
     init();
-    m_background.setTexture (&TextureManager::get_background_texture());
-    playButton.setButtonText(TextureManager::get_playButton_texture());
-    exitButton.setButtonText(TextureManager::get_exitButton_texture());
+    m_background.setTexture (&TextureManager::getInstance().get_background_texture());
+    playButton.setButtonText(TextureManager::getInstance().get_playButton_texture());
+    exitButton.setButtonText(TextureManager::getInstance().get_exitButton_texture());
 }
 
 MainMenu::~MainMenu()

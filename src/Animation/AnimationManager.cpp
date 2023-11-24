@@ -26,7 +26,7 @@ void AnimationManager::createNewExplosionAnimators(std::stack<sf::Vector2f>& ene
 	while (!enemyDeathPositions.empty())
 	{
 		position = enemyDeathPositions.top();
-		m_explosionAnimators.emplace_back(TextureManager::get_explosion_texture(), 13, 1, position, 0.06f);
+		m_explosionAnimators.emplace_back(TextureManager::getInstance().get_explosion_texture(), 13, 1, position, 0.06f);
 		enemyDeathPositions.pop();
 	}
 }

@@ -3,23 +3,17 @@
 Game::Game(sf::RenderWindow& win)
     : window(win),
       m_ship         (50, 50, window),
-      m_enemyManager (),
       m_bulletManager(m_ship, window),
       mainMenuState  (win),
       pauseState     (win),
-      gameOverState  (),
-      m_enemyDeathPositions(),
-      m_introAudio(AudioManager::get_mainmenu_buffer(), 40.f),
-      m_gamePlayAudio(AudioManager::get_gameplay_buffer(), 40.f),
-      m_score(),
-      m_background(),
-      m_crosshair()
+      m_introAudio(AudioManager::getInstance().get_mainmenu_buffer(), 40.f),
+      m_gamePlayAudio(AudioManager::getInstance().get_gameplay_buffer(), 40.f)
 {
     sf::Vector2f pos(10.f, 45.f);
     m_score.setPosition(pos);
-    m_background.setTexture(&TextureManager::get_gameBackground_texture());
+    m_background.setTexture(&TextureManager::getInstance().get_gameBackground_texture());
     m_background.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
-    m_crosshair.setTexture(&TextureManager::get_crosshair_texture());
+    m_crosshair.setTexture(&TextureManager::getInstance().get_crosshair_texture());
     m_crosshair.setSize(sf::Vector2f(30.f, 30.f));
     this->window.setFramerateLimit(60);
 }
@@ -156,7 +150,7 @@ void Game::update()
 
         // add explosions audio when enemy dies
         if (!enemy.isAlive) {
-            this->m_explosionsAudio.emplace_back(Audio(AudioManager::get_explosion_buffer(), 8.f));
+            this->m_explosionsAudio.emplace_back(Audio(AudioManager::getInstance().get_explosion_buffer(), 8.f));
             this->m_score.increaseScore();
         }
     }

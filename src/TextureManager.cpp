@@ -1,19 +1,5 @@
 #include "include/TextureManager.h"
 
-sf::Texture TextureManager::shipText;
-sf::Texture TextureManager::bulletText;
-sf::Texture TextureManager::playButtonText;
-sf::Texture TextureManager::exitButtonText;
-sf::Texture TextureManager::resumeButtonText;
-sf::Texture TextureManager::quitButtonText;
-sf::Texture TextureManager::backgText;
-sf::Texture TextureManager::asteroidText;
-sf::Texture TextureManager::explosionText;
-sf::Texture TextureManager::soundEnableText;
-sf::Texture TextureManager::soundDisableText;
-sf::Texture TextureManager::backgroundText;
-sf::Texture TextureManager::crosshairText;
-
 void TextureManager::instantiate_textures()
 {
     shipText.loadFromFile(TEXT_RELATIVE_PATH_SHIP);

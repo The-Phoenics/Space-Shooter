@@ -11,7 +11,7 @@ Bullet::Bullet(Ship& ship, float radii)
     m_bullet.setRadius(10.f);
     m_bullet.setPosition(ship.getShip().getPosition());
     m_bullet.setOrigin(m_bullet.getRadius(), m_bullet.getRadius());
-    m_bullet.setTexture(&TextureManager::get_bullet_texture());
+    m_bullet.setTexture(&TextureManager::getInstance().get_bullet_texture());
     m_bullet.rotate(ship.getShip().getRotation());
 }
 

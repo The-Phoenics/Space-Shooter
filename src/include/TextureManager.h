@@ -20,38 +20,49 @@ constexpr const char* TEXT_RELATIVE_PATH_CROSSHAIR   = "../res/textures/crosshai
 class TextureManager
 {
 public:
-    static void instantiate_textures();
+    void instantiate_textures();
 
-    static const sf::Texture& get_ship_texture()             { return shipText;         }
-    static const sf::Texture& get_bullet_texture()           { return bulletText;       }
-    static const sf::Texture& get_playButton_texture()       { return playButtonText;   }
-    static const sf::Texture& get_exitButton_texture()       { return exitButtonText;   }
-    static const sf::Texture& get_resumeButton_texture()     { return resumeButtonText; }
-    static const sf::Texture& get_quitButton_texture()       { return quitButtonText;   }
-    static const sf::Texture& get_background_texture()       { return backgText;        }
-    static const sf::Texture& get_asteroid_texture()         { return asteroidText;     }
-    static       sf::Texture& get_explosion_texture()        { return explosionText;    }
-    static const sf::Texture& get_soundEnable_texture()      { return soundEnableText;  }
-    static const sf::Texture& get_soundDisable_texture()     { return soundDisableText; }
-    static const sf::Texture& get_gameBackground_texture()   { return backgroundText;   }
-    static const sf::Texture& get_crosshair_texture()        { return crosshairText;    }
+    static TextureManager& getInstance()
+    {
+        static TextureManager stextureManager;
+        return stextureManager;
+    }
+
+    const sf::Texture& get_ship_texture()             { return shipText;         }
+    const sf::Texture& get_bullet_texture()           { return bulletText;       }
+    const sf::Texture& get_playButton_texture()       { return playButtonText;   }
+    const sf::Texture& get_exitButton_texture()       { return exitButtonText;   }
+    const sf::Texture& get_resumeButton_texture()     { return resumeButtonText; }
+    const sf::Texture& get_quitButton_texture()       { return quitButtonText;   }
+    const sf::Texture& get_background_texture()       { return backgText;        }
+    const sf::Texture& get_asteroid_texture()         { return asteroidText;     }
+          sf::Texture& get_explosion_texture()        { return explosionText;    }
+    const sf::Texture& get_soundEnable_texture()      { return soundEnableText;  }
+    const sf::Texture& get_soundDisable_texture()     { return soundDisableText; }
+    const sf::Texture& get_gameBackground_texture()   { return backgroundText;   }
+    const sf::Texture& get_crosshair_texture()        { return crosshairText;    }
 
 public:
     static constexpr size_t EXPLOSION_TEXT_ROWS    = 1;
     static constexpr size_t EXPLOSION_TEXT_COLUMNS = 13;
 
 private:
-    static sf::Texture shipText;
-    static sf::Texture bulletText;
-    static sf::Texture playButtonText;
-    static sf::Texture exitButtonText;
-    static sf::Texture resumeButtonText;
-    static sf::Texture quitButtonText;
-    static sf::Texture backgText;
-    static sf::Texture asteroidText;
-    static sf::Texture explosionText;
-    static sf::Texture soundEnableText;
-    static sf::Texture soundDisableText;
-    static sf::Texture backgroundText;
-    static sf::Texture crosshairText;
+
+    TextureManager() {}
+    ~TextureManager() {}
+    TextureManager(const TextureManager&) = delete;
+
+    sf::Texture shipText;
+    sf::Texture bulletText;
+    sf::Texture playButtonText;
+    sf::Texture exitButtonText;
+    sf::Texture resumeButtonText;
+    sf::Texture quitButtonText;
+    sf::Texture backgText;
+    sf::Texture asteroidText;
+    sf::Texture explosionText;
+    sf::Texture soundEnableText;
+    sf::Texture soundDisableText;
+    sf::Texture backgroundText;
+    sf::Texture crosshairText;
 };

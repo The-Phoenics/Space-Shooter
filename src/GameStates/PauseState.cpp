@@ -42,12 +42,12 @@ void PauseState::update(sf::RenderWindow& window)
     if (soundOptionButton.isClicked()) {
         if (soundIsOn) {
             std::cout << "Disabling sound!\n";
-            soundOptionButton.setButtonText(TextureManager::get_soundDisable_texture());
+            soundOptionButton.setButtonText(TextureManager::getInstance().get_soundDisable_texture());
             soundIsOn = false;
         }
         else {
             std::cout << "Enabling sound!\n";
-            soundOptionButton.setButtonText(TextureManager::get_soundEnable_texture());
+            soundOptionButton.setButtonText(TextureManager::getInstance().get_soundEnable_texture());
             soundIsOn = true;
         }
     }
@@ -76,7 +76,7 @@ void PauseState::setup()
     soundOptionButton.setButtonPos(sf::Vector2f(WINDOW_WIDTH + 35, 0 + 40.f));
 
     // Load textures
-    resumeButton.setButtonText(TextureManager::get_resumeButton_texture());
-    quitButton.setButtonText  (TextureManager::get_quitButton_texture());
-    soundOptionButton.setButtonText(TextureManager::get_soundEnable_texture());
+    resumeButton.setButtonText(TextureManager::getInstance().get_resumeButton_texture());
+    quitButton.setButtonText  (TextureManager::getInstance().get_quitButton_texture());
+    soundOptionButton.setButtonText(TextureManager::getInstance().get_soundEnable_texture());
 }

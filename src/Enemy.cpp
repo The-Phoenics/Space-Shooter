@@ -57,7 +57,7 @@ void Enemy::init()
 	m_enemy.setRadius(m_size);
 	m_enemy.setPosition(pos);
 	m_enemy.setOrigin(sf::Vector2f(m_enemy.getRadius(), m_enemy.getRadius()));
-	m_enemy.setTexture(&TextureManager::get_asteroid_texture());
+	m_enemy.setTexture(&TextureManager::getInstance().get_asteroid_texture());
 }
 
 void Enemy::move()

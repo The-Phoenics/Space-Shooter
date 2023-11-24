@@ -15,7 +15,7 @@ Ship::Ship(sf::RenderWindow& win)
     m_ship.setPosition(MIDDLE_OF_SCREEN);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
-    m_ship.setTexture(&TextureManager::get_ship_texture());
+    m_ship.setTexture(&TextureManager::getInstance().get_ship_texture());
 }
 
 Ship::Ship(float width, float height, sf::RenderWindow& win)
@@ -36,7 +36,7 @@ Ship::Ship(float width, float height, sf::RenderWindow& win)
     m_ship.setPosition(MIDDLE_OF_SCREEN);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
-    m_ship.setTexture(&TextureManager::get_ship_texture());
+    m_ship.setTexture(&TextureManager::getInstance().get_ship_texture());
 }
 
 void Ship::initHpText()

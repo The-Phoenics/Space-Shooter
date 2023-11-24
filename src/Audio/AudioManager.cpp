@@ -1,9 +1,5 @@
 #include "AudioManager.h"
 
-sf::SoundBuffer AudioManager::mainMenuBuffer;
-sf::SoundBuffer AudioManager::explosionBuffer;
-sf::SoundBuffer AudioManager::gameplayBuffer;
-
 void AudioManager::instantiate_audio()
 {
     if (!mainMenuBuffer.loadFromFile(AUDIO_MAINMENU_PATH)) {
