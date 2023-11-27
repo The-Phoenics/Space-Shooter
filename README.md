@@ -1,5 +1,7 @@
 # Space-Shooter
 
+*Install game from *[here](https://the-prime.itch.io/space-shooter)**
+
 ## Controls
 - Move  : W A S D Keys
 - Fire  : Left Mouse Click
