@@ -2,7 +2,7 @@
 #include "Util.h"
 #include "TextureManager.h"
 
-#define M_PI 3.14
+#define PI 3.14
 
 Ship::Ship(sf::RenderWindow& win)
     : m_vel(sf::Vector2f(3.f, 3.f)),
@@ -140,7 +140,7 @@ float Ship::angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::
     sf::Vector2f hypot = mousePos - spritePos;
     sf::Vector2f base  = sf::Vector2f(mousePos.x, spritePos.y) - spritePos;
 
-    angle = std::atan2(hypot.y, base.x) * 180.0f / M_PI;
+    angle = std::atan2(hypot.y, base.x) * 180.0f / PI;
 
     angle > 180.f ? angle = 180.f - angle : angle = 180.f + angle;
     return angle;
