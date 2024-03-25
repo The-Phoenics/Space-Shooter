@@ -9,12 +9,14 @@ class MainMenu
 {
 public:
     MainMenu(sf::RenderWindow& win);
-    ~MainMenu();
-    
+    ~MainMenu() = default;
+
     void update(sf::RenderWindow& window);
     void render(sf::RenderWindow& window);
 
-    inline bool isPlayButtonClicked() { return playButton.isClicked(); }
+    bool isPlayButtonClicked(sf::RenderWindow& window) {
+        return playButton.isClicked(window);
+    }
 
 private:
     void init();

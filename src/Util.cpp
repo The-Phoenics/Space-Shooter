@@ -1,5 +1,6 @@
 #include "include/Util.h"
 #include <cmath>
+#include <SFML/System.hpp>
 
 sf::Vector2f operator+(sf::Vector2f& v1, sf::Vector2f& v2)
 {

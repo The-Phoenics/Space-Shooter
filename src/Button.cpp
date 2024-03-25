@@ -1,16 +1,16 @@
 #include "Button.h"
+#include "Util.h"
+#include <iostream>
 
-Button::Button(sf::RenderWindow& win)
-    : window(win),
-      m_timer(0.5f)
+Button::Button()
+    : m_timer(0.5f)
 {
     init();
     m_timer.start();
 }
 
-Button::Button(sf::RenderWindow& win, const sf::Texture& texture)
+Button::Button(const sf::Texture &texture)
     : buttonText(texture),
-      window(win),
       m_timer(0.5f)
 {
     init();
@@ -18,23 +18,31 @@ Button::Button(sf::RenderWindow& win, const sf::Texture& texture)
     m_timer.start();
 }
 
-Button::~Button()
+void Button::onFocus(sf::RenderWindow& window)
 {
+    if (isFocused(window))
+    {
+        sf::Vector2f pos = button.getPosition();
+        float scaleFactor = 0.05f;
+        button.setScale(1.f + scaleFactor, 1.f + scaleFactor);
+        button.setPosition({button.getPosition().x + button.getPosition().x * scaleFactor / 2.f, button.getPosition().y + button.getPosition().y * scaleFactor / 2.f});
+        button.setPosition(pos);
+        button.setFillColor(sf::Color::Cyan);
+    }
+    else
+    {
+        reset();
+    }
 }
 
-void Button::onFocus()
+bool Button::isClicked(sf::RenderWindow& window)
 {
-    sf::Vector2f pos = button.getPosition();
-    this->button.setScale(1.2f, 1.2f);
-    this->button.setPosition(pos);
-    this->button.setFillColor(sf::Color::Cyan);
-}
-
-bool Button::isClicked()
-{
-    if (m_timer.getElapsedTime() >= 0.6f) {
-        if (isFocused()) {
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+    if (m_timer.getElapsedTime() >= 0.6f)
+    {
+        if (isFocused(window))
+        {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
                 m_timer.reset();
                 return true;
             }
@@ -43,12 +51,10 @@ bool Button::isClicked()
     return false;
 }
 
-bool Button::isFocused()
+bool Button::isFocused(sf::RenderWindow& window)
 {
-    return (button.getGlobalBounds().contains(
-        sf::Mouse::getPosition(window).x,
-        sf::Mouse::getPosition(window).y)
-    );
+    sf::Vector2f mousePos = {sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y};
+    return button.getGlobalBounds().contains(mousePos);
 }
 
 void Button::init()
@@ -56,7 +62,7 @@ void Button::init()
     button = sf::RectangleShape();
     button.setPosition(sf::Vector2f(400, 300));
     button.setSize(sf::Vector2f(200.f, 50.f));
-    
+
     sf::Vector2f centre = sf::Vector2f(button.getSize().x / 2.f, button.getSize().x / 2.f);
     button.setOrigin(centre);
 }

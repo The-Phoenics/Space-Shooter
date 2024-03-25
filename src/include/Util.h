@@ -5,6 +5,8 @@
 
 #define PI 3.14159
 
+sf::Vector2i getMousePositionInWindow();
+
 sf::Vector2f operator+(sf::Vector2f& v1, sf::Vector2f& v2);
 
 sf::Vector2f operator-(sf::Vector2f& v1, sf::Vector2f& v2);

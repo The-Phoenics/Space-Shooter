@@ -9,20 +9,29 @@ class PauseState
 {
 public:
     PauseState(sf::RenderWindow& win);
-    ~PauseState();
+    ~PauseState() = default;
 
     void update(sf::RenderWindow& window);
     void render(sf::RenderWindow& window);
 
-    inline bool resumeButtonClicked() { return resumeButton.isClicked();      }
-    inline bool quitButtonClicked()   { return quitButton.isClicked();        }
-    inline bool soundButtonClicked()  { return soundOptionButton.isClicked(); }
+    bool resumeButtonClicked(sf::RenderWindow& window){
+        return resumeButton.isClicked(window);
+    }
+
+    bool quitButtonClicked(sf::RenderWindow& window)  {
+        return quitButton.isClicked(window);
+    }
+
+    bool soundButtonClicked(sf::RenderWindow& window) {
+        return soundOptionButton.isClicked(window);
+    }
+
 
 public:
     bool soundIsOn = true;
 
 private:
-    void setup();
+    void init();
 
 private:
     Button resumeButton;

@@ -34,3 +34,5 @@ run.sh
 
 # build directory
 build
+
+.vscode

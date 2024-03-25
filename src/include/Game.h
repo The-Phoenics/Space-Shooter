@@ -34,9 +34,12 @@ public:
 	void reset();
 
 private:
+	
+	void mainMenuStateUpdate();
+	
 	void processEvents();
 	void update();
-	void render(sf::RenderWindow& window);
+	void render(sf::RenderWindow& window, bool display = true);
 	void remove();
 
 public:

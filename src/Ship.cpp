@@ -21,7 +21,7 @@ Ship::Ship(sf::RenderWindow& win)
 }
 
 Ship::Ship(float width, float height, sf::RenderWindow& win)
-    : m_vel(sf::Vector2f(3.f, 3.f)),
+    : m_vel(sf::Vector2f(13.f, 3.f)),
       m_health(5),
       m_ship(),
       window(win),

@@ -1,11 +1,11 @@
 #include "Game.h"
 
-Game::Game(sf::RenderWindow& win)
+Game::Game(sf::RenderWindow &win)
     : window(win),
-      m_ship         (50, 50, window),
+      m_ship(50, 50, window),
       m_bulletManager(m_ship, window),
-      mainMenuState  (win),
-      pauseState     (win),
+      mainMenuState(win),
+      pauseState(win),
       m_introAudio(AudioManager::getInstance().get_mainmenu_buffer(), 40.f),
       m_gamePlayAudio(AudioManager::getInstance().get_gameplay_buffer(), 40.f)
 {
@@ -18,94 +18,109 @@ Game::Game(sf::RenderWindow& win)
     this->window.setFramerateLimit(60);
 }
 
+void Game::mainMenuStateUpdate()
+{
+    m_introAudio.play(); // MUSIC
+    if (mainMenuState.isPlayButtonClicked(window))
+    {
+        this->isInMainMenuState = false;
+        this->m_introAudio.stop();
+    }
+    else
+    {
+        this->mainMenuState.update(window);
+        this->mainMenuState.render(window);
+    }
+}
+
 void Game::run()
 {
     gamePlayState = Playing;
-
-    while (window.isOpen())
+    while (window.hasFocus() && window.isOpen())
     {
-        // only run the game is window/game has focus
-        if (window.hasFocus()) 
-        {
-            // polling events
-            this->processEvents();
+        // polling events
+        this->processEvents();
 
-            if (isInMainMenuState)
+        if (isInMainMenuState)
+        {
+            this->mainMenuStateUpdate();
+        }
+        else
+        {
+            switch (gamePlayState)
             {
-                m_introAudio.play(); // MUSIC
-                if (mainMenuState.isPlayButtonClicked()) {
-                    this->isInMainMenuState = false;
-                    this->m_introAudio.stop();
+            case Playing:
+            {
+                window.setMouseCursorVisible(false);
+                // switch to gameOverState
+                if (!m_ship.isAlive)
+                {
+                    gamePlayState = GameOver;
+                    m_gamePlayAudio.stop();
+                    window.setMouseCursorVisible(true);
                     continue;
                 }
-                this->mainMenuState.update(window);
-                this->mainMenuState.render(window);
-            }
-            else
-            {
-                switch (gamePlayState)
+
+                // Gameplay
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
-                    case Playing:
-                    {
-                        window.setMouseCursorVisible(false);
-                        // switch to gameOverState
-                        if (!m_ship.isAlive) {
-                            gamePlayState = GameOver;
-                            m_gamePlayAudio.stop();
-                            window.setMouseCursorVisible(true);
-                            continue;
-                        }
-    
-                        // Gameplay 
-                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                            this->gamePlayState = Paused;
-                            this->m_gamePlayAudio.pause();
-                            window.setMouseCursorVisible(true);
-                            continue;
-                        }
-                        if (pauseState.soundIsOn) {
-                            if (!m_gamePlayAudio.isPlaying()) {
-                                m_gamePlayAudio.play();
-                            }
-                        }
-                        this->update();
-                        this->remove();
-                        this->render(window);
-                    } break;
-
-                    case Paused:
-                    {
-                        if (pauseState.resumeButtonClicked()) {
-                            this->gamePlayState = Playing;
-                            if (pauseState.soundIsOn) {
-                                this->m_gamePlayAudio.resume();
-                            }
-                            continue;
-                        }
-                        if (pauseState.quitButtonClicked()) {
-                            this->isInMainMenuState = true;
-                            this->gamePlayState = Playing;
-                            this->m_gamePlayAudio.stop();
-                            this->reset();
-                            continue;
-                        }
-                        this->pauseState.update(window);
-                        this->pauseState.render(window);
-                    } break;
-
-                    case GameOver:
-                    {
-                        // restart the game
-                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-                            this->reset();
-                            gamePlayState = Playing;
-                            continue;
-                        }
-                        this->gameOverState.update();
-                        this->gameOverState.render(window);
-                    } break;
-                };
+                    this->gamePlayState = Paused;
+                    this->m_gamePlayAudio.pause();
+                    window.setMouseCursorVisible(true);
+                    continue;
+                }
+                if (pauseState.soundIsOn)
+                {
+                    if (!m_gamePlayAudio.isPlaying())
+                        m_gamePlayAudio.play();
+                }
+                this->update();
+                this->remove();
+                this->render(window);
             }
+            break;
+
+            case Paused:
+            {
+                if (pauseState.resumeButtonClicked(window))
+                {
+                    this->gamePlayState = Playing;
+                    if (pauseState.soundIsOn)
+                    {
+                        this->m_gamePlayAudio.resume();
+                    }
+                    continue;
+                }
+                if (pauseState.quitButtonClicked(window))
+                {
+                    this->isInMainMenuState = true;
+                    this->gamePlayState = Playing;
+                    this->m_gamePlayAudio.stop();
+                    this->reset();
+                    continue;
+                }
+                this->render(window, false);
+                this->pauseState.update(window);
+                this->pauseState.render(window);
+            }
+            break;
+
+            case GameOver:
+            {
+                // restart the game
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+                {
+                    this->reset();
+                    gamePlayState = Playing;
+                }
+                else
+                {
+                    this->gameOverState.update();
+                    this->gameOverState.render(window);
+                }
+            }
+            break;
+            };
         }
     }
 }
@@ -130,18 +145,24 @@ void Game::update()
     this->m_bulletManager.update();
 
     // reduce enemy health at bullet hit
-    for (auto& bullet : m_bulletManager.m_bullets) {
-        for (auto& enemy : m_enemyManager.m_enemies) {
-            if (isColliding(bullet.getBullet(), enemy.getEnemy())) {
+    for (auto &bullet : m_bulletManager.m_bullets)
+    {
+        for (auto &enemy : m_enemyManager.m_enemies)
+        {
+            if (isColliding(bullet.getBullet(), enemy.getEnemy()))
+            {
                 enemy.reduceHealth();
             }
         }
     }
 
-    for (auto& enemy : m_enemyManager.m_enemies) {
+    for (auto &enemy : m_enemyManager.m_enemies)
+    {
         // damage ship if it collides with rocks
-        if (isColliding(m_ship.getShip(), enemy.getEnemy())) {
-            if (m_ship.isAlive) {
+        if (isColliding(m_ship.getShip(), enemy.getEnemy()))
+        {
+            if (m_ship.isAlive)
+            {
                 this->m_ship.reduceHealth();
             }
             enemy.isAlive = false;
@@ -149,14 +170,16 @@ void Game::update()
         }
 
         // add explosions audio when enemy dies
-        if (!enemy.isAlive) {
+        if (!enemy.isAlive)
+        {
             this->m_explosionsAudio.emplace_back(Audio(AudioManager::getInstance().get_explosion_buffer(), 8.f));
             this->m_score.increaseScore();
         }
     }
 
     // play explosions audios
-    for (auto& explAudio : this->m_explosionsAudio) {
+    for (auto &explAudio : this->m_explosionsAudio)
+    {
         if (!explAudio.isPlaying())
             explAudio.play();
     }
@@ -170,7 +193,7 @@ void Game::update()
 }
 
 // Render Game
-void Game::render(sf::RenderWindow& window)
+void Game::render(sf::RenderWindow &window, bool display)
 {
     this->window.clear();
 
@@ -182,14 +205,16 @@ void Game::render(sf::RenderWindow& window)
     this->m_score.render(window);
     window.draw(this->m_crosshair);
 
-    this->window.display();
+    if (display)
+        this->window.display();
 }
 
 // Remove entities
 void Game::remove()
 {
     // remove enemies
-    for (auto& enemy : this->m_enemyManager.m_enemies) {
+    for (auto &enemy : this->m_enemyManager.m_enemies)
+    {
         m_bulletManager.removeBullets(enemy.getEnemy());
     }
 
@@ -199,11 +224,9 @@ void Game::remove()
 
     // remove explosion audios
     this->m_explosionsAudio.erase(
-        std::remove_if(m_explosionsAudio.begin(), m_explosionsAudio.end(), [&](Audio& ea) {
-            return !ea.isPlaying();
-        }),
-        m_explosionsAudio.end()
-    );
+        std::remove_if(m_explosionsAudio.begin(), m_explosionsAudio.end(), [&](Audio &ea)
+                       { return !ea.isPlaying(); }),
+        m_explosionsAudio.end());
 }
 
 // Reset the game

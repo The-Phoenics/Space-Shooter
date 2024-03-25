@@ -5,29 +5,31 @@
 class Button
 {
 public:
-    Button(sf::RenderWindow& win);
-    Button(sf::RenderWindow& win, const sf::Texture& texture);
-    ~Button();
+    Button();
+    Button(const sf::Texture& texture);
+    ~Button() = default;
 
     void init();
     void reset();
-    bool isClicked();
-    bool isFocused();
+    bool isClicked(sf::RenderWindow& window);
+    bool isFocused(sf::RenderWindow& window);
 
     sf::RectangleShape& getButton() { return this->button; }
 
-    inline void setButtonPos (const sf::Vector2f& pos)    { button.setPosition(pos); }
-    inline void setButtonText(const sf::Texture& texture) { button.setTexture(&texture); }
-    inline void setButtonSize(const sf::Vector2f& size)   { button.setSize(size); }
+    void setButtonPos (const sf::Vector2f& pos)    { button.setPosition(pos); }
+    void setButtonText(const sf::Texture& texture) { button.setTexture(&texture); }
+    void setButtonSize(const sf::Vector2f& size)   { button.setSize(size); }
 
-    inline void update() { m_timer.update(); }
-    inline void render() { window.draw(this->button); }
+    void update() {
+        m_timer.update();
+    }
+    void render(sf::RenderWindow& window) {
+        window.draw(button);
+    }
 
-    void onFocus();
-    void fadeOut();
+    void onFocus(sf::RenderWindow& window);
 
 private:
-    sf::RenderWindow& window;
     sf::RectangleShape button;
     sf::Texture buttonText;
 

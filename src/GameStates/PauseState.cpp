@@ -1,15 +1,11 @@
 #include "PauseState.h"
 
 PauseState::PauseState(sf::RenderWindow& win)
-    : resumeButton(win),
-      quitButton(win),
-      soundOptionButton(win)
+    : resumeButton(),
+      quitButton(),
+      soundOptionButton()
 {
-    setup();
-}
-
-PauseState::~PauseState()
-{
+    init();
 }
 
 void PauseState::update(sf::RenderWindow& window)
@@ -18,58 +14,42 @@ void PauseState::update(sf::RenderWindow& window)
     quitButton.update();
     soundOptionButton.update();
 
-    if (resumeButton.isFocused()) {
-        resumeButton.onFocus();
-    } else {
-        resumeButton.reset();
-    }
+    resumeButton.onFocus(window);
+    quitButton.onFocus(window);
 
-    if (quitButton.isFocused()) {
-        quitButton.onFocus();
-    } else {
-        quitButton.reset();
-    }
-    
-    if (resumeButton.isClicked()) {
-        std::cout << "Resume clicked!\n";
-    }
-
-    if (quitButton.isClicked()) {
-        std::cout << "Quit clicked!\n";
+    if (quitButton.isClicked(window)) {
         window.close();
     }
 
-    if (soundOptionButton.isClicked()) {
-        if (soundIsOn) {
-            std::cout << "Disabling sound!\n";
-            soundOptionButton.setButtonText(TextureManager::getInstance().get_soundDisable_texture());
-            soundIsOn = false;
-        }
-        else {
-            std::cout << "Enabling sound!\n";
+    if (soundOptionButton.isClicked(window)) {
+        soundIsOn = !soundIsOn;
+        if (soundIsOn)
             soundOptionButton.setButtonText(TextureManager::getInstance().get_soundEnable_texture());
-            soundIsOn = true;
-        }
+        else
+            soundOptionButton.setButtonText(TextureManager::getInstance().get_soundDisable_texture());
     }
 }
 
 void PauseState::render(sf::RenderWindow& window)
 {
-    window.clear();
-    resumeButton.render();
-    quitButton.render();
-    soundOptionButton.render();
+    // window.clear();
+    resumeButton.render(window);
+    quitButton.render(window);
+    soundOptionButton.render(window);
     window.display();
 }
 
-void PauseState::setup()
+void PauseState::init()
 {
-    sf::Vector2f centre(MIDDLE_OF_SCREEN.x, MIDDLE_OF_SCREEN.y - 50.f);
+    sf::Vector2f buttonSize = { 80.f, 80.f };
+    sf::Vector2f centre(MIDDLE_OF_SCREEN.x, MIDDLE_OF_SCREEN.y);
+    resumeButton.getButton().setSize(buttonSize);
     resumeButton.getButton().setOrigin(sf::Vector2f(resumeButton.getButton().getSize() / 2.f));
-    resumeButton.setButtonPos(centre);
+    resumeButton.setButtonPos({centre.x - buttonSize.x / 1.5f, centre.y});
 
+    quitButton.getButton().setSize(buttonSize);
     quitButton.getButton().setOrigin(quitButton.getButton().getSize() / 2.f);
-    quitButton.setButtonPos(sf::Vector2f(resumeButton.getButton().getPosition().x - 10.f, resumeButton.getButton().getPosition().y + 100));
+    quitButton.setButtonPos({centre.x + buttonSize.x / 1.5f, centre.y});
 
     soundOptionButton.getButton().setOrigin(soundOptionButton.getButton().getSize() / 2.f);
     soundOptionButton.setButtonSize(sf::Vector2f(45.f, 45.f));
