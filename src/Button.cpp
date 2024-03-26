@@ -53,7 +53,10 @@ bool Button::isClicked(sf::RenderWindow& window)
 
 bool Button::isFocused(sf::RenderWindow& window)
 {
-    sf::Vector2f mousePos = {sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y};
+    sf::Vector2f mousePos = {
+        static_cast<float>(sf::Mouse::getPosition(window).x),
+        static_cast<float>(sf::Mouse::getPosition(window).y)
+    };
     return button.getGlobalBounds().contains(mousePos);
 }
 
