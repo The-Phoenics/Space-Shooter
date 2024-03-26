@@ -16,6 +16,8 @@ constexpr const char* TEXT_RELATIVE_SOUND_ENABLE     = "../res/textures/soundEna
 constexpr const char* TEXT_RELATIVE_SOUND_DISABLE    = "../res/textures/soundDisable.png";
 constexpr const char* TEXT_RELATIVE_PATH_BACKGROUND  = "../res/textures/spacebackground.png";
 constexpr const char* TEXT_RELATIVE_PATH_CROSSHAIR   = "../res/textures/crosshair.png";
+constexpr const char* TEXT_RELATIVE_PATH_HBAR        = "../res/textures/hbar.png";
+constexpr const char* TEXT_RELATIVE_PATH_BARBORDER   = "../res/textures/barborder.png";
 
 class TextureManager
 {
@@ -41,6 +43,8 @@ public:
     const sf::Texture& get_soundDisable_texture()     { return soundDisableText; }
     const sf::Texture& get_gameBackground_texture()   { return backgroundText;   }
     const sf::Texture& get_crosshair_texture()        { return crosshairText;    }
+          sf::Texture& get_barborder_texture()        { return barBorderText;    }
+          sf::Texture& get_hbar_texture()             { return hbarText;         }
 
 public:
     static constexpr size_t EXPLOSION_TEXT_ROWS    = 1;
@@ -65,4 +69,6 @@ private:
     sf::Texture soundDisableText;
     sf::Texture backgroundText;
     sf::Texture crosshairText;
+    sf::Texture barBorderText;
+    sf::Texture hbarText;
 };

@@ -1,28 +1,28 @@
 #include "Score.h"
+#include "DEFINES.h"
 
 Score::Score()
     : m_text(),
       m_font()
 {
     init();
-    sf::Vector2f pos(0 + 30.f, 0 + 30.f);
-    m_text.setPosition(pos);
-    m_text.setCharacterSize(TEXT_SIZE);
+    m_text.setPosition({25.f, 10.f});
+    m_text.setCharacterSize(30.f);
 }
 
 void Score::init()
 {
-    if (!m_font.loadFromFile(PATH_TO_FONT)) {
+    if (!m_font.loadFromFile("../res/font/GAMERIA.ttf")) {
         std::cout << "Failed to load font\n";
     }
-    
+
     m_text.setFont(m_font);
-    m_text.setString("Score  " + std::to_string(m_score));
+    m_text.setString(std::to_string(m_score));
 }
 
 void Score::update()
 {
-    m_text.setString("Score  " + std::to_string(m_score));
+    m_text.setString(std::to_string(m_score));
 }
 
 void Score:: render(sf::RenderWindow& window)

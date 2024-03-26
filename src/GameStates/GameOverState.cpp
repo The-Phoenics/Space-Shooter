@@ -7,7 +7,7 @@ GameOverState::GameOverState()
 
 void GameOverState::init()
 {
-    if (!m_gameOverFont.loadFromFile(PATH_TO_FONT)) {
+    if (!m_gameOverFont.loadFromFile("../res/font/GAMERIA.ttf")) {
         std::cout << "Failed to load font\n";
     }
 

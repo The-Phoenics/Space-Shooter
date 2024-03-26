@@ -10,12 +10,11 @@ class Score
 {    
 public:
     Score();
-    ~Score() { }
+    ~Score() = default;
 
     void init();
-
     void update();
-    void  render(sf::RenderWindow& window);
+    void render(sf::RenderWindow& window);
     void reset();
 
     void increaseScore(int n = 5) { m_score += n; }
@@ -25,7 +24,7 @@ public:
     sf::Vector2f getPosition() const { return m_text.getPosition(); }
 
 private:
-    unsigned int m_score { 0 };
+    unsigned int m_score = 0;
     sf::Text m_text;
     sf::Font m_font;
 };

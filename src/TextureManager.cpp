@@ -15,4 +15,6 @@ void TextureManager::instantiate_textures()
     soundDisableText.loadFromFile(TEXT_RELATIVE_SOUND_DISABLE);
     backgroundText.loadFromFile(TEXT_RELATIVE_PATH_BACKGROUND);
     crosshairText.loadFromFile(TEXT_RELATIVE_PATH_CROSSHAIR);
+    barBorderText.loadFromFile(TEXT_RELATIVE_PATH_BARBORDER);
+    hbarText.loadFromFile(TEXT_RELATIVE_PATH_HBAR);
 }

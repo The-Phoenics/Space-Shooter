@@ -9,12 +9,10 @@ Game::Game(sf::RenderWindow &win)
       m_introAudio(AudioManager::getInstance().get_mainmenu_buffer(), 40.f),
       m_gamePlayAudio(AudioManager::getInstance().get_gameplay_buffer(), 40.f)
 {
-    sf::Vector2f pos(10.f, 45.f);
-    m_score.setPosition(pos);
     m_background.setTexture(&TextureManager::getInstance().get_gameBackground_texture());
     m_background.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
     m_crosshair.setTexture(&TextureManager::getInstance().get_crosshair_texture());
-    m_crosshair.setSize(sf::Vector2f(30.f, 30.f));
+    m_crosshair.setSize(sf::Vector2f(15.f, 15.f));
     this->window.setFramerateLimit(60);
 }
 
@@ -36,91 +34,94 @@ void Game::mainMenuStateUpdate()
 void Game::run()
 {
     gamePlayState = Playing;
-    while (window.hasFocus() && window.isOpen())
+    while (window.isOpen())
     {
-        // polling events
-        this->processEvents();
-
-        if (isInMainMenuState)
+        if (window.hasFocus())
         {
-            this->mainMenuStateUpdate();
-        }
-        else
-        {
-            switch (gamePlayState)
-            {
-            case Playing:
-            {
-                window.setMouseCursorVisible(false);
-                // switch to gameOverState
-                if (!m_ship.isAlive)
-                {
-                    gamePlayState = GameOver;
-                    m_gamePlayAudio.stop();
-                    window.setMouseCursorVisible(true);
-                    continue;
-                }
+            // polling events
+            this->processEvents();
 
-                // Gameplay
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                {
-                    this->gamePlayState = Paused;
-                    this->m_gamePlayAudio.pause();
-                    window.setMouseCursorVisible(true);
-                    continue;
-                }
-                if (pauseState.soundIsOn)
-                {
-                    if (!m_gamePlayAudio.isPlaying())
-                        m_gamePlayAudio.play();
-                }
-                this->update();
-                this->remove();
-                this->render(window);
+            if (isInMainMenuState)
+            {
+                this->mainMenuStateUpdate();
             }
-            break;
-
-            case Paused:
+            else
             {
-                if (pauseState.resumeButtonClicked(window))
+                switch (gamePlayState)
                 {
-                    this->gamePlayState = Playing;
+                case Playing:
+                {
+                    window.setMouseCursorVisible(false);
+                    // switch to gameOverState
+                    if (!m_ship.isAlive)
+                    {
+                        gamePlayState = GameOver;
+                        m_gamePlayAudio.stop();
+                        window.setMouseCursorVisible(true);
+                        continue;
+                    }
+
+                    // Gameplay
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                    {
+                        this->gamePlayState = Paused;
+                        this->m_gamePlayAudio.pause();
+                        window.setMouseCursorVisible(true);
+                        continue;
+                    }
                     if (pauseState.soundIsOn)
                     {
-                        this->m_gamePlayAudio.resume();
+                        if (!m_gamePlayAudio.isPlaying())
+                            m_gamePlayAudio.play();
                     }
-                    continue;
+                    this->update();
+                    this->remove();
+                    this->render(window);
                 }
-                if (pauseState.quitButtonClicked(window))
-                {
-                    this->isInMainMenuState = true;
-                    this->gamePlayState = Playing;
-                    this->m_gamePlayAudio.stop();
-                    this->reset();
-                    continue;
-                }
-                this->render(window, false);
-                this->pauseState.update(window);
-                this->pauseState.render(window);
-            }
-            break;
+                break;
 
-            case GameOver:
-            {
-                // restart the game
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+                case Paused:
                 {
-                    this->reset();
-                    gamePlayState = Playing;
+                    if (pauseState.resumeButtonClicked(window))
+                    {
+                        this->gamePlayState = Playing;
+                        if (pauseState.soundIsOn)
+                        {
+                            this->m_gamePlayAudio.resume();
+                        }
+                        continue;
+                    }
+                    if (pauseState.quitButtonClicked(window))
+                    {
+                        this->isInMainMenuState = true;
+                        this->gamePlayState = Playing;
+                        this->m_gamePlayAudio.stop();
+                        this->reset();
+                        continue;
+                    }
+                    this->render(window, false);
+                    this->pauseState.update(window);
+                    this->pauseState.render(window);
                 }
-                else
+                break;
+
+                case GameOver:
                 {
-                    this->gameOverState.update();
-                    this->gameOverState.render(window);
+                    // restart the game
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+                    {
+                        this->reset();
+                        gamePlayState = Playing;
+                    }
+                    else
+                    {
+                        this->gameOverState.update();
+                        this->gameOverState.render(window);
+                    }
                 }
+                break;
+                };
             }
-            break;
-            };
         }
     }
 }
@@ -140,7 +141,7 @@ void Game::update()
 {
     m_crosshair.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
-    this->m_ship.update();
+    this->m_ship.update(window);
     this->m_enemyManager.update();
     this->m_bulletManager.update();
 
@@ -201,7 +202,7 @@ void Game::render(sf::RenderWindow &window, bool display)
     this->m_bulletManager.render(window);
     this->m_animationManager.render(window);
     this->m_enemyManager.render(window);
-    this->m_ship.render();
+    this->m_ship.render(window);
     this->m_score.render(window);
     window.draw(this->m_crosshair);
 
@@ -224,9 +225,11 @@ void Game::remove()
 
     // remove explosion audios
     this->m_explosionsAudio.erase(
-        std::remove_if(m_explosionsAudio.begin(), m_explosionsAudio.end(), [&](Audio &ea)
-                       { return !ea.isPlaying(); }),
-        m_explosionsAudio.end());
+        std::remove_if(m_explosionsAudio.begin(), m_explosionsAudio.end(), [](Audio& ea) {
+            return !ea.isPlaying(); 
+        }),
+        m_explosionsAudio.end()
+    );
 }
 
 // Reset the game
