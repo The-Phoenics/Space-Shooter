@@ -58,6 +58,21 @@ sf::Vector2f operator/(sf::Vector2f& v, float n)
     return resultDiv;
 }
 
+float clamp(float min, float max, float value)
+{
+    bool isNegative = value < 0.f ? true : false; 
+    int retVal = std::abs(value);;
+    if (value < min)
+        retVal = min;
+    else if (value > max)
+        retVal = max;
+    
+    if (isNegative) {
+        return -1 * retVal;
+    }
+    return retVal;
+}
+
 sf::Vector2f calcPointAfterRotation(Ship& ship, float rotationAngle)
 {
     sf::Vector2f center(ship.getShip().getPosition());

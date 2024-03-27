@@ -2,12 +2,14 @@
 
 Game::Game(sf::RenderWindow &win)
     : window(win),
+      event(),
       m_ship(50, 50, window),
       m_bulletManager(m_ship, window),
       mainMenuState(win),
       pauseState(win),
-      m_introAudio(AudioManager::getInstance().get_mainmenu_buffer(), 40.f),
-      m_gamePlayAudio(AudioManager::getInstance().get_gameplay_buffer(), 40.f)
+      m_introAudio(AudioManager::getInstance().get_mainmenu_buffer(), 7.f),
+      m_gamePlayAudio(AudioManager::getInstance().get_gameplay_buffer(), 7.f),
+      c_explosionAudioValue(6.f)
 {
     m_background.setTexture(&TextureManager::getInstance().get_gameBackground_texture());
     m_background.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
@@ -36,11 +38,10 @@ void Game::run()
     gamePlayState = Playing;
     while (window.isOpen())
     {
-        if (window.hasFocus())
+        // polling events
+        if (true)
         {
-            // polling events
-            this->processEvents();
-
+            this->processEvents(event);
             if (isInMainMenuState)
             {
                 this->mainMenuStateUpdate();
@@ -126,22 +127,29 @@ void Game::run()
     }
 }
 
-void Game::processEvents()
+void Game::processEvents(sf::Event& event)
 {
-    sf::Event event;
     while (this->window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
             this->window.close();
+        
+        
+        m_ship.inputHandler(event);
+
+        if (event.type == sf::Event::MouseMoved) {
+            m_crosshair.setPosition(
+                sf::Mouse::getPosition(window).x,
+                sf::Mouse::getPosition(window).y
+            );
+        }
     }
 }
 
 // Update Game
 void Game::update()
 {
-    m_crosshair.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-
-    this->m_ship.update(window);
+    this->m_ship.update(window, event);
     this->m_enemyManager.update();
     this->m_bulletManager.update();
 
@@ -173,7 +181,7 @@ void Game::update()
         // add explosions audio when enemy dies
         if (!enemy.isAlive)
         {
-            this->m_explosionsAudio.emplace_back(Audio(AudioManager::getInstance().get_explosion_buffer(), 8.f));
+            this->m_explosionsAudio.emplace_back(Audio(AudioManager::getInstance().get_explosion_buffer(), c_explosionAudioValue));
             this->m_score.increaseScore();
         }
     }

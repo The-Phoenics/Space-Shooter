@@ -21,7 +21,7 @@ class Game
 {
 public:
 	Game(sf::RenderWindow& window);
-	~Game() { }
+	~Game() = default;
 
 	enum PlayState
 	{
@@ -37,7 +37,7 @@ private:
 	
 	void mainMenuStateUpdate();
 	
-	void processEvents();
+	void processEvents(sf::Event& event);
 	void update();
 	void render(sf::RenderWindow& window, bool display = true);
 	void remove();
@@ -47,6 +47,7 @@ public:
 
 private:
 	sf::RenderWindow& window;
+	sf::Event event;
 	sf::RectangleShape m_crosshair;
 
     Ship  m_ship;
@@ -67,6 +68,7 @@ private:
 	Audio m_introAudio;
 	std::vector<Audio> m_explosionsAudio;
 	Audio m_gamePlayAudio;
+	float c_explosionAudioValue;
 
 	// Scrore instance
 	Score m_score;

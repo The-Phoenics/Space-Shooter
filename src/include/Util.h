@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
 #include <iostream>
@@ -20,6 +21,8 @@ sf::Vector2f operator-(sf::Vector2f& v, float n);
 sf::Vector2f operator/(sf::Vector2f& v, float n);
 
 sf::Vector2f operator*(sf::Vector2f& v, float n);
+
+float clamp(float min, float max, float value);
 
 sf::Vector2f calcPointAfterRotation(Ship& ship, float rotationAngle);
 
