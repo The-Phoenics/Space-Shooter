@@ -18,6 +18,7 @@ constexpr const char* TEXT_RELATIVE_PATH_BACKGROUND  = "../res/textures/spacebac
 constexpr const char* TEXT_RELATIVE_PATH_CROSSHAIR   = "../res/textures/crosshair.png";
 constexpr const char* TEXT_RELATIVE_PATH_HBAR        = "../res/textures/hbar.png";
 constexpr const char* TEXT_RELATIVE_PATH_BARBORDER   = "../res/textures/barborder.png";
+constexpr const char* TEXT_RELATIVE_PATH_STARS       = "../res/textures/stars.png";
 
 class TextureManager
 {
@@ -30,21 +31,22 @@ public:
         return stextureManager;
     }
 
-    const sf::Texture& get_ship_texture()             { return shipText;         }
-    const sf::Texture& get_bullet_texture()           { return bulletText;       }
-    const sf::Texture& get_playButton_texture()       { return playButtonText;   }
-    const sf::Texture& get_exitButton_texture()       { return exitButtonText;   }
-    const sf::Texture& get_resumeButton_texture()     { return resumeButtonText; }
-    const sf::Texture& get_quitButton_texture()       { return quitButtonText;   }
-    const sf::Texture& get_background_texture()       { return backgText;        }
-    const sf::Texture& get_asteroid_texture()         { return asteroidText;     }
-          sf::Texture& get_explosion_texture()        { return explosionText;    }
-    const sf::Texture& get_soundEnable_texture()      { return soundEnableText;  }
-    const sf::Texture& get_soundDisable_texture()     { return soundDisableText; }
-    const sf::Texture& get_gameBackground_texture()   { return backgroundText;   }
-    const sf::Texture& get_crosshair_texture()        { return crosshairText;    }
-          sf::Texture& get_barborder_texture()        { return barBorderText;    }
-          sf::Texture& get_hbar_texture()             { return hbarText;         }
+    sf::Texture& get_ship_texture()             { return shipText;         }
+    sf::Texture& get_bullet_texture()           { return bulletText;       }
+    sf::Texture& get_playButton_texture()       { return playButtonText;   }
+    sf::Texture& get_exitButton_texture()       { return exitButtonText;   }
+    sf::Texture& get_resumeButton_texture()     { return resumeButtonText; }
+    sf::Texture& get_quitButton_texture()       { return quitButtonText;   }
+    sf::Texture& get_background_texture()       { return backgText;        }
+    sf::Texture& get_asteroid_texture()         { return asteroidText;     }
+    sf::Texture& get_explosion_texture()        { return explosionText;    }
+    sf::Texture& get_soundEnable_texture()      { return soundEnableText;  }
+    sf::Texture& get_soundDisable_texture()     { return soundDisableText; }
+    sf::Texture& get_gameBackground_texture()   { return backgroundText;   }
+    sf::Texture& get_crosshair_texture()        { return crosshairText;    }
+    sf::Texture& get_barborder_texture()        { return barBorderText;    }
+    sf::Texture& get_hbar_texture()             { return hbarText;         }
+    sf::Texture& get_stars_texture()            { return starsText;        }
 
 public:
     static constexpr size_t EXPLOSION_TEXT_ROWS    = 1;
@@ -71,4 +73,5 @@ private:
     sf::Texture crosshairText;
     sf::Texture barBorderText;
     sf::Texture hbarText;
+    sf::Texture starsText;
 };

@@ -36,7 +36,6 @@ void PauseState::render(sf::RenderWindow& window)
     resumeButton.render(window);
     quitButton.render(window);
     soundOptionButton.render(window);
-    window.display();
 }
 
 void PauseState::init()

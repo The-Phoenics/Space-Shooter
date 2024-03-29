@@ -31,7 +31,6 @@ void MainMenu::update(sf::RenderWindow& window)
     exitButton.onFocus(window);
 
     if (exitButton.isClicked(window)) {
-        std::cout << "Exiting game!\n";
         window.close();
     }
 }
@@ -42,5 +41,4 @@ void MainMenu::render(sf::RenderWindow& window)
     window.draw(m_background);
     playButton.render(window);
     exitButton.render(window);
-    window.display();
 }

@@ -2,6 +2,7 @@
 
 Game::Game(sf::RenderWindow &win)
     : window(win),
+      is_window_active(true),
       event(),
       m_ship(50, 50, window),
       m_bulletManager(m_ship, window),
@@ -11,16 +12,19 @@ Game::Game(sf::RenderWindow &win)
       m_gamePlayAudio(AudioManager::getInstance().get_gameplay_buffer(), 7.f),
       c_explosionAudioValue(6.f)
 {
+    m_stars.setTexture(&TextureManager::getInstance().get_stars_texture());
+    m_stars.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
+    // m_stars.setFillColor(sf::Color());
     m_background.setTexture(&TextureManager::getInstance().get_gameBackground_texture());
     m_background.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
     m_crosshair.setTexture(&TextureManager::getInstance().get_crosshair_texture());
-    m_crosshair.setSize(sf::Vector2f(15.f, 15.f));
-    this->window.setFramerateLimit(60);
+    m_crosshair.setSize(sf::Vector2f(17.f, 17.f));
+    window.setFramerateLimit(60);
 }
 
 void Game::mainMenuStateUpdate()
 {
-    m_introAudio.play(); // MUSIC
+    m_introAudio.play();
     if (mainMenuState.isPlayButtonClicked(window))
     {
         this->isInMainMenuState = false;
@@ -30,6 +34,8 @@ void Game::mainMenuStateUpdate()
     {
         this->mainMenuState.update(window);
         this->mainMenuState.render(window);
+        window.draw(m_crosshair);
+        window.display();
     }
 }
 
@@ -39,12 +45,14 @@ void Game::run()
     while (window.isOpen())
     {
         // polling events
-        if (true)
+        this->processEvents(event);
+        if (is_window_active)
         {
-            this->processEvents(event);
+            window.setMouseCursorVisible(false);
             if (isInMainMenuState)
             {
                 this->mainMenuStateUpdate();
+                window.draw(this->m_crosshair);
             }
             else
             {
@@ -52,13 +60,11 @@ void Game::run()
                 {
                 case Playing:
                 {
-                    window.setMouseCursorVisible(false);
                     // switch to gameOverState
                     if (!m_ship.isAlive)
                     {
                         gamePlayState = GameOver;
                         m_gamePlayAudio.stop();
-                        window.setMouseCursorVisible(true);
                         continue;
                     }
 
@@ -67,7 +73,6 @@ void Game::run()
                     {
                         this->gamePlayState = Paused;
                         this->m_gamePlayAudio.pause();
-                        window.setMouseCursorVisible(true);
                         continue;
                     }
                     if (pauseState.soundIsOn)
@@ -103,6 +108,8 @@ void Game::run()
                     this->render(window, false);
                     this->pauseState.update(window);
                     this->pauseState.render(window);
+                    window.draw(this->m_crosshair);
+                    window.display();
                 }
                 break;
 
@@ -118,6 +125,8 @@ void Game::run()
                     {
                         this->gameOverState.update();
                         this->gameOverState.render(window);
+                        window.draw(this->m_crosshair);
+                        window.display();
                     }
                 }
                 break;
@@ -143,6 +152,12 @@ void Game::processEvents(sf::Event& event)
                 sf::Mouse::getPosition(window).y
             );
         }
+
+        if (event.type == sf::Event::LostFocus)
+            is_window_active = false;
+
+        if (event.type == sf::Event::GainedFocus)
+            is_window_active = true;
     }
 }
 
@@ -194,28 +209,39 @@ void Game::update()
     }
 
     // update the enemy dead position stack, right after they die, before removing them from vector
-    this->m_enemyManager.updateStackOfDeadEnemyPositions(m_enemyDeathPositions);
-    this->m_animationManager.createNewExplosionAnimators(m_enemyDeathPositions);
+    m_enemyManager.updateStackOfDeadEnemyPositions(m_enemyDeathPositions);
+    m_animationManager.createNewExplosionAnimators(m_enemyDeathPositions);
 
-    this->m_animationManager.update();
-    this->m_score.update();
+    m_animationManager.update();
+    m_score.update();
+
+    // update stars opacity
+    static int colorAlpha = 1;
+    sf::Color color = m_stars.getFillColor();
+    if (color.a >= 255) {
+        colorAlpha *= -1;
+    }
+    if (color.a <= 140) {
+        colorAlpha *= -1;
+    }
+    color.a = int(color.a + colorAlpha);
+    m_stars.setFillColor(color);
 }
 
 // Render Game
 void Game::render(sf::RenderWindow &window, bool display)
 {
-    this->window.clear();
-
-    this->window.draw(this->m_background);
-    this->m_bulletManager.render(window);
-    this->m_animationManager.render(window);
-    this->m_enemyManager.render(window);
-    this->m_ship.render(window);
-    this->m_score.render(window);
-    window.draw(this->m_crosshair);
+    window.clear();
+    window.draw(m_background);
+    window.draw(m_stars);
+    m_bulletManager.render(window);
+    m_animationManager.render(window);
+    m_enemyManager.render(window);
+    m_ship.render(window);
+    m_score.render(window);
 
     if (display)
-        this->window.display();
+        window.display();
 }
 
 // Remove entities

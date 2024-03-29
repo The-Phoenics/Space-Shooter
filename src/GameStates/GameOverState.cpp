@@ -33,5 +33,4 @@ void GameOverState::render(sf::RenderWindow& window)
     window.clear();
     window.draw(m_gameOver);
     window.draw(m_playAgain);
-    window.display();
 }

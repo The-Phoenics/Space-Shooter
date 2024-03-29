@@ -52,6 +52,7 @@ private:
 
     Ship  m_ship;
 	sf::RectangleShape m_background;
+	sf::RectangleShape m_stars;
 	EnemyManager       m_enemyManager;
 	BulletManager      m_bulletManager;
 	AnimationManager   m_animationManager;
@@ -72,4 +73,5 @@ private:
 
 	// Scrore instance
 	Score m_score;
+	bool is_window_active;
 };

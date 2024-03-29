@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Button.h"
 #include "TextureManager.h"
 #include "DEFINES.h"

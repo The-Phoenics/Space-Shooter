@@ -4,7 +4,6 @@
 #include <vector>
 #include <stack>
 #include <algorithm>
-#include <iostream>
 
 #include "Util.h"
 #include "Animator.h"

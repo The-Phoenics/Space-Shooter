@@ -24,10 +24,9 @@ public:
     bool isAlive = true;
 
 private:
-    void  alignShipRotationWithCursor(sf::RenderWindow& window);
-    void  calcFacingDir(sf::RenderWindow& window);
-    float angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos);
-    void  onCollisionWithWall(int Collision_Side);
+    void calcFacingDir(sf::RenderWindow& window);
+    void angleSpriteWithMouse();
+    void onCollisionWithWall(int Collision_Side);
 
 private:
     sf::RectangleShape m_ship;

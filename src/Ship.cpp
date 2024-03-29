@@ -12,7 +12,7 @@ Ship::Ship(float width, float height, sf::RenderWindow& win)
       m_healthBar(5.f)
 {
     m_ship = sf::RectangleShape(sf::Vector2f(width, height));
-    m_ship.setPosition(MIDDLE_OF_SCREEN);
+    m_ship.setPosition(MIDDLE_OF_SCREEN.x - 40.f, MIDDLE_OF_SCREEN.y);
     m_ship.setOrigin(m_ship.getSize() / 2.f);
     m_ship.setFillColor(sf::Color::Cyan);
     m_ship.setTexture(&TextureManager::getInstance().get_ship_texture());
@@ -25,7 +25,7 @@ void Ship::calcFacingDir(sf::RenderWindow& window)
         (float)sf::Mouse::getPosition(window).x, 
         (float)sf::Mouse::getPosition(window).y
     );
-    sf::Vector2f dir = mousePos - centre;
+    sf::Vector2f dir = MIDDLE_OF_SCREEN - centre;
     m_facingDir = normalize(dir);
 }
 
@@ -47,7 +47,7 @@ void Ship::onCollisionWithWall(int Collision_Side) {
     switch (Collision_Side)
     {
         case LEFT:
-            m_ship.setPosition(WINDOW_WIDTH, m_ship.getPosition().y);
+            m_ship.setPosition(WINDOW_WIDTH - m_ship.getSize().x, m_ship.getPosition().y);
             break;
         case RIGHT:
             m_ship.setPosition(m_ship.getSize().x, m_ship.getPosition().y);
@@ -63,6 +63,9 @@ void Ship::onCollisionWithWall(int Collision_Side) {
     }
 }
 
+/*
+* interpolation/lerp: increase and deacrase to target value slowly
+*/
 float lerp(float target, float current, float increaseFactor)
 {
     float diff = target - current;
@@ -76,6 +79,7 @@ float lerp(float target, float current, float increaseFactor)
 
 void Ship::inputHandler(sf::Event& event)
 {
+    // acceleration
     if (event.type == sf::Event::KeyPressed)
     {
         switch (event.key.code)
@@ -101,6 +105,7 @@ void Ship::inputHandler(sf::Event& event)
         }
     }
 
+    // deceleration
     if (event.type == sf::Event::KeyReleased)
     {
         switch (event.key.code)
@@ -127,40 +132,33 @@ void Ship::inputHandler(sf::Event& event)
     }
 }
 
-void Ship::alignShipRotationWithCursor(sf::RenderWindow& window)
-{
-    // rotational movement
-    static sf::Vector2f mousePos;
-    static float angle;
-    mousePos = sf::Vector2f((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
-    angle = angleToAlignSpriteWithMouse(mousePos, m_ship.getPosition()) - 90.f;
-    m_ship.setRotation(angle);
-}
-
-float Ship::angleToAlignSpriteWithMouse(const sf::Vector2f& mousePos, const sf::Vector2f& spritePos)
+void Ship::angleSpriteWithMouse()
 {
     float angle = 0.0f;
-    sf::Vector2f hypot = mousePos - spritePos;
-    sf::Vector2f base  = sf::Vector2f(mousePos.x, spritePos.y) - spritePos;
+    const sf::Vector2f& spritePos = m_ship.getPosition();
+    sf::Vector2f hypot = MIDDLE_OF_SCREEN - spritePos;
+    sf::Vector2f base  = sf::Vector2f(MIDDLE_OF_SCREEN.x, spritePos.y) - spritePos;
     angle = std::atan2(hypot.y, base.x) * 180.0f / PI;
     angle > 180.f ? angle = 180.f - angle : angle = 180.f + angle;
-    return angle;
+
+    angle -= 90.f;
+    m_ship.setRotation(angle);
 }
 
 void Ship::update(sf::RenderWindow& window, sf::Event& event)
 {
-    m_health = m_healthBar.getBarValue() / m_healthBar.getAmount();
-    onCollisionWithWall(isColliding(m_ship, window));
-    alignShipRotationWithCursor(window);
-    calcFacingDir(window);
-    m_healthBar.update();
-
     // update velocity
     m_vel.y = lerp(goalVel.y, m_vel.y, m_speed);
     m_vel.x = lerp(goalVel.x, m_vel.x, m_speed);
-
     sf::Vector2f currentPos = m_ship.getPosition();
     m_ship.setPosition({currentPos.x + m_vel.x, currentPos.y + m_vel.y});
+
+    m_health = m_healthBar.getBarValue() / m_healthBar.getAmount();
+    m_healthBar.update();
+    onCollisionWithWall(isColliding(m_ship, window));
+    calcFacingDir(window);
+    angleSpriteWithMouse();
+
 }
 
 void Ship::reset()

@@ -17,4 +17,5 @@ void TextureManager::instantiate_textures()
     crosshairText.loadFromFile(TEXT_RELATIVE_PATH_CROSSHAIR);
     barBorderText.loadFromFile(TEXT_RELATIVE_PATH_BARBORDER);
     hbarText.loadFromFile(TEXT_RELATIVE_PATH_HBAR);
+    starsText.loadFromFile(TEXT_RELATIVE_PATH_STARS);
 }

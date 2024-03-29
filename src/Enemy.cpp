@@ -9,10 +9,6 @@ Enemy::Enemy()
 	init();
 }
 
-Enemy::~Enemy()
-{
-}
-
 void Enemy::update()
 {
 	this->move();
@@ -68,7 +64,7 @@ void Enemy::move()
 
 void Enemy::rotate()
 {
-    this->m_enemy.rotate(this->m_rotate);
+    m_enemy.rotate(m_rotate);
 }
 
 void Enemy::onCollisionWithWall()

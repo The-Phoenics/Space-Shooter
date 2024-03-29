@@ -1,6 +1,5 @@
 #include "Button.h"
 #include "Util.h"
-#include <iostream>
 
 Button::Button()
     : m_timer(0.5f)

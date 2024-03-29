@@ -11,6 +11,4 @@ int main()
 
     Game game(window);
     game.run();
-
-    // std::cout << clamp(0.f, 6.f, -0.5f) << "\n";
 }

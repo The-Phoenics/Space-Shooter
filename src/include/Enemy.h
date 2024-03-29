@@ -8,7 +8,7 @@ class Enemy
 {
 public:
 	Enemy();
-	~Enemy();
+	~Enemy() = default;
 
 	inline sf::CircleShape& getEnemy() { return this->m_enemy; }
 	inline int getHealth() const       { return this->m_health; }
@@ -36,6 +36,5 @@ private:
 
 	int   m_health = 3;
 	float m_rotate;
-	float m_size;   // radius between 30 to 60
-
+	float m_size;
 };
