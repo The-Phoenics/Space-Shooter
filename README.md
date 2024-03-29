@@ -3,39 +3,41 @@
 *Install game from *[here](https://the-prime.itch.io/space-shooter)**
 
 ## Controls
-- Move  : W A S D Keys
-- Fire  : Left Mouse Click
+- Move  : WASD keys
+- Fire  : Spacebar
 - Pause : Escape Key
 
----
+## Build
 
-### Requirements
-- C++ >= 17
-- CMake >= 3.10
+#### Requirements
 
-### Build
+- C++ 17 compiler
+- cmake 3.20 or higher
 
-Clone repository  `git clone https://github.com/Karansemwal/Space-Shooter.git`
+<br>
 
-`cd Space-Shooter`
+1. Clone the repository:
+```bash
+git clone https://github.com/Karan-Semwal/Space-Shooter
+cd Space-Shooter
+```
 
-`mkdir build`
+2. Generate build files using *cmake*
+```bash
+$ cmake -S . -B build
+```
 
-`cd build`
-
-`cmake ..`
-
-`cmake --build .`
-
-Run **Space_Shooter** executable.
-
----
-
-
-## Gameplay
-
-
-https://github.com/Karansemwal/Space-Shooter/assets/96228962/2a63a829-1873-4b44-82a5-251cb5ed45b8
-
+3. Build project
+```bash
+$ cmake --build build
+```
 
 ---
+
+
+## Screenshots
+
+![menuss](https://github.com/Karan-Semwal/Space-Shooter/assets/96228962/cf339be8-fec1-4d82-a49c-bf95415fa521)
+
+![ss](https://github.com/Karan-Semwal/Space-Shooter/assets/96228962/6f226f61-5e3f-48c0-94e2-55b4e8873007)
+
