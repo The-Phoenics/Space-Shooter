@@ -1,6 +1,6 @@
 # Space-Shooter
 
-*Install game from *[here](https://the-prime.itch.io/space-shooter)**
+*Download game from *[here](https://the-prime.itch.io/space-shooter)**
 
 ## Controls
 - Move  : WASD keys
@@ -11,8 +11,8 @@
 
 #### Requirements
 
-- C++ 17 compiler
-- cmake 3.20 or higher
+- C++17 compiler
+- cmake 3.16 or higher
 
 <br>
 
