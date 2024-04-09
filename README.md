@@ -18,7 +18,7 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Karan-Semwal/Space-Shooter
+git clone https://github.com/The-Phoenics/Space-Shooter
 cd Space-Shooter
 ```
 
